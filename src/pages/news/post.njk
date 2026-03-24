@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: news
+  size: 1
+  alias: post
+permalink: /news/{{ post.slug }}/index.html
+---
+
+<article>
+  <h1>{{ post.title }}</h1>
+  <p>By {{ post.authorName }} on {{ post.dateIsoString }}</p>
+  <div>{{ post.bodyRichText | renderRichTextAsHtml | safe }}</div>
+  <p><a href="/news/">← Back to news</a></p>
+</article>

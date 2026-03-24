@@ -1,0 +1,22 @@
+<section>
+
+	<h2>Recent News</h2>
+
+	{% for newsPost in news | reverse %}
+
+		<!--{{ newsPost | dump }}-->
+
+		<h3>
+			<a href="/news/{{newsPost.slug}}">
+					{{ newsPost.title }}
+			</a>
+		</h3>
+			
+		{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
+			
+		<p>
+			<small>{{ newsPost.date }} by {{ newsPost.authorName }}</small>
+		</p>
+
+	{% endfor %}
+</section>
