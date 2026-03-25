@@ -17,7 +17,7 @@ module.exports = async function () {
 
   const newsPosts = response.items
     .map(i => mapNewsPost(i, referencedEntries))
-    .sort((a, b) => a.dateIsoString - b.dateIsoString); // sort oldest first
+    .sort((a, b) => b.date - a.date); // sort newest first
   //console.log(`*** Mapped, sorted news posts: ${JSON.stringify(newsPosts)}`);
 
   console.log(`... fetched ${newsPosts.length} news posts.`);
@@ -28,7 +28,7 @@ const mapNewsPost = (entry, referencedEntries) => {
   return {
     title: entry.fields.title,
     slug: entry.fields.slug,
-    dateIsoString: new Date(entry.fields.postingDate || entry.sys.createdAt).toISOString(),
+    date: new Date(entry.fields.postingDate || entry.sys.createdAt),
     bodyRichText: entry.fields.body,
     authorName: referencedEntries[entry.fields.author.sys.id]?.name || "Unknown Author"
   };

@@ -2,7 +2,7 @@
 
 	<h2>Recent News</h2>
 
-	{% for newsPost in news | reverse %}
+	{% for newsPost in news %}
 
 		<!--{{ newsPost | dump }}-->
 
@@ -15,7 +15,7 @@
 		{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
 			
 		<p>
-			<small>{{ newsPost.date }} by {{ newsPost.authorName }}</small>
+			<small>{{ newsPost.date | readableDate }} by {{ newsPost.authorName }}</small>
 		</p>
 
 	{% endfor %}

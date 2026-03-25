@@ -1,4 +1,5 @@
 const { documentToHtmlString } = require('@contentful/rich-text-html-renderer');
+const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
 
@@ -6,6 +7,19 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('renderRichTextAsHtml', (value) => {
     return documentToHtmlString(value);
   });
+
+  // Dump as JSON (for debugging)
+  eleventyConfig.addFilter('dump', (value) => {
+    return JSON.stringify(value, null, 2);
+  });
+
+  // Date formatting (human readable)
+  eleventyConfig.addFilter("readableDate", dateObj => {
+    return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
+  });
+
+  // Copy all static files to output
+  eleventyConfig.addPassthroughCopy({ "src/static": "/" });
 
   return {
     templateFormats: ["md", "njk", "liquid"],
