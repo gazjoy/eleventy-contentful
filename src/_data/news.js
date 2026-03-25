@@ -1,5 +1,4 @@
 const { deliveryApiClient } = require("../../contentful/client");
-// const { DateTime } = require("luxon");
 
 module.exports = async function () {
   console.log("Fetching news posts from Contentful...");

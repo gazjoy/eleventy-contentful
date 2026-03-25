@@ -8,11 +8,6 @@ module.exports = function(eleventyConfig) {
     return documentToHtmlString(value);
   });
 
-  // Dump as JSON (for debugging)
-  eleventyConfig.addFilter('dump', (value) => {
-    return JSON.stringify(value, null, 2);
-  });
-
   // Date formatting (human readable)
   eleventyConfig.addFilter("readableDate", dateObj => {
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");

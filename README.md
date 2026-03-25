@@ -16,8 +16,13 @@ https://moment.github.io/luxon/#/?id=luxon
 
 ## To-Do List
 
-- Pull static pages from CF
+- No need for mapping to "includes" for referenced entries??
+- Pull static pages from CF (POC using 'About' tree, with pages only defined in CMS - in separate branch)
 - Demonstrate adding links 
 - Pagination for data? CF API limit is 1000 (use cursor approach if so)
 - Plan for handling timezones in dates/times
+- preview site
+  - rely on user clicking build?
+  - auto-build triggered by webhook on save?
 - sitemap?
+- update robots (ideally by env) when going live
