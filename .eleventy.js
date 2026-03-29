@@ -13,6 +13,8 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
   });
 
+  
+
   // Copy all static files to output
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
 
