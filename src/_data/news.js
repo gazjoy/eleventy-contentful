@@ -5,17 +5,12 @@ module.exports = async function () {
 
   const response = await deliveryApiClient.getEntries({ 
     content_type: "newsPost",
+    limit: 1000
   });
   //console.log(`*** Response: ${JSON.stringify(response)}`);
 
-  const referencedEntries = response.includes?.Entry?.reduce((acc, entry) => {
-    acc[entry.sys.id] = entry.fields;
-    return acc;
-  }, {}) || {};
-  //console.log(`*** Referenced entries: ${JSON.stringify(referencedEntries)}`);
-
   const newsPosts = response.items
-    .map(i => mapNewsPost(i, referencedEntries))
+    .map(i => mapNewsPost(i))
     .sort((a, b) => b.date - a.date); // sort newest first
   //console.log(`*** Mapped, sorted news posts: ${JSON.stringify(newsPosts)}`);
 
@@ -23,12 +18,12 @@ module.exports = async function () {
   return newsPosts;
 };
 
-const mapNewsPost = (entry, referencedEntries) => {
+const mapNewsPost = (entry) => {
   return {
     title: entry.fields.title,
     slug: entry.fields.slug,
     date: new Date(entry.fields.postingDate || entry.sys.createdAt),
     bodyRichText: entry.fields.body,
-    authorName: referencedEntries[entry.fields.author.sys.id]?.name || "Unknown Author"
+    authorName: entry.fields.author.fields.name
   };
 }
