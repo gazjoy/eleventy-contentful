@@ -7,12 +7,12 @@ module.exports = async function () {
     content_type: "page",
     limit: 1000
   });
-  console.log(`*** Response: ${JSON.stringify(response)}`);
+  //console.log(`*** Response: ${JSON.stringify(response)}`);
 
   const pages = response.items
     .map(i => mapPages(i))
-    .sort((a, b) => a.slug.localeCompare(b.slug)); // sort by slug
-  console.log(`*** Mapped, sorted pages: ${JSON.stringify(pages)}`);
+    .sort((a,b) => a.urlPath.localeCompare(b.urlPath)); // sort by path
+  //console.log(`*** Mapped, sorted pages: ${JSON.stringify(pages)}`);
 
   console.log(`... fetched ${pages.length} pages.`);
   return pages;
@@ -21,8 +21,16 @@ module.exports = async function () {
 const mapPages = (entry) => {
   return {
     title: entry.fields.title,
-    slug: entry.fields.slug,
+    urlPath: getFullPath(entry),
     lastUpdatedDate: new Date(entry.sys.updatedAt || entry.sys.createdAt),
     bodyRichText: entry.fields.pageContent
   };
+}
+
+const getFullPath = (page) => {
+  if (page.fields.parentPage) {
+    const parentPath = getFullPath(page.fields.parentPage);
+    return `${parentPath}/${page.fields.slug}`;
+  }
+  return page.fields.slug;
 }
