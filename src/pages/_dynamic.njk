@@ -3,7 +3,7 @@ layout: layouts/base.njk
 eleventyComputed:
   title: "{{ page.title }}"
 pagination:
-  data: pages
+  data: pages.flatList
   size: 1
   alias: page
 permalink: /{{ page.urlPath }}/index.html
@@ -13,4 +13,17 @@ permalink: /{{ page.urlPath }}/index.html
   <em>*** This is a dynamic page ***</em>
   <h1>{{ page.title }}</h1>
   <div>{{ page.bodyRichText | renderRichTextAsHtml | safe }}</div>
+
+  {% if page.childPages.length > 0 %}
+    <hr />
+
+    <h2>Child Pages:</h2>
+    <ul>
+    
+    {% for childPage in page.childPages %}	
+      <li><a href="/{{ childPage.urlPath }}">{{ childPage.title }}</a></li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
 </article>

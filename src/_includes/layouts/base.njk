@@ -16,10 +16,17 @@
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
+        {% include "components/dynamic-nav.njk" %}
     </header>
+
+    <hr/>
+
     <main>
         {{ content | safe }}
     </main>
+
+    <hr/>
+
     <footer>
         <p>&copy; My Website. All rights reserved.</p>
     </footer>

@@ -1,0 +1,33 @@
+{% macro renderNavLink(url, title, currentUrl) %}
+	{% if url == currentUrl %}
+		<strong>{{ title }}</strong>
+	{% else %}
+		<a href="{{ url }}">{{ title }}</a>
+	{% endif %}
+{% endmacro %}
+
+{% macro renderPages(pageList, currentUrl) %}
+	{% for navPage in pageList %}
+	<li>
+		{{ renderNavLink("/" + navPage.urlPath + "/", navPage.title, currentUrl) }}
+
+		{% if navPage.childPages.length > 0 %}
+		<ul>
+			{{ renderPages(navPage.childPages, currentUrl) }}
+		</ul>
+		{% endif %}
+	</li>
+	{% endfor %}
+{% endmacro %}
+
+<nav>
+	<em>*** This is the dynamic nav ***</em>
+
+	<ul>
+		<li>{{ renderNavLink("/", "Home", page.url) }} <em>(this item is static)</em></li>
+		<li>{{ renderNavLink("/news/", "News", page.url) }} <em>(this item is static)</em></li>
+	
+		{{ renderPages(pages.hierarchy, page.url) }}
+
+	</ul>
+</nav>
