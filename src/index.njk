@@ -1,10 +1,23 @@
 ---
-title: Eleventy Contentful
+eleventyComputed:
+  title: "{{ homepage.title }}"
 layout: layouts/base.njk
 ---
 
 <h1>{{ title }}</h1>
 
-This is a home page.
+{% for component in homepage.components %}
 
-{% include "components/recent-news.njk" %}
+    <hr />
+
+    {% if component.type == "componentLatestNews" %}
+        {% include "components/recent-news.njk" %}
+    {% elif component.type == "componentImageFeature" %}
+        {% include "components/image-feature.njk" %}
+    {% endif %}
+
+    {% if loop.last %}
+        <hr />
+    {% endif %}
+
+{% endfor %}

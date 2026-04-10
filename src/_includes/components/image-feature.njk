@@ -1,0 +1,9 @@
+{# by nunjucks magic, already has access to component data #}
+
+<section>
+
+	<h2>{{ component.title }}</h2>
+
+	{{ component.contentRichText | renderRichTextAsHtml(pages.idLookup) | safe }}
+	
+</section>

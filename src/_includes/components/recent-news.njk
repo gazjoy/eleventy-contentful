@@ -1,22 +1,20 @@
+{# by nunjucks magic, already has access to component data #}
+
 <section>
 
-	<h2>Recent News</h2>
+	<h2>{{ component.title }}</h2>
 
-	{% for newsPost in news %}
-
-		<!--{{ newsPost | dump }}-->
+	{% for newsPost in news.slice(0, component.numberOfPosts) %}
 
 		<h3>
 			<a href="/news/{{newsPost.slug}}">
 					{{ newsPost.title }}
 			</a>
 		</h3>
+
+		<small>{{ newsPost.date | readableDate }} by {{ newsPost.authorName }}</small>
 			
-		{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
-			
-		<p>
-			<small>{{ newsPost.date | readableDate }} by {{ newsPost.authorName }}</small>
-		</p>
+		{{ newsPost.bodyRichText | renderRichTextAsHtml(pages.idLookup) | safe }}
 
 	{% endfor %}
 </section>
