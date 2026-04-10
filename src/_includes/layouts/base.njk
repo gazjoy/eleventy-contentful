@@ -7,27 +7,15 @@
     {# <link rel="stylesheet" href="/assets/css/style.css"> #}
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/news">News</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
+    <header style="background-color:aliceblue;border-bottom:2px solid black;">
         {% include "components/dynamic-nav.njk" %}
     </header>
-
-    <hr/>
 
     <main>
         {{ content | safe }}
     </main>
 
-    <hr/>
-
-    <footer>
+    <footer style="background-color:aliceblue;border-top:2px solid black;">
         <p>&copy; My Website. All rights reserved.</p>
     </footer>
 </body>
