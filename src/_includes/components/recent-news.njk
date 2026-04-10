@@ -14,7 +14,7 @@
 
 		<small>{{ newsPost.date | readableDate }} by {{ newsPost.authorName }}</small>
 			
-		{{ newsPost.bodyRichText | renderRichTextAsHtml(pages.idLookup) | safe }}
+		{{ newsPost.bodyRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}
 
 	{% endfor %}
 </section>

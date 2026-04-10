@@ -36,7 +36,8 @@ const mapComponent = (component) => {
         title: fields.title,
         imageUrl: fields.image.fields.file.url,
         imageAlt: fields.image.fields.title,
-        contentRichText: fields.featureContent
+        contentRichText: fields.featureContent,
+        imageOnLeft: fields.imageOnLeft ?? true
       };
     case "componentLatestNews":
       return {

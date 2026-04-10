@@ -4,6 +4,15 @@
 
 	<h2>{{ component.title }}</h2>
 
-	{{ component.contentRichText | renderRichTextAsHtml(pages.idLookup) | safe }}
+	<div style="display: flex; gap: 1rem; flex-direction: row{% if component.imageOnLeft %}-reverse{% endif %};">
+		<img 
+			src="{{ component.imageUrl }}" 
+			alt="{{ component.imageAlt }}" 
+			style="max-height: 300px; " />
+	
+		<div>
+			{{ component.contentRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}
+		</div>
+	</div>
 	
 </section>

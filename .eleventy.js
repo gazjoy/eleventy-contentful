@@ -5,7 +5,7 @@ const { DateTime } = require("luxon");
 module.exports = function(eleventyConfig) {
 
   // Contentful rich text
-  eleventyConfig.addFilter('renderRichTextAsHtml', (value, pageLookup) => {
+  eleventyConfig.addFilter('renderRichTextAsHtml', (value, linkLookups) => {
     if (!value) {
       return "";
     }
@@ -15,16 +15,30 @@ module.exports = function(eleventyConfig) {
         [INLINES.ENTRY_HYPERLINK]: (node) => {
           const target = node?.data?.target;
           const targetId = target?.sys?.id;
-          const resolvedPage = pageLookup?.get?.(targetId);
 
-          if (!resolvedPage) {
-            console.warn(`Could not resolve linked entry with ID ${targetId}`);
-            return `<!-- Unresolved link to entry with ID ${targetId} -->`;
+          const resolvedPage = linkLookups?.pages?.get?.(targetId);
+          if (resolvedPage) {
+            const linkText = node.content?.[0]?.value || resolvedPage.title;
+            return `<a href="/${resolvedPage.urlPath}/">${linkText}</a>
+                    <small><em>(This is a dynamic link)</em></small>`;
           }
 
-          const linkText = node.content?.[0]?.value || resolvedPage.title;
+          const resolvedLocation = linkLookups?.locations?.get?.(targetId);
+          if (resolvedLocation) {
+            const linkText = node.content?.[0]?.value || resolvedLocation.name;
 
-          return `<a href="/${resolvedPage.urlPath}/">${linkText}</a>`;
+            if (resolvedLocation.website) {
+              return `<a href="${resolvedLocation.website}">${linkText}</a>
+                      <small><em>(This is a dynamic link)</em></small>`;
+            }
+            return linkText; // no link if no website provided
+          }
+          
+          console.warn(`Could not resolve linked entry with ID ${targetId}`);
+          if (node.content?.[0]?.value) {
+            return node.content[0].value; // fallback to link text if available
+          }
+          return `<!-- Unresolved link to entry with ID ${targetId} -->`;
         }
       }
     });

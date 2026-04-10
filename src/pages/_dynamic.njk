@@ -12,7 +12,7 @@ permalink: /{{ page.urlPath }}/index.html
 <article>
   <em>*** This is a dynamic page ***</em>
   <h1>{{ page.title }}</h1>
-  <div>{{ page.bodyRichText | renderRichTextAsHtml(pages.idLookup) | safe }}</div>
+  <div>{{ page.bodyRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}</div>
 
   {% if page.childPages.length > 0 %}
     <hr />

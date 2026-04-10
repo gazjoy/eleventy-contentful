@@ -18,8 +18,7 @@ module.exports = async function () {
 
   const data = {
     flatList: pages,
-    hierarchy: buildHierarchy(pages),
-    idLookup: new Map(pages.map(p => [p.id, p]))  
+    hierarchy: buildHierarchy(pages), 
   };
   //console.log(`*** Pages data: ${JSON.stringify(data)}`);
 
