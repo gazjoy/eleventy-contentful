@@ -1,0 +1,11 @@
+{%- for component in components -%}
+
+    {%- if component.type == "componentLatestNews" -%}
+        {% include "components/recent-news.njk" %}
+    {%- elif component.type == "componentImageFeature" -%}
+        {% include "components/image-feature.njk" %}
+    {%- else -%}
+        <!-- Component type {{ component.type }} unhandled in dynamic-components.njk -->
+    {%- endif -%}
+
+{%- endfor -%}

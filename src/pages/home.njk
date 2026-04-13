@@ -7,14 +7,5 @@ permalink: /index.html
 
 <h1>{{ title }}</h1>
 
-{% for component in homepage.components %}
-
-    <hr />
-
-    {% if component.type == "componentLatestNews" %}
-        {% include "components/recent-news.njk" %}
-    {% elif component.type == "componentImageFeature" %}
-        {% include "components/image-feature.njk" %}
-    {% endif %}
-
-{% endfor %}
+{% set components = homepage.components %}
+{% include "components/dynamic-components.njk" %}

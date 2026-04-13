@@ -1,4 +1,4 @@
-const { deliveryApiClient } = require("../../contentful/client");
+const { deliveryApiClient } = require("../lib/contentful/client");
 
 module.exports = async function () {
   console.log("Fetching pages from Contentful...");

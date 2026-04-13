@@ -1,4 +1,5 @@
-const { deliveryApiClient } = require("../../contentful/client");
+const { deliveryApiClient } = require("../lib/contentful/client");
+const { mapComponents } = require("../lib/contentful/componentMapper");
 
 module.exports = async function () {
   console.log("Fetching homepage from Contentful...");
@@ -20,30 +21,6 @@ module.exports = async function () {
 const mapHomepage = (entry) => {
   return {
     title: entry.fields.title,
-    components: entry.fields.components.map(c => mapComponent(c))
+    components: mapComponents(entry.fields.components)
   };
 }
-
-// TODO: extend to support other components, and move to a shared utils file 
-const mapComponent = (component) => {
-  const type = component.sys.contentType.sys.id;
-  const fields = component.fields;
-
-  switch (type) {
-    case "componentImageFeature":
-      return {
-        type,
-        title: fields.title,
-        imageUrl: fields.image.fields.file.url,
-        imageAlt: fields.image.fields.title,
-        contentRichText: fields.featureContent,
-        imageOnLeft: fields.imageOnLeft ?? true
-      };
-    case "componentLatestNews":
-      return {
-        type,
-        title: fields.title,
-        numberOfPosts: fields.numberOfPosts
-      };
-    }
-  }
