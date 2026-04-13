@@ -1,0 +1,15 @@
+---
+permalink: /robots.txt
+---
+
+{%- if config.allowRobots -%}
+
+User-agent: *
+Disallow:
+
+{%- else -%}
+
+User-agent: *
+Disallow: /
+
+{%- endif -%}

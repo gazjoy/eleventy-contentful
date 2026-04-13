@@ -16,10 +16,8 @@ https://moment.github.io/luxon/#/?id=luxon
 
 ## To-Do List
 
-- Pagination for data? CF API limit is 1000 (use cursor approach if so)
 - Plan for handling timezones in dates/times
 - preview site
   - rely on user clicking build?
   - auto-build triggered by webhook on save?
 - sitemap?
-- update robots (ideally by env) when going live
