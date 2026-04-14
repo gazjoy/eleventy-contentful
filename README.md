@@ -22,6 +22,8 @@ https://moment.github.io/luxon/#/?id=luxon
 
 ## To-Do List
  
+- timetables
+- committee page - references to team members
 - preview site
   - rely on user clicking build?
   - auto-build triggered by webhook on save?

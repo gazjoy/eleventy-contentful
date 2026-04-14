@@ -26,8 +26,8 @@ const mapEvent = (entry) => {
   return {
     title: entry.fields.title,
     slug: entry.fields.slug,
-    startTime: new Date(entry.fields.startTime),
-    endTime: entry.fields.endTime ? new Date(entry.fields.endTime) : null,
+    startDate: new Date(entry.fields.startDate),
+    endDate: entry.fields.endDate ? new Date(entry.fields.endDate) : null,
     descriptionRichText: entry.fields.description,
     location: mapLocation(entry.fields.location),
   };

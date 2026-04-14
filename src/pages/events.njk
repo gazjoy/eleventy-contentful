@@ -10,7 +10,7 @@ permalink: /events/index.html
 
 		<h2>{{ event.title }}</h2>
 
-		<p><strong>{{ event.startTime | readableEventTime(event.endTime) }}</strong></p>
+		<p><strong>{{ event.startDate | readableDate(event.endDate) }}</strong></p>
     <p>{{ event.location.name }}</p>
     
 			
