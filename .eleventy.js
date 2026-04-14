@@ -19,8 +19,7 @@ module.exports = function(eleventyConfig) {
           const resolvedPage = linkLookups?.pages?.get?.(targetId);
           if (resolvedPage) {
             const linkText = node.content?.[0]?.value || resolvedPage.title;
-            return `<a href="/${resolvedPage.urlPath}/">${linkText}</a>
-                    <small><em>(This is a dynamic link)</em></small>`;
+            return `<a href="/${resolvedPage.urlPath}/">${linkText}</a>`;
           }
 
           const resolvedLocation = linkLookups?.locations?.get?.(targetId);
@@ -28,8 +27,7 @@ module.exports = function(eleventyConfig) {
             const linkText = node.content?.[0]?.value || resolvedLocation.name;
 
             if (resolvedLocation.website) {
-              return `<a href="${resolvedLocation.website}">${linkText}</a>
-                      <small><em>(This is a dynamic link)</em></small>`;
+              return `<a href="${resolvedLocation.website}">${linkText}</a>`;
             }
             return linkText; // no link if no website provided
           }
