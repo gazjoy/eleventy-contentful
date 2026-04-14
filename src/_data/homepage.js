@@ -1,5 +1,5 @@
-const { deliveryApiClient } = require("../lib/contentful/client");
-const { mapComponents } = require("../lib/contentful/componentMapper");
+const { deliveryApiClient } = require("../lib/contentful/apiClient");
+const { mapHomepage } = require("../lib/contentful/contentMapper");
 
 module.exports = async function () {
   console.log("Fetching homepage from Contentful...");
@@ -8,7 +8,6 @@ module.exports = async function () {
     content_type: "homepage",
     limit: 1
   });
-  //console.log(`*** Response: ${JSON.stringify(response)}`);
 
   const homepage = response.items
     .map(i => mapHomepage(i))[0]; // we expect exactly one homepage entry
@@ -17,10 +16,3 @@ module.exports = async function () {
   console.log(`... fetched homepage.`);
   return homepage;
 };
-
-const mapHomepage = (entry) => {
-  return {
-    title: entry.fields.title,
-    components: mapComponents(entry.fields.components)
-  };
-}

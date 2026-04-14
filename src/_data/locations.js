@@ -1,17 +1,14 @@
-const { deliveryApiClient } = require("../lib/contentful/client");
+const { fetchAllEntriesForContentType } = require("../lib/contentful/paginationHelper");
+const { mapLocation } = require("../lib/contentful/contentMapper");
 
 module.exports = async function () {
   console.log("Fetching locations from Contentful...");
 
-  const response = await deliveryApiClient.getEntries({ 
-    content_type: "locations",
-    limit: 1000
-  });
-  //console.log(`*** Response: ${JSON.stringify(response)}`);
+  const allItems = await fetchAllEntriesForContentType("locations");
 
-  const locations = response.items
-    .map((i) => mapLocations(i))
-    .sort((a, b) => a.name.localeCompare(b.name)); // sort by name
+  const locations = allItems
+    .map((i) => mapLocation(i))
+    .sort((a, b) => a.name.localeCompare(b.name)); // sort by name alphabetically
   //console.log(`*** Mapped, sorted locations: ${JSON.stringify(locations)}`);
 
   console.log(`... fetched ${locations.length} locations.`);
@@ -19,12 +16,3 @@ module.exports = async function () {
   return locations;
 };
 
-const mapLocations = (entry) => {
-  return {
-    id: entry.sys.id,
-    name: entry.fields.name,
-    location: entry.fields.location, // { lat, lon }
-    phoneNumber: entry.fields.phoneNumber,
-    website: entry.fields.website,
-  };
-};

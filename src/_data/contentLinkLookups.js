@@ -1,3 +1,8 @@
+/*
+  Builds lookup maps for content links. This allows us to easily resolve 
+  links to pages and locations when rendering rich text fields.
+*/
+
 const getPages = require("./pages");
 const getLocations = require("./locations");
 

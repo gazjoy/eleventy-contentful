@@ -1,0 +1,19 @@
+---
+title: Events
+layout: layouts/base.njk
+permalink: /events/index.html
+---
+
+<h1>{{ title }}</h1>
+
+{% for event in events %}
+
+		<h2>{{ event.title }}</h2>
+
+		<p><strong>{{ event.startTime | readableEventTime(event.endTime) }}</strong></p>
+    <p>{{ event.location.name }}</p>
+    
+			
+		{{ event.descriptionRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}
+
+	{% endfor %}

@@ -22,7 +22,6 @@ https://moment.github.io/luxon/#/?id=luxon
 
 ## To-Do List
  
-- Plan for handling timezones in dates/times
 - preview site
   - rely on user clicking build?
   - auto-build triggered by webhook on save?

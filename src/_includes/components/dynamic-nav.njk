@@ -1,3 +1,8 @@
+{#
+	Renders a dynamic navigation, including all the pages defined in the CMS.
+	Uses the global "pages" data 
+#}
+
 {% macro renderNavLink(url, title, currentUrl) %}
 	{% if url == currentUrl %}
 		<strong>{{ title }}</strong>
@@ -8,8 +13,9 @@
 
 <nav>
 	<ul>
-		<li>{{ renderNavLink("/", "Home", page.url) }}</em></li>
+		<li>{{ renderNavLink("/", "Home", page.url) }}</li>
 		<li>{{ renderNavLink("/news/", "News", page.url) }}</li>
+		<li>{{ renderNavLink("/events/", "Events", page.url) }}</li>
 	
 		{% for level1Page in pages.hierarchy %}
 		<li>

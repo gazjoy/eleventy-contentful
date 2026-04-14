@@ -1,3 +1,7 @@
+/*
+  Maps Contentful component entries to the shape we want to use in our templates.
+*/
+
 const mapComponent = (component) => {
   const type = component?.sys?.contentType?.sys?.id;
   const fields = component?.fields || {};

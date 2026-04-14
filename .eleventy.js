@@ -44,7 +44,32 @@ module.exports = function(eleventyConfig) {
 
   // Date formatting (human readable)
   eleventyConfig.addFilter("readableDate", dateObj => {
+    if (!dateObj) {
+      return "";
+    }
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
+  });
+
+  // Event time formatting (human readable)
+  eleventyConfig.addFilter("readableEventTime", (startTime, endTime) => {
+    if (!startTime) {
+      return "";
+    }
+    const start = DateTime.fromJSDate(startTime);
+    const startString = start.toFormat("dd LLL yyyy, HH:mm");
+
+    if (!endTime) {
+      return startString;
+    }
+
+    const end = DateTime.fromJSDate(endTime);
+    let endString = end.toFormat("dd LLL yyyy, HH:mm");
+
+    if (start.hasSame(end, "day")) {
+      endString = end.toFormat("HH:mm");
+    }
+
+    return `${startString} - ${endString}`;
   });
 
   // Copy all static files to output

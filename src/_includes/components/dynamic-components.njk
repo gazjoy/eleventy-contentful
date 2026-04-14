@@ -1,3 +1,8 @@
+{#
+    Renders a list of components defined in the CMS.
+    Expects the context to contain a variable called "components"
+#}
+
 {%- for component in components -%}
 
     {%- if component.type == "componentLatestNews" -%}

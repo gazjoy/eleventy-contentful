@@ -1,21 +1,19 @@
-const { deliveryApiClient } = require("../lib/contentful/client");
+const { fetchAllEntriesForContentType } = require("../lib/contentful/paginationHelper");
+const { mapPage } = require("../lib/contentful/contentMapper");
 
 module.exports = async function () {
   console.log("Fetching pages from Contentful...");
 
-  const response = await deliveryApiClient.getEntries({ 
-    content_type: "page",
-    limit: 1000
-  });
-  //console.log(`*** Response: ${JSON.stringify(response)}`);
+  const allItems = await fetchAllEntriesForContentType("page");
 
-  const pages = response.items
-    .map((i) => mapPages(i))
+  const pages = allItems
+    .map((i) => mapPage(i))
     .sort((a, b) => a.urlPath.localeCompare(b.urlPath)); // sort by path
   //console.log(`*** Mapped, sorted pages: ${JSON.stringify(pages)}`);
 
   console.log(`... fetched ${pages.length} pages.`);
 
+  // Return the data in different structures, just for convenience. 
   const data = {
     flatList: pages,
     hierarchy: buildHierarchy(pages), 
@@ -23,18 +21,6 @@ module.exports = async function () {
   //console.log(`*** Pages data: ${JSON.stringify(data)}`);
 
   return data;
-};
-
-const mapPages = (entry) => {
-  return {
-    id: entry.sys.id,
-    title: entry.fields.title,
-    urlPath: getFullPath(entry),
-    parentUrlPath: entry.fields.parentPage ? getFullPath(entry.fields.parentPage) : null,
-    childPages: [], // will be populated in buildHierarchy
-    lastUpdatedDate: new Date(entry.sys.updatedAt || entry.sys.createdAt),
-    bodyRichText: entry.fields.pageContent
-  };
 };
 
 const buildHierarchy = (pages) => {
@@ -59,12 +45,4 @@ const buildHierarchy = (pages) => {
   }
 
   return hierarchy;
-};
-
-const getFullPath = (page) => {
-  if (page.fields.parentPage) {
-    const parentPath = getFullPath(page.fields.parentPage);
-    return `${parentPath}/${page.fields.slug}`;
-  }
-  return page.fields.slug;
 };
