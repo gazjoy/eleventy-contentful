@@ -30,6 +30,7 @@ const mapEvent = (entry) => {
     endDate: entry.fields.endDate ? new Date(entry.fields.endDate) : null,
     descriptionRichText: entry.fields.description,
     location: mapLocation(entry.fields.location),
+    website: entry.fields.eventInformationLink
   };
 };
 

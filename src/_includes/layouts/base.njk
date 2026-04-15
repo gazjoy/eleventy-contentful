@@ -11,10 +11,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     {# <link rel="stylesheet" href="/assets/css/style.css"> #}
+
+    <style>
+a[href]:not(:where(
+  /* exclude hash only links */
+  [href^="#"],
+  /* exclude javascript only links */
+  [href^="javascript:" i],  
+  /* exclude relative but not double slash only links */
+  [href^="/"]:not([href^="//"]),
+)):after {
+  content: ' ↗️';
+}
+    </style>
 </head>
 <body>
     <header style="background-color:aliceblue;border-bottom:2px solid black;">
         {% include "components/dynamic-nav.njk" %}
+        <a href="https://phoenixyth.swimmanager.co.uk/login" target="_blank">Login to Swim Manager</a>
     </header>
 
     <main>
