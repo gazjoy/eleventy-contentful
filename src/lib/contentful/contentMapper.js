@@ -1,3 +1,6 @@
+const { mapComponents } = require("./componentMapper");
+const { mapImageField } = require("./mappingUtils");
+
 /*
     Maps Contentful content entries to the shape we want to use in our templates.
     Please keep in alphabetical order by content type for easier maintenance.
@@ -24,7 +27,6 @@ const mapEvent = (entry) => {
 };
 
 const mapHomepage = (entry) => {
-  const { mapComponents } = require("./componentMapper");
   return {
     title: entry.fields.title,
     components: mapComponents(entry.fields.components)
@@ -85,6 +87,17 @@ const mapSquad = (entry) => {
   };
 };
 
+const mapTeamMember = (entry) => {
+  return {
+    id: entry.sys.id,
+    name: entry.fields.name,
+    roles: entry.fields.roles,
+    photo: mapImageField(entry.fields.photo, entry.fields.name),
+    biographyRichText: entry.fields.biography,
+    email: entry.fields.email,
+  };
+};
+
 module.exports = {
   mapEvent,
   mapHomepage,
@@ -93,4 +106,5 @@ module.exports = {
   mapPage,
   mapSession,
   mapSquad,
+  mapTeamMember,
 };

@@ -22,8 +22,7 @@ https://moment.github.io/luxon/#/?id=luxon
 
 ## To-Do List
  
-- committee page - references to team members
-- roles
+- split team members into committee and coaching staff
 - preview site
   - rely on user clicking build?
   - auto-build triggered by webhook on save?

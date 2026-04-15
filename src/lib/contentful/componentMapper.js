@@ -1,19 +1,20 @@
+const { mapImageField } = require("./mappingUtils");
+
 /*
   Maps Contentful component entries to the shape we want to use in our templates.
   Please keep in alphabetical order by content type for easier maintenance.
 */
 
-const mapComponent = (component) => {
-  const type = component?.sys?.contentType?.sys?.id;
-  const fields = component?.fields || {};
+const mapComponent = (entry) => {
+  const type = entry?.sys?.contentType?.sys?.id;
+  const fields = entry?.fields || {};
 
   switch (type) {
     case "componentImageFeature":
       return {
         type,
         title: fields.title,
-        imageUrl: fields.image?.fields?.file?.url,
-        imageAlt: fields.image?.fields?.title,
+        image: mapImageField(fields.image, ""),
         contentRichText: fields.featureContent,
         imageOnLeft: fields.imageOnLeft ?? true,
       };

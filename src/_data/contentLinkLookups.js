@@ -3,24 +3,31 @@
   links to pages and locations when rendering rich text fields.
 */
 
-const getPages = require("./pages");
 const getLocations = require("./locations");
+const getPages = require("./pages");
+const getTeam = require("./team");
 
 module.exports = async function () {
-  const [pagesData, locations] = await Promise.all([
+  const [locations, pagesData, teamMembers] = await Promise.all([
+    getLocations(),
     getPages(),
-    getLocations()
+    getTeam()
   ]);
 
   const data = {
+    locations: new Map(locations.map(l => [l.id, {
+      name: l.name,
+      website: l.website
+    }])),
+
     pages: new Map(pagesData.flatList.map(p => [p.id, {
       title: p.title,
       urlPath: p.urlPath
     }])),
 
-    locations: new Map(locations.map(l => [l.id, {
-      name: l.name,
-      website: l.website
+    teamMembers: new Map(teamMembers.map(t => [t.id, {
+      name: t.name,
+      email: t.email
     }])),
   };
 
