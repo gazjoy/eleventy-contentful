@@ -4,9 +4,9 @@ const { mapPage } = require("../lib/contentful/contentMapper");
 module.exports = async function () {
   console.log("Fetching pages from Contentful...");
 
-  const allItems = await fetchAllEntriesForContentType("page");
+  const pageEntries = await fetchAllEntriesForContentType("page");
 
-  const pages = allItems
+  const pages = pageEntries
     .map((i) => mapPage(i))
     .sort((a, b) => a.urlPath.localeCompare(b.urlPath)); // sort by path
   //console.log(`*** Mapped, sorted pages: ${JSON.stringify(pages)}`);

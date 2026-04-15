@@ -22,9 +22,12 @@ https://moment.github.io/luxon/#/?id=luxon
 
 ## To-Do List
  
-- timetables
 - committee page - references to team members
+- roles
 - preview site
   - rely on user clicking build?
   - auto-build triggered by webhook on save?
+- align rich text editor options
+  - allowed functions (H1, tables etc.)
+  - linkable content types
 - sitemap?

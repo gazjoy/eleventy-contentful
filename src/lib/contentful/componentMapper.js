@@ -1,5 +1,6 @@
 /*
   Maps Contentful component entries to the shape we want to use in our templates.
+  Please keep in alphabetical order by content type for easier maintenance.
 */
 
 const mapComponent = (component) => {
