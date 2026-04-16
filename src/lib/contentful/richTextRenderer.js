@@ -29,7 +29,8 @@ const renderLinkToEntry = (linkLookups) => (node) => {
   const resolvedStaffMember = linkLookups?.staffMembers?.get?.(targetId);
   if (resolvedStaffMember) {
     const linkText = node.content?.[0]?.value || `${resolvedStaffMember.name} (${resolvedStaffMember.role})`;
-    return `<a href="#">${linkText}</a>`;
+    const slug = resolvedStaffMember.name.toLowerCase().replace(/\s+/g, '-');
+    return `<a href="/coaching-staff/#${slug}">${linkText}</a>`;
   }
 
   const resolvedVenue = linkLookups?.venues?.get?.(targetId);

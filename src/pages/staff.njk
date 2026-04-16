@@ -1,0 +1,22 @@
+---
+title: Coaching Staff
+layout: layouts/base.njk
+permalink: /coaching-staff/index.html
+---
+
+<h1>{{ title }}</h1>
+
+{% for staffMember in staff %}
+
+  <h2 id={{ staffMember.name | slug }}>{{ staffMember.name }}</h2>
+  <p><strong>{{ staffMember.role }}</strong></p>
+  
+  <img src="{{staffMember.photo.url}}" src="{{staffMember.photo.alt}}" />
+
+  <div>{{ staffMember.biographyRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}</div>
+
+  {% if not loop.last %}
+    <hr/>
+  {% endif %}
+
+{% endfor %}

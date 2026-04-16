@@ -39,6 +39,7 @@ const mapNewsPost = (entry) => {
     slug: entry.fields.slug,
     date: new Date(entry.fields.postingDate || entry.sys.createdAt),
     bodyRichText: entry.fields.body,
+    author: entry.fields.author || "Phoenix Swimming Club",
   };
 };
 

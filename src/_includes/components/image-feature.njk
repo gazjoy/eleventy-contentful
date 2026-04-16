@@ -6,8 +6,8 @@
 
 	<div style="display: flex; gap: 1rem; flex-direction: row{% if not component.imageOnLeft %}-reverse{% endif %};">
 		<img 
-			src="{{ component.imageUrl }}" 
-			alt="{{ component.imageAlt }}" 
+			src="{{ component.image.url }}" 
+			alt="{{ component.image.alt }}" 
 			style="max-height: 300px; " />
 	
 		<div>
