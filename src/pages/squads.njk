@@ -36,7 +36,7 @@ permalink: /competitive-squads/index.html
           <td>{{session.startTime}} - {{session.endTime}}</td>
 
           {%- if loop.first -%}
-            <td rowspan="{{ sessions.length }}"><a href="{{session.location.website}}">{{session.location.name}}</a></td>
+            <td rowspan="{{ sessions.length }}"><a href="{{session.venue.website}}">{{session.venue.name}}</a></td>
           {%- endif -%}
         </tr>
       {%- else -%}

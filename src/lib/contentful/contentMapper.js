@@ -21,7 +21,7 @@ const mapEvent = (entry) => {
     startDate: new Date(entry.fields.startDate),
     endDate: entry.fields.endDate ? new Date(entry.fields.endDate) : null,
     descriptionRichText: entry.fields.description,
-    location: mapLocation(entry.fields.location),
+    venue: mapVenue(entry.fields.venue),
     website: entry.fields.eventInformationLink
   };
 };
@@ -33,23 +33,12 @@ const mapHomepage = (entry) => {
   };
 };
 
-const mapLocation = (entry) => {
-  return {
-    id: entry.sys.id,
-    name: entry.fields.name,
-    location: entry.fields.location, // { lat, lon }
-    phoneNumber: entry.fields.phoneNumber,
-    website: entry.fields.website,
-  };
-};
-
 const mapNewsPost = (entry) => {
   return {
     title: entry.fields.title,
     slug: entry.fields.slug,
     date: new Date(entry.fields.postingDate || entry.sys.createdAt),
     bodyRichText: entry.fields.body,
-    authorName: entry.fields.author.fields.name
   };
 };
 
@@ -71,7 +60,7 @@ const mapSession = (entry) => {
     title: entry.fields.title,
     day: entry.fields.day,
     activity: entry.fields.activity,
-    location: mapLocation(entry.fields.location),
+    venue: mapVenue(entry.fields.venue),
     startTime: entry.fields.startTime,
     endTime: entry.fields.endTime,
     squadsIds: entry.fields.squads?.map(squad => squad.sys.id) || [], // only need IDs here
@@ -87,24 +76,33 @@ const mapSquad = (entry) => {
   };
 };
 
-const mapTeamMember = (entry) => {
+const mapStaffMember = (entry) => {
   return {
     id: entry.sys.id,
     name: entry.fields.name,
-    roles: entry.fields.roles,
+    role: entry.fields.role,
     photo: mapImageField(entry.fields.photo, entry.fields.name),
     biographyRichText: entry.fields.biography,
-    email: entry.fields.email,
+  };
+};
+
+const mapVenue = (entry) => {
+  return {
+    id: entry.sys.id,
+    name: entry.fields.name,
+    location: entry.fields.location, // { lat, lon }
+    phoneNumber: entry.fields.phoneNumber,
+    website: entry.fields.website,
   };
 };
 
 module.exports = {
   mapEvent,
   mapHomepage,
-  mapLocation,
   mapNewsPost,
   mapPage,
   mapSession,
   mapSquad,
-  mapTeamMember,
+  mapStaffMember,
+  mapVenue,
 };

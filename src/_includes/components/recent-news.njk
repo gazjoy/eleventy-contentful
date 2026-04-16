@@ -15,7 +15,7 @@
 			</a>
 		</h3>
 
-		<small>{{ newsPost.date | readableDate }} by {{ newsPost.authorName }}</small>
+		<small>{{ newsPost.date | readableDate }}</small>
 			
 		{{ newsPost.bodyRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}
 

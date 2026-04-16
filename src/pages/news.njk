@@ -9,6 +9,6 @@ permalink: /news/index.html
 {% for post in news %}
   <article>
     <h3><a href="/news/{{ post.slug }}/">{{ post.title }}</a></h3>
-    <p>{{ post.authorName }} — {{ post.date | readableDate }}</p>
+    <p>{{ post.date | readableDate }}</p>
   </article>
 {% endfor %}

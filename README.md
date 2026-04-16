@@ -11,9 +11,9 @@ npm run start
 
 ## Useful Resources
 
-- **Eleventy:**
+- **Eleventy (SSG):**
   https://www.11ty.dev/docs/
-- **Nunjucks:**
+- **Nunjucks (templating):**
   https://mozilla.github.io/nunjucks/templating.html
 - **Contentful (CMS):**
   https://www.contentful.com/developers/docs/references/content-delivery-api/
@@ -22,7 +22,7 @@ https://moment.github.io/luxon/#/?id=luxon
 
 ## To-Do List
  
-- split team members into committee and coaching staff
+- split team members into committee (positions/roles seats with holders as a field, no photo field), and coaching staff (people with roles as a field)
 - preview site
   - rely on user clicking build?
   - auto-build triggered by webhook on save?
@@ -30,3 +30,5 @@ https://moment.github.io/luxon/#/?id=luxon
   - allowed functions (H1, tables etc.)
   - linkable content types
 - sitemap?
+- linting?
+- tests?

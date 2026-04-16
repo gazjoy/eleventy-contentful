@@ -1,6 +1,7 @@
 const { documentToHtmlString } = require("@contentful/rich-text-html-renderer");
 const { INLINES } = require("@contentful/rich-text-types");
 
+// see contentLinkLookups.js for how these lookups are built
 const renderRichTextAsHtml = (value, linkLookups) => {
   if (!value) {
     return "";
@@ -19,26 +20,26 @@ const renderLinkToEntry = (linkLookups) => (node) => {
   const target = node?.data?.target;
   const targetId = target?.sys?.id;
 
-  const resolvedLocation = linkLookups?.locations?.get?.(targetId);
-  if (resolvedLocation) {
-    const linkText = node.content?.[0]?.value || resolvedLocation.name;
-
-    if (resolvedLocation.website) {
-      return `<a href="${resolvedLocation.website}">${linkText}</a>`;
-    }
-    return linkText; // no link if no website provided
-  }
-
   const resolvedPage = linkLookups?.pages?.get?.(targetId);
   if (resolvedPage) {
     const linkText = node.content?.[0]?.value || resolvedPage.title;
     return `<a href="/${resolvedPage.urlPath}/">${linkText}</a>`;
   }
 
-  const resolvedTeamMember = linkLookups?.teamMembers?.get?.(targetId);
-  if (resolvedTeamMember) {
-    const linkText = node.content?.[0]?.value || resolvedTeamMember.name;
-    return `<a href="mailto:${resolvedTeamMember.email}">${linkText}</a>`;
+  const resolvedStaffMember = linkLookups?.staffMembers?.get?.(targetId);
+  if (resolvedStaffMember) {
+    const linkText = node.content?.[0]?.value || `${resolvedStaffMember.name} (${resolvedStaffMember.role})`;
+    return `<a href="#">${linkText}</a>`;
+  }
+
+  const resolvedVenue = linkLookups?.venues?.get?.(targetId);
+  if (resolvedVenue) {
+    const linkText = node.content?.[0]?.value || resolvedVenue.name;
+
+    if (resolvedVenue.website) {
+      return `<a href="${resolvedVenue.website}">${linkText}</a>`;
+    }
+    return linkText; // no link if no website provided
   }
 
   console.warn(`Could not resolve linked entry with ID ${targetId}`);
