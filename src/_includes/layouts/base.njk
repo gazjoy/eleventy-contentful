@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     
-    {% set css %}
-        {% include "assets/css/inline.css" %}
-    {% endset %}
-    <style>{{ css | cssmin | safe }}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/css/style.css" />
 
     <style>
 a[href]:not(:where(
@@ -30,9 +30,23 @@ a[href]:not(:where(
     </style>
 </head>
 <body>
-    <header style="background-color:aliceblue;border-bottom:2px solid black;">
-        {% include "components/dynamic-nav.njk" %}
-        <a href="https://phoenixyth.swimmanager.co.uk/login" target="_blank">Login to Swim Manager</a>
+    <header class="site-header">
+
+        <div class="nav-bar container">
+            <div class="nav-bar__logo">
+                <a href="/" class="logo">Logo</a>
+            </div>
+            <div class="nav-bar__menu">
+                <input id="menu-toggler" type="checkbox" class="menu-toggler" aria-hidden="true" />
+                <label for="menu-toggler" class="show-menu">
+                    <span></span>
+                </label>
+                {% include "components/dynamic-nav.njk" %}
+            </div>
+            <div class="nav-bar__login">
+                <a href="https://phoenixyth.swimmanager.co.uk/login" target="_blank" class="btn btn-secondary">Login to Swim Manager</a>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -40,7 +54,7 @@ a[href]:not(:where(
     </main>
 
     <footer style="background-color:aliceblue;border-top:2px solid black;">
-        <p>&copy; My Website. All rights reserved.</p>
+        <p>&copy; My Website. All rights reserved. | <a href="/styles/">Styles</a></p>
     </footer>
 </body>
 </html>

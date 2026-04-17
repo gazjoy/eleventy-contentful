@@ -11,7 +11,7 @@
 	{% endif %}
 {% endmacro %}
 
-<nav>
+<nav class="site-nav">
 	<ul>
 		<li>{{ renderNavLink("/", "Home", page.url) }}</li>
 		<li>{{ renderNavLink("/news/", "News", page.url) }}</li>
@@ -26,18 +26,18 @@
 			{% if level1Page.childPages.length > 0 %}
 			<ul>
 				{% for level2Page in level1Page.childPages %}
-				<li><small>
+				<li>
 					{{ renderNavLink("/" + level2Page.urlPath + "/", level2Page.title, page.url) }}
 					{% if level2Page.childPages.length > 0 %}
 					<ul>
 						{% for level3Page in level2Page.childPages %}
-						<li><small>
+						<li>
 							{{ renderNavLink("/" + level3Page.urlPath + "/", level3Page.title, page.url) }}
-						</small></li>
+						</li>
 						{% endfor %}
 					</ul>
 					{% endif %}
-				</small></li>
+				</li>
 				{% endfor %}
 			</ul>
 			{% endif %}
