@@ -18,6 +18,6 @@ permalink: /events/index.html
 	{% endif %}
     
 			
-		{{ event.descriptionRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}
+		{{ event.descriptionRichText | renderRichTextAsHtml | safe }}
 
 	{% endfor %}

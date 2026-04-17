@@ -9,7 +9,7 @@ permalink: /competitive-squads/index.html
 {% for squad in squads %}
 
   <h2>{{ squad.name }}</h2>
-  <div>{{ squad.descriptionRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}</div>
+  <div>{{ squad.descriptionRichText | renderRichTextAsHtml | safe }}</div>
 
   <style>
     table { border-collapse: collapse; }

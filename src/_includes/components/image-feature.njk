@@ -12,7 +12,7 @@
 	
 		<div>
 			<h2>{{ component.title }}</h2>
-			{{ component.contentRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}
+			{{ component.contentRichText | renderRichTextAsHtml | safe }}
 		</div>
 	</div>
 	

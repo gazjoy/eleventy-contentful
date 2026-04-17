@@ -1,15 +1,12 @@
-const { deliveryApiClient } = require("../lib/contentful/apiClient");
+const { fetchAllEntriesForContentType } = require("../lib/contentful/paginationHelper");
 const { mapHomepage } = require("../lib/contentful/contentMapper");
 
 module.exports = async function () {
   console.log("Fetching homepage from Contentful...");
 
-  const homepageEntry = await deliveryApiClient.getEntries({ 
-    content_type: "homepage",
-    limit: 1
-  });
+  const homepageEntries = await fetchAllEntriesForContentType("homepage");
 
-  const homepage = homepageEntry.items
+  const homepage = homepageEntries
     .map(i => mapHomepage(i))[0]; // we expect exactly one homepage entry
   //console.log(`*** Mapped homepage: ${JSON.stringify(homepage)}`);
 

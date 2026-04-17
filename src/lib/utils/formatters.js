@@ -28,6 +28,18 @@ const formatDates = (startDate, endDate) => {
   return `${start.toFormat(DAY_MONTH_YEAR)} - ${end.toFormat(DAY_MONTH_YEAR)}`;
 };
 
+/** Formats a file size in a human-readable format, e.g. 1.23 MB */
+formatFileSize = (sizeInBytes, decimalPlaces = 0) => {
+  if (sizeInBytes < 1024) {
+    return `${sizeInBytes} bytes`;
+  } else if (sizeInBytes < 1024 * 1024) {
+    return `${(sizeInBytes / 1024).toFixed(decimalPlaces)} KB`; 
+  } else {
+    return `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+}
+
 module.exports = {
   formatDates,
+  formatFileSize
 };

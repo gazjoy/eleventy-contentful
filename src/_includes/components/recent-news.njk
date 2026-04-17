@@ -17,7 +17,7 @@
 
 		<small>{{ newsPost.date | readableDate }} by {{ newsPost.author }}</small>
 			
-		{{ newsPost.bodyRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}
+		{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
 
 	{% endfor %}
 </section>

@@ -4,5 +4,5 @@ permalink: /about-static/index.html
 ---
 
 <h1>{{ aboutPage.title }}</h1>
-<div>{{ aboutPage.bodyRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}</div>
+<div>{{ aboutPage.bodyRichText | renderRichTextAsHtml | safe }}</div>
     

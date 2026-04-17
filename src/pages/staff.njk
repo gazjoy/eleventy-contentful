@@ -13,7 +13,7 @@ permalink: /coaching-staff/index.html
   
   <img src="{{staffMember.photo.url}}" src="{{staffMember.photo.alt}}" />
 
-  <div>{{ staffMember.biographyRichText | renderRichTextAsHtml(contentLinkLookups) | safe }}</div>
+  <div>{{ staffMember.biographyRichText | renderRichTextAsHtml | safe }}</div>
 
   {% if not loop.last %}
     <hr/>

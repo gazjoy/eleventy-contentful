@@ -18,7 +18,7 @@ module.exports = async function () {
       squad.timetable = buildTimetableForSquad(sessions, squad);
       return squad;
     });
-  console.log(`*** Mapped, sorted squads with timetables: ${JSON.stringify(squads)}`);
+  //console.log(`*** Mapped, sorted squads with timetables: ${JSON.stringify(squads)}`);
 
   console.log(`... fetched ${squads.length} squads and ${sessions.length} sessions.`);
 

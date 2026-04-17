@@ -27,8 +27,8 @@ https://moment.github.io/luxon/#/?id=luxon
   - rely on user clicking build?
   - auto-build triggered by webhook on save?
 - align rich text editor options
-  - allowed functions (H1, tables etc.)
-  - linkable content types
+  - allowed features (H1, tables etc.)
+  - linkable/embeddable content types, and how they should render
 - sitemap?
 - linting?
 - tests?
