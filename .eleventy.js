@@ -1,5 +1,6 @@
 const { renderRichTextAsHtml } = require("./src/lib/contentful/richTextRenderer");
 const { formatDates } = require("./src/lib/utils/formatters");
+const CleanCSS = require("clean-css");
 
 module.exports = function(eleventyConfig) {
 
@@ -8,6 +9,11 @@ module.exports = function(eleventyConfig) {
 
   // Date formatting (human readable)
   eleventyConfig.addFilter("readableDate", formatDates);
+
+  // Minify CSS
+  eleventyConfig.addFilter("cssmin", function(code) {
+    return new CleanCSS({}).minify(code).styles;
+  });
 
   // Copy all static files to output
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
