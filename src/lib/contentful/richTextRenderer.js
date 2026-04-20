@@ -1,8 +1,9 @@
 const { documentToHtmlString } = require("@contentful/rich-text-html-renderer");
 const { INLINES, BLOCKS } = require("@contentful/rich-text-types");
+const markdownIt = require("markdown-it")();
 const { formatFileSize } = require("../utils/formatters");
 const { slugify } = require("../utils/helpers");
-const { mapPage, mapStaffMember, mapVenue } = require("./contentMapper");
+const { mapCommitteeRole, mapPage, mapStaffMember, mapVenue } = require("./contentMapper");
 
 const renderRichTextAsHtml = (value) => {
   if (!value) {
@@ -38,6 +39,8 @@ const renderReference = () => (node) => {
       const entryContentType = target?.sys?.contentType?.sys?.id;
 
       switch (entryContentType) {
+        case "committeeRole":
+          return renderCommitteeRoleReference(target, referenceType, linkText);
         case "page":
           return renderPageReference(target, referenceType, linkText);
         case "staffMember":
@@ -85,14 +88,41 @@ const renderAssetReference = (asset, type, linkText) => {
   }
 };
 
+const renderCommitteeRoleReference = (entry, type, linkText) => {
+  const committeeRole = mapCommitteeRole(entry);
+  const memberNames = committeeRole.members.join("/") || "Vacant";
+  const linkUrl = `mailto:${committeeRole.email}`;
+  const descriptionHtml = markdownIt.renderInline(committeeRole.descriptionMarkdown || "");
+  
+  if (type === INLINES.ENTRY_HYPERLINK) {
+    return `<a href="${linkUrl}">${linkText || committeeRole.name}</a>`;
+  }
+
+  if (type === INLINES.EMBEDDED_ENTRY) {
+    return `<span>${committeeRole.title}: ${memberNames}</span>`;
+  }
+
+  if (type === BLOCKS.EMBEDDED_ENTRY) {
+    return `<p>
+      <strong>${committeeRole.title}</strong><br/>
+      ${descriptionHtml && `${descriptionHtml}<br/>`}
+      Held by: ${memberNames}<br/>
+    </p>`;
+  }
+};
+
 const renderPageReference = (entry, type, linkText) => {
   const page = mapPage(entry);
   
   // Render hyperlink to page itself
+
   if (type === INLINES.ENTRY_HYPERLINK
-    || type === INLINES.EMBEDDED_ENTRY
-    || type === BLOCKS.EMBEDDED_ENTRY) {
+    || type === INLINES.EMBEDDED_ENTRY) {
     return `<a href="/${page.urlPath}/">${linkText || page.title}</a>`;
+  }
+
+  if (type === BLOCKS.EMBEDDED_ENTRY) {
+    return `<p><a href="/${page.urlPath}/">${linkText || page.title}</a></p>`;
   }
 };
 

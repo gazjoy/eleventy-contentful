@@ -1,3 +1,4 @@
+const markdownIt = require("markdown-it")();
 const { renderRichTextAsHtml } = require("./src/lib/contentful/richTextRenderer");
 const { formatDates } = require("./src/lib/utils/formatters");
 // const CleanCSS = require("clean-css");
@@ -6,6 +7,8 @@ module.exports = function(eleventyConfig) {
 
   // Contentful rich text
   eleventyConfig.addFilter("renderRichTextAsHtml", renderRichTextAsHtml);
+
+  eleventyConfig.addFilter("renderMarkdownAsHtml",  markdownIt.renderInline);
 
   // Date formatting (human readable)
   eleventyConfig.addFilter("readableDate", formatDates);

@@ -14,6 +14,16 @@ const getFullPagePath = (page) => {
   return page.fields.slug;
 };
 
+const mapCommitteeRole = (entry) => {
+  return {
+    id: entry.sys.id,
+    title: entry.fields.title,
+    descriptionMarkdown: entry.fields.description,
+    members: entry.fields.members || [], // array of member names, e.g. ["Jane Doe", "John Smith"] or [] if vacant
+    email: entry.fields.email,
+  };
+};
+
 const mapEvent = (entry) => {
   return {
     title: entry.fields.title,
@@ -98,6 +108,7 @@ const mapVenue = (entry) => {
 };
 
 module.exports = {
+  mapCommitteeRole,
   mapEvent,
   mapHomepage,
   mapNewsPost,

@@ -19,10 +19,11 @@ npm run start
   https://www.contentful.com/developers/docs/references/content-delivery-api/
 - **Luxon (date formatting):**
 https://moment.github.io/luxon/#/?id=luxon
+- **Markdown-It (markdown rendering)**
+https://markdown-it.github.io/markdown-it/
 
 ## To-Do List
  
-- split team members into committee (positions/roles seats with holders as a field, no photo field), and coaching staff (people with roles as a field)
 - preview site
   - rely on user clicking build?
   - auto-build triggered by webhook on save?
