@@ -9,8 +9,8 @@
     "build:sass": "sass src/static/sass:_site/css",
     "watch:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
-    "start": "npm run clean && npm-run-all build:sass --parallel watch:*",
-    "build": "npm-run-all build:*",
+    "start": "npm run clean && run-p watch:*",
+    "build": "run-p build:*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
