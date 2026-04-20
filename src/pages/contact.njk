@@ -6,3 +6,20 @@ permalink: /contact-static/index.html
 <h1>{{ contactPage.title }}</h1>
 <div>{{ contactPage.bodyRichText | renderRichTextAsHtml | safe }}</div>
     
+    <h2>Static form demo</h2>
+    <form action="https://api.staticforms.dev/submit" method="POST">
+    <!-- Your API Key (replace with your actual key) -->
+    <input type="hidden" name="apiKey" value="sf_0ed3f339c09f91f2a204aad9">
+    
+    <!-- Form fields -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+    
+    <button type="submit">Send Message</button>
+  </form>
