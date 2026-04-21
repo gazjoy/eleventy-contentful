@@ -4,13 +4,16 @@ const markdownIt = require("markdown-it")();
 const { formatFileSize } = require("../utils/formatters");
 const { slugify } = require("../utils/helpers");
 const { mapCommitteeRole, mapPage, mapStaffMember, mapVenue } = require("./contentMapper");
+const { removeParagraphsWithinLists } = require("./richTextUtils");
 
 const renderRichTextAsHtml = (value) => {
   if (!value) {
     return "";
   }
 
-  return documentToHtmlString(value, {
+  const normalizedValue = removeParagraphsWithinLists(value);
+
+  return documentToHtmlString(normalizedValue, {
     renderNode: {
       [INLINES.ENTRY_HYPERLINK]: renderReference(),
       [INLINES.ASSET_HYPERLINK]: renderReference(),
