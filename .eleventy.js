@@ -29,9 +29,9 @@ module.exports = function(eleventyConfig) {
   // Time formatting (human readable)
   eleventyConfig.addFilter("readableTime", (value) => safeFilter(value, formatTime));
 
-  // Copy all static files to output
-  eleventyConfig.addPassthroughCopy({ "src/static": "/" });
-  eleventyConfig.addWatchTarget('src/static/sass');
+  // Copy static files to output
+  eleventyConfig.addPassthroughCopy({ "src/static/images": "/images" });
+  eleventyConfig.addPassthroughCopy({ "src/static/js": "/js" });
 
   return {
     templateFormats: ["md", "njk", "liquid"],

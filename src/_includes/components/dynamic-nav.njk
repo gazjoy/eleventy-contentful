@@ -5,15 +5,14 @@
 
 {% macro renderNavLink(url, title, currentUrl) %}
 	{% if url == currentUrl %}
-		<strong>{{ title }}</strong>
+		<strong class="text-white font-medium">{{ title }}</strong>
 	{% else %}
-		<a href="{{ url }}">{{ title }}</a>
+		<a href="{{ url }}" class="block md:inline text-gray-200 hover:text-white transition cursor-pointer py-2 md:py-0">{{ title }}</a>
 	{% endif %}
 {% endmacro %}
 
 <nav class="site-nav">
-	<ul>
-		<li>{{ renderNavLink("/", "Home", page.url) }}</li>
+	<ul class="flex flex-col md:flex-row gap-4 md:gap-8">
 		<li>{{ renderNavLink("/news/", "News", page.url) }}</li>
 		<li>{{ renderNavLink("/events/", "Events", page.url) }}</li>
 		<li>{{ renderNavLink("/competitive-squads/", "Competitive Squads", page.url) }}</li>
