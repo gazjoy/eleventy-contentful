@@ -1,13 +1,42 @@
+const { DateTime } = require("luxon");
 
-const chunkArray = (arr, size) => {
+/**
+ * Splits an array into chunks of the specified size. 
+ * The last chunk may be smaller if the array length is not a multiple of the chunk size.
+ * @param {any[]} array 
+ * @param {number} size 
+ */
+const chunkArray = (array, size) => {
   const chunks = [];
-  for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
+  for (let i = 0; i < array.length; i += size) chunks.push(array.slice(i, i + size));
   return chunks;
 };
 
+/**
+ * Converts a string into a URL-friendly slug, e.g. "Hello World" -> "hello-world"
+ * @param {string} text 
+ */
 const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-');
+
+/**
+ * Produces a Luxon DateTime object in UK timezone from a date string and optional time string.
+ * @param {string} dateIsoString Date in ISO format (e.g. "YYYY-MM-DD", "YYYY-MM-DDTHH:mm")
+ */
+const toUkDateTime = (dateIsoString) => {
+  return DateTime.fromISO(dateIsoString, { zone: "Europe/London" });
+}
+
+/**
+ * Returns true if the given date is in the past, false otherwise.
+ * @param {DateTime} date The date to assess 
+ */
+const isInPast = (date) => {
+  return date < DateTime.now({ zone: "Europe/London" });
+};
 
 module.exports = {
   chunkArray,
   slugify,
+  toUkDateTime,
+  isInPast
 };

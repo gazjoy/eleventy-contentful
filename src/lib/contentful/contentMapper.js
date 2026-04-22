@@ -1,3 +1,4 @@
+const { toUkDateTime, isInPast } = require("../utils/helpers");
 const { mapComponents } = require("./componentMapper");
 const { mapImageField } = require("./mappingUtils");
 
@@ -28,11 +29,12 @@ const mapEvent = (entry) => {
   return {
     title: entry.fields.title,
     slug: entry.fields.slug,
-    startDate: new Date(entry.fields.startDate),
-    endDate: entry.fields.endDate ? new Date(entry.fields.endDate) : null,
+    startDate: toUkDateTime(entry.fields.startDate),
+    startTime: entry.fields.startTime,
+    endDate: entry.fields.endDate ? toUkDateTime(entry.fields.endDate) : null,
     descriptionRichText: entry.fields.description,
     venue: mapVenue(entry.fields.venue),
-    website: entry.fields.eventInformationLink
+    website: entry.fields.eventInformationLink,
   };
 };
 
@@ -47,7 +49,7 @@ const mapNewsPost = (entry) => {
   return {
     title: entry.fields.title,
     slug: entry.fields.slug,
-    date: new Date(entry.fields.postingDate || entry.sys.createdAt),
+    date: toUkDateTime(entry.fields.postingDate || entry.sys.createdAt),
     bodyRichText: entry.fields.body,
     author: entry.fields.author || "Phoenix Swimming Club",
   };

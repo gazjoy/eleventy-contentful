@@ -8,16 +8,15 @@ permalink: /events/index.html
 
 {% for event in events %}
 
-		<h2>{{ event.title }}</h2>
+	<h2>{{ event.title }}</h2>
 
-		<p><strong>{{ event.startDate | readableDate(event.endDate) }}</strong></p>
+	<p><strong>{{ event.startDate | readableDate(event.endDate) }}</strong> {{event.startTime | readableTime}}</p>
     <p>{{ event.venue.name }}</p>
 
 	{% if event.website %}
-	<p><a href="{{ event.website }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a></p>
+		<p><a href="{{ event.website }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a></p>
 	{% endif %}
     
-			
-		{{ event.descriptionRichText | renderRichTextAsHtml | safe }}
+	{{ event.descriptionRichText | renderRichTextAsHtml | safe }}
 
-	{% endfor %}
+{% endfor %}
