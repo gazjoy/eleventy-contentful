@@ -6,17 +6,47 @@ permalink: /events/index.html
 
 <h1>{{ title }}</h1>
 
-{% for event in events %}
+<h2>Upcoming Events</h2>
 
-	<h2>{{ event.title }}</h2>
+{% for event in events.upcoming %}
 
-	<p><strong>{{ event.startDate | readableDate(event.endDate) }}</strong> {{event.startTime | readableTime}}</p>
-    <p>{{ event.venue.name }}</p>
+	<div style="display:flex;">
+		{% include "components/event-date-badge.njk" %}
 
-	{% if event.website %}
-		<p><a href="{{ event.website }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a></p>
-	{% endif %}
-    
-	{{ event.descriptionRichText | renderRichTextAsHtml | safe }}
+		<div>
+			{% if loop.first %}
+				<p><em>Next Event!</em></p>
+			{% endif %}
+			
+			<h3>{{ event.title }}</h3>
+
+			<p><strong>{{ event.startDate | readableDate(event.endDate) }}</strong> {{event.startTime | readableTime}}</p>
+			<p>{{ event.venue.name }}</p>
+
+			{% if event.website %}
+				<p><a href="{{ event.website }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a></p>
+			{% endif %}
+			
+			{{ event.descriptionRichText | renderRichTextAsHtml | safe }}
+		</div>
+	</div>
+
+{% endfor %}
+
+<h2>Past Events</h2>
+
+{% for year, pastEvents in events.past %}
+
+	<h3>{{ year }}</h3>
+
+	{% for event in pastEvents %}
+
+		<div style="display:flex;">
+			{% include "components/event-date-badge.njk" %}
+
+			<h4>{{ event.title }}</h4>
+		</div>
+
+	{% endfor %}
 
 {% endfor %}

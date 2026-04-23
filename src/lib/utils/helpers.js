@@ -26,17 +26,8 @@ const toUkDateTime = (dateIsoString) => {
   return DateTime.fromISO(dateIsoString, { zone: "Europe/London" });
 }
 
-/**
- * Returns true if the given date is in the past, false otherwise.
- * @param {DateTime} date The date to assess 
- */
-const isInPast = (date) => {
-  return date < DateTime.now({ zone: "Europe/London" });
-};
-
 module.exports = {
   chunkArray,
   slugify,
-  toUkDateTime,
-  isInPast
+  toUkDateTime
 };

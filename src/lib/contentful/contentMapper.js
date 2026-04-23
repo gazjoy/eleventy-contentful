@@ -31,7 +31,7 @@ const mapEvent = (entry) => {
     slug: entry.fields.slug,
     startDate: toUkDateTime(entry.fields.startDate),
     startTime: entry.fields.startTime,
-    endDate: entry.fields.endDate ? toUkDateTime(entry.fields.endDate) : null,
+    endDate: toUkDateTime(entry.fields.endDate || entry.fields.startDate),
     descriptionRichText: entry.fields.description,
     venue: mapVenue(entry.fields.venue),
     website: entry.fields.eventInformationLink,
