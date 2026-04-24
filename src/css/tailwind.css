@@ -4,5 +4,43 @@
   --color-primary: #0d2240;
   --color-secondary: #cc1e1e;
   --color-accent: #5cb85c;
-  /*--color-light: #f8f9fa;*/
+  --color-light: #f8f9fa;
+  --color-dark: #0a1b30;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Montserrat", sans-serif;
+}
+h1 {
+	font-weight: 900;
+}
+
+h2 {
+	font-weight: 800;
+}
+h3, h4, h5 {
+	font-weight: 700;
+}
+
+.site-nav {
+
+  > ul {
+    @apply flex flex-col md:flex-row gap-2 md:gap-2;
+  }
+  a {
+    @apply flex;
+  }
+}
+
+.site-footer {
+  @apply bg-dark text-white;
+
+  & .site-footer__inner {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8;
+  }
+
+  & .site-footer__footer {
+    @apply border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40;
+  }
+
 }
