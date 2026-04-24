@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/tailwind.css" />
 
     <style>
 a[href]:not(:where(
@@ -30,24 +30,59 @@ a[href]:not(:where(
     </style>
 </head>
 <body>
-    <header class="site-header">
-
-        <div class="nav-bar container">
-            <div class="nav-bar__logo">
-                <a href="/" class="logo">Logo</a>
-            </div>
-            <div class="nav-bar__menu">
-                <input id="menu-toggler" type="checkbox" class="menu-toggler" aria-hidden="true" />
-                <label for="menu-toggler" class="show-menu">
-                    <span></span>
-                </label>
-                {% include "components/dynamic-nav.njk" %}
-            </div>
-            <div class="nav-bar__login">
-                <a href="https://phoenixyth.swimmanager.co.uk/login" target="_blank" class="btn btn-secondary">Login to Swim Manager</a>
-            </div>
-        </div>
-    </header>
+    <header class="site-header bg-primary text-white">
+  <div class="max-w-7xl mx-auto px-4 py-3">
+    <!-- Top Row: Logo + Hamburger/Actions -->
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="/" class="logo flex items-center gap-2 md:gap-3 hover:opacity-80">
+          <img src="/images/CPSC-Logo.png" alt="Cannock Phoenix" class="w-10 h-10 md:w-12 md:h-12" />
+          <div class="hidden sm:block">
+            <div class="text-xs font-semibold tracking-wide">CANNOCK PHOENIX</div>
+            <div class="text-xs md:text-sm font-bold">Swimming Club</div>
+          </div>
+        </a>
+      </div>
+      
+      <!-- Desktop: Nav + Request Trial | Mobile: Hamburger -->
+      <div class="hidden md:flex flex-1 items-center justify-between gap-8 ml-8">
+        <nav class="flex items-center gap-8">
+          {% include "components/dynamic-nav.njk" %}
+          <a href="#" class="text-accent hover:text-opacity-80 flex items-center gap-1 font-medium">
+            🔒 Pay Fees
+          </a>
+        </nav>
+        <a href="#trial" class="bg-secondary text-white px-6 py-2 rounded-full font-semibold hover:bg-opacity-90 transition flex-shrink-0">
+          Request a Trial
+        </a>
+      </div>
+      
+      <!-- Mobile: Menu label + Hamburger -->
+      <button id="menu-toggle" class="md:hidden flex items-center gap-2 text-white">
+        <span class="text-sm font-medium">Menu</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu: Nav + Request Trial (stacked below) -->
+    <nav id="nav-menu" class="hidden md:hidden flex-col pb-4 mt-4">
+      <div class="flex flex-col gap-4 pt-4 border-t border-white/20">
+        {% include "components/dynamic-nav.njk" %}
+        <a href="#" class="text-accent hover:text-opacity-80 flex items-center gap-1 font-medium">
+          🔒 Pay Fees
+        </a>
+      </div>
+      <div class="pt-4 mt-2 border-t border-white/20">
+        <a href="#trial" class="block bg-secondary text-white px-4 py-2 rounded-full font-semibold hover:bg-opacity-90 transition text-center">
+          Request a Trial
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
 
     <main>
         {{ content | safe }}
@@ -56,5 +91,21 @@ a[href]:not(:where(
     <footer style="background-color:aliceblue;border-top:2px solid black;">
         <p>&copy; My Website. All rights reserved. | <a href="/styles/">Styles</a></p>
     </footer>
+
+    <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
+    });
+    
+    // Close menu when a link is clicked
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+        navMenu.classList.add('hidden');
+        });
+    });
+    </script>
 </body>
 </html>
