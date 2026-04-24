@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap');
+
 @import "tailwindcss";
 
 @theme {
@@ -6,10 +8,34 @@
   --color-accent: #5cb85c;
   --color-light: #f8f9fa;
   --color-dark: #0a1b30;
+
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; 
+
+  --text-xs: var(--step--2);
+  --text-sm: var(--step--1);
 }
 
+
+:root {
+  --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
+  --step--1: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1rem);
+  --step-0: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
+  --step-1: clamp(1.35rem, 1.2631rem + 0.3864vw, 1.5625rem);
+  --step-2: clamp(1.62rem, 1.4837rem + 0.6057vw, 1.9531rem);
+  --step-3: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
+  --step-4: clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem);
+  --step-5: clamp(2.7994rem, 2.384rem + 1.8461vw, 3.8147rem);
+}
+h1 { font-size: var(--step-5); }
+h2 { font-size: var(--step-4); }
+h3 { font-size: var(--step-3); }
+h4 { font-size: var(--step-2); }
+h5 { font-size: var(--step-1); }
+h6 { font-size: var(--step-0); }
+
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Montserrat", sans-serif;
+	font-family: var(--font-montserrat);
 }
 h1 {
 	font-weight: 900;
@@ -21,6 +47,20 @@ h2 {
 h3, h4, h5 {
 	font-weight: 700;
 }
+
+body {
+  font-family: var(--font-inter);
+}
+
+.site-footer h3 {
+    /* font-size: var(--step-0); */
+    @apply text-sm uppercase tracking-widest text-secondary mb-4;
+}
+.site-footer__footer {
+  @apply border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40;
+}
+
+
 
 .site-nav {
 
