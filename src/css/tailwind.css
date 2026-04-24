@@ -68,9 +68,25 @@ body {
     @apply flex flex-col md:flex-row gap-2 md:gap-2;
   }
   a {
-    @apply flex;
+    
+  }
+
+  & .site-nav__link,
+  & .site-nav__current {
+    @apply flex px-3 py-2 text-sm rounded-md;
+  }
+
+  & .site-nav__link {
+    @apply  transition-colors duration-150 text-white/85 hover:text-white hover:bg-white/10;
+  }
+  & .site-nav__current {
+    @apply text-white font-medium bg-white/10;
+  }
+  & .site-nav__link--pay {
+    @apply text-emerald-400 font-semibold hover:bg-emerald-400 hover:text-primary;
   }
 }
+
 
 .site-footer {
   @apply bg-dark text-white;
@@ -81,6 +97,17 @@ body {
 
   & .site-footer__footer {
     @apply border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40;
+  }
+
+  a {
+    @apply hover:text-white hover:underline transition-colors underline-offset-4;
+  }
+
+  .link {
+    @apply underline;
+  }
+  .link--pay {
+    @apply text-emerald-400/70 underline;
   }
 
 }

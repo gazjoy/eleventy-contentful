@@ -4,15 +4,14 @@
 #}
 
 {% macro renderNavLink(url, title, currentUrl) %}
-	{% set dynamicClass = "text-white/85" %}
+	{% set dynamicClass = "" %}
 	{% if "🔒" in title %}
-		{% set dynamicClass = "text-emerald-400 font-semibold" %}
+		{% set dynamicClass = "site-nav__link--pay" %}
 	{% endif %}
 	{% if url == currentUrl %}
-		<strong class="text-white font-medium">{{ title }}</strong>
+		<strong class="site-nav__current">{{ title }}</strong>
 	{% else %}
-		<a href="{{ url }}" class="px-3 py-2 text-sm transition-colors duration-150 
-		rounded-md hover:text-white hover:bg-white/10 {{ dynamicClass }}">{{ title }}</a>
+		<a href="{{ url }}" class="site-nav__link {{ dynamicClass }}">{{ title }}</a>
 	{% endif %}
 {% endmacro %}
 
