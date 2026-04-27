@@ -29,15 +29,15 @@ a[href]:not(:where(
 }
     </style>
 </head>
-<body>
-    <header class="site-header bg-primary text-white">
+<body class="{{ bodyClass | default('') }}">
+  <header class="site-header bg-primary text-white">
   <div class="max-w-7xl mx-auto px-4 py-3">
     <!-- Top Row: Logo + Hamburger/Actions -->
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <div class="shrink-0">
         <a href="/" class="logo flex items-center gap-2 md:gap-3 hover:opacity-80">
-          <img src="/images/CPSC-Logo.png" alt="Cannock Phoenix" class="w-10 h-10 md:w-12 md:h-12" />
+          <img src="/images/CPSC-Logo.png" alt="Cannock Phoenix"/>
           <div class="">
             <div class="text-xs font-semibold tracking-wide">CANNOCK PHOENIX</div>
             <div class="text-xs md:text-sm font-bold">Swimming Club</div>
@@ -48,8 +48,8 @@ a[href]:not(:where(
       <!-- Desktop: Nav + Request Trial | Mobile: Hamburger -->
       <div class="hidden md:flex flex-1 items-center justify-between gap-8 ml-8">
         {% include "components/dynamic-nav.njk" %}
-        <a href="#trial" class="bg-secondary text-white px-6 py-2 rounded-full font-semibold hover:bg-opacity-90 transition shrink-0">
-          Request a Trial
+        <a href="#trial" class="bg-secondary text-white px-6 py-2 rounded-full font-semibold hover:bg-opacity-90 transition flex-shrink-0">
+          Request free trial
         </a>
       </div>
       

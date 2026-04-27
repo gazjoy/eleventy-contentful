@@ -16,6 +16,7 @@
   --text-sm: var(--step--1);
 }
 
+/* Typography */
 
 :root {
   --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
@@ -34,11 +35,14 @@ h4 { font-size: var(--step-2); }
 h5 { font-size: var(--step-1); }
 h6 { font-size: var(--step-0); }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+.eyebrow {
 	font-family: var(--font-montserrat);
 }
 h1 {
 	font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 h2 {
@@ -51,6 +55,16 @@ h3, h4, h5 {
 body {
   font-family: var(--font-inter);
 }
+
+
+/* header */
+
+.page-home .site-header {
+  @apply fixed z-10 w-full;
+}
+
+
+/* Footer */
 
 .site-footer h3 {
     /* font-size: var(--step-0); */
@@ -111,3 +125,51 @@ body {
   }
 
 }
+
+
+.masthead {
+  @apply relative z-1 py-22 bg-dark text-white overflow-hidden;
+
+  p {
+    @apply text-white/80;
+  }
+}
+.masthead--full {
+  @apply flex items-center min-h-screen pb-48;
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 5rem);
+  }
+}
+
+.masthead__content {
+  @apply relative z-10 text-center px-4 sm:px-8 max-w-4xl mx-auto;
+}
+
+.masthead__description {
+  @apply max-w-2xl mx-auto mb-10 leading-relaxed;
+  font-size: var(--step--1);
+}
+
+.eyebrow {
+  @apply mb-6 text-sm uppercase tracking-widest;
+}
+
+.wave {
+  @apply absolute bottom-0 left-0 right-0 overflow-hidden leading-none;
+  bottom: -1px;
+}
+
+.logo {
+  display: block;
+  
+  @apply rounded-md bg-white text-sm p-5 text-white/80 hover:text-white transition-colors duration-200;
+}
+.logo--se {
+  width: 200px;
+}
+
+.btn {
+  font-family: Inter, sans-serif; font-weight: 600; font-size: 1rem;
+}
+
