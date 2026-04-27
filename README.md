@@ -54,17 +54,16 @@ TODO
 
 ## To-Do List
  
-- preview site
+- automatic period build of site?
+  - to cover e.g. whether events are listed as past or upcoming
+- preview site?
   - rely on user clicking build?
   - auto-build triggered by webhook on save?
+  - automatic periodic build? (would need to be fairly frequent)
 - align rich text editor options
   - allowed features (H1, tables etc.)
   - linkable/embeddable content types, and how they should render
 - sitemap?
+- typescript?
 - linting?
 - tests?
-
-
-
-## Technical Details
-The site is built with Eleventy (Nunjucks) and Contentful, and uses CSS for styling. It uses Tailwind CSS for styling and is configured to copy static files from the `src/static` directory to the output directory. The project also includes filters for formatting dates and times in a human-readable format.

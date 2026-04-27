@@ -1,0 +1,26 @@
+{# 
+    Expects the context to include:
+    - file: the referenced file (see mapFile function in src/lib/contentful/assetMapper.js)
+    - type: the type of reference ("asset-hyperlink" | "embedded-asset-block")
+    - linkText: only relevant for "asset-hyperlink" type
+#}
+
+{# render simple link #}
+{% if type == "asset-hyperlink" %}
+
+  <a href="{{ file.url }}" target="_blank" rel="noopener noreferrer">{{ linkText or file.title }}</a>
+
+{# render as a link with file size and description #}
+{% elif type == "embedded-asset-block" %}
+  <p>
+    <a href="{{ file.url }}" target="_blank" rel="noopener noreferrer">{{ file.title }}</a>
+    ({{ file.fileSize | readableFileSize }})
+    {% if file.description %}
+      <br/>
+      <small>{{ file.description }}</small>
+    {% endif %}
+  </p>
+
+{% else %}
+  <!-- Unhandled file reference type "{{ type }}" -->
+{% endif %}

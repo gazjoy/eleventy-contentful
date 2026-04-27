@@ -1,4 +1,5 @@
 const { DateTime } = require("luxon");
+const { luxonDateTimeOptions } = require("./helpers");
 
 // see https://moment.github.io/luxon/#/formatting?id=table-of-tokens
 const DAY = "EEEE d"; // Wednesday 4
@@ -31,7 +32,8 @@ const formatDates = (startDate, endDate = null) => {
  * @param {string} timeString A time string in 24-hour format, e.g. "18:30"
  */
 const formatTime = (timeString) => {
-  const dateTime = DateTime.fromISO(`2000-01-01T${timeString}:00`, { zone: "Europe/London" });
+  // Use an arbitrary date since we only care about the time component
+  const dateTime = DateTime.fromISO(`2000-01-01T${timeString}:00`, luxonDateTimeOptions);
   return dateTime.toFormat("h:mma").toLowerCase(); // e.g. 18:30 -> 6:30pm
 };
 

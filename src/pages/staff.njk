@@ -11,7 +11,7 @@ permalink: /coaching-staff/index.html
   <h2 id={{ staffMember.name | slug }}>{{ staffMember.name }}</h2>
   <p><strong>{{ staffMember.role }}</strong></p>
   
-  <img src="{{staffMember.photo.url}}" src="{{staffMember.photo.alt}}" />
+  <img src="{{staffMember.photo.url}}" alt="{{staffMember.photo.description or staffMember.name }}" />
 
   <div>{{ staffMember.biographyRichText | renderRichTextAsHtml | safe }}</div>
 

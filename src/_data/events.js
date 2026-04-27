@@ -1,6 +1,7 @@
 const { DateTime } = require("luxon");
 const { fetchAllEntriesForContentType } = require("../lib/contentful/paginationHelper");
 const { mapEvent } = require("../lib/contentful/contentMapper");
+const { luxonDateTimeOptions } = require("../lib/utils/helpers");
 
 module.exports = async function () {
   console.log("Fetching events from Contentful...");
@@ -12,7 +13,7 @@ module.exports = async function () {
 
   console.log(`... done. ${events.length} events fetched.`);
 
-  const today = DateTime.now({ zone: "Europe/London" }).startOf("day");
+  const today = DateTime.now(luxonDateTimeOptions).startOf("day");
 
   const data = {
     // future and current events, sorted date ascending

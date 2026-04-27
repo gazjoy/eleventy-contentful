@@ -19,15 +19,22 @@ const chunkArray = (array, size) => {
 const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-');
 
 /**
+ * Options for Luxon DateTime parsing/formatting in UK timezone.
+ * Use this whenever creating DateTime objects to ensure consistent timezone handling across the site.
+ */
+const luxonDateTimeOptions = { zone: "Europe/London" };
+
+/**
  * Produces a Luxon DateTime object in UK timezone from a date string and optional time string.
  * @param {string} dateIsoString Date in ISO format (e.g. "YYYY-MM-DD", "YYYY-MM-DDTHH:mm")
  */
 const toUkDateTime = (dateIsoString) => {
-  return DateTime.fromISO(dateIsoString, { zone: "Europe/London" });
+  return DateTime.fromISO(dateIsoString, luxonDateTimeOptions);
 }
 
 module.exports = {
   chunkArray,
   slugify,
+  luxonDateTimeOptions,
   toUkDateTime
 };

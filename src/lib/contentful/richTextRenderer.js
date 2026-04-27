@@ -1,5 +1,6 @@
 const { documentToHtmlString } = require("@contentful/rich-text-html-renderer");
 const { INLINES, BLOCKS } = require("@contentful/rich-text-types");
+const { mapFile, mapImage } = require("./assetMapper");
 const { mapCommitteeRole, mapPage, mapStaffMember, mapVenue } = require("./contentMapper");
 const { removeParagraphsWithinLists } = require("./richTextUtils");
 
@@ -22,7 +23,7 @@ const renderRichTextAsHtml = (value, renderPartial) => {
 };
 
 const renderReference = (renderPartial) => (node) => {
-  //return `<p><small>${JSON.stringify(node)}</small></p>`;
+  //return `<p><small>***<br/>${JSON.stringify(node)}<br/>***</small></p>`; // for debugging
   
   const referenceType = node.nodeType;
   const target = node?.data?.target;
@@ -33,7 +34,15 @@ const renderReference = (renderPartial) => (node) => {
     const linkText = node.content?.[0]?.value;
 
     if (targetType === "Asset") {
-      return renderAssetReference(target, referenceType, linkText, renderPartial);
+      const fileType = target.fields.file.contentType;
+
+      if (fileType?.startsWith("image/")) {
+        return renderImageReference(target, referenceType, linkText, renderPartial);
+      } 
+      // add other asset types (e.g. video) as needed
+      else {
+        return renderFileReference(target, referenceType, linkText, renderPartial);
+      }
     }
   
     if (targetType === "Entry") {
@@ -59,11 +68,23 @@ const renderReference = (renderPartial) => (node) => {
   return `<!-- Unresolved ${referenceType} reference to '${targetId}' -->`;
 };
 
-const renderAssetReference = (asset, type, linkText, renderPartial) => {
-  return renderPartial("rich-text/asset-reference.njk", {
+const renderImageReference = (asset, type, linkText, renderPartial) => {
+  const image = mapImage(asset);
+  
+  return renderPartial("rich-text/image-reference.njk", {
     type,
     linkText,
-    asset,
+    image,
+  });
+};
+
+const renderFileReference = (asset, type, linkText, renderPartial) => {
+  const file = mapFile(asset);
+
+  return renderPartial("rich-text/file-reference.njk", {
+    type,
+    linkText,
+    file,
   });
 };
 

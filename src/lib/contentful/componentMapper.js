@@ -1,4 +1,4 @@
-const { mapImageField } = require("./mappingUtils");
+const { mapImage } = require("./assetMapper");
 
 /*
   Maps Contentful component entries to the shape we want to use in our templates.
@@ -14,7 +14,7 @@ const mapComponent = (entry) => {
       return {
         type,
         title: fields.title,
-        image: mapImageField(fields.image, ""),
+        image: mapImage(fields.image),
         contentRichText: fields.featureContent,
         imageOnLeft: fields.imageOnLeft ?? true,
       };

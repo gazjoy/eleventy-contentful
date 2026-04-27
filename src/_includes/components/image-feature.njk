@@ -11,9 +11,8 @@
 	<div>
 		<img 
 			src="{{ component.image.url }}" 
-			alt="{{ component.image.alt }}" 
+			alt="{{ component.image.description }}"
 			style="max-height: 300px; " />
-	
 		<div>
 			<h2>{{ component.title }}</h2>
 			{{ component.contentRichText | renderRichTextAsHtml | safe }}

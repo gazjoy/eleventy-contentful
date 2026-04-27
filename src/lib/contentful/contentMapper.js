@@ -1,10 +1,10 @@
-const { toUkDateTime, isInPast } = require("../utils/helpers");
+const { toUkDateTime } = require("../utils/helpers");
 const { mapComponents } = require("./componentMapper");
-const { mapImageField } = require("./mappingUtils");
+const { mapImage } = require("./assetMapper");
 
 /*
     Maps Contentful content entries to the shape we want to use in our templates.
-    Please keep in alphabetical order by content type for easier maintenance.
+    Please keep in alphabetical order for easier maintenance.
 */
 
 const getFullPagePath = (page) => {
@@ -27,6 +27,7 @@ const mapCommitteeRole = (entry) => {
 
 const mapEvent = (entry) => {
   return {
+    id: entry.sys.id,
     title: entry.fields.title,
     slug: entry.fields.slug,
     startDate: toUkDateTime(entry.fields.startDate),
@@ -47,6 +48,7 @@ const mapHomepage = (entry) => {
 
 const mapNewsPost = (entry) => {
   return {
+    id: entry.sys.id,
     title: entry.fields.title,
     slug: entry.fields.slug,
     date: toUkDateTime(entry.fields.postingDate || entry.sys.createdAt),
@@ -94,7 +96,7 @@ const mapStaffMember = (entry) => {
     id: entry.sys.id,
     name: entry.fields.name,
     role: entry.fields.role,
-    photo: mapImageField(entry.fields.photo, entry.fields.name),
+    photo: mapImage(entry.fields.photo),
     biographyRichText: entry.fields.biography,
   };
 };

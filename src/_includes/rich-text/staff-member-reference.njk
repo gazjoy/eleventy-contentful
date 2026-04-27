@@ -18,7 +18,7 @@
   <a href="{{ linkUrl }}">
     {{ staffMember.name }}
     {% if staffMember.photo %}
-      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.alt or staffMember.name }}" style="height: 20px;" />
+      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.description or staffMember.name }}" style="height: 20px;" />
     {% endif %}
   </a>
 
@@ -27,7 +27,7 @@
 
   <div style="display: flex;">
     {% if staffMember.photo %}
-      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.alt or staffMember.name }}" style="height: 100px;" />
+      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.description or staffMember.name }}" style="height: 100px;" />
     {% endif %}
     <p><strong>{{ staffMember.name }}</strong><br/>{{ staffMember.role }}</p>
   </div>

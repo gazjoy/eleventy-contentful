@@ -1,0 +1,23 @@
+{# 
+    Expects the context to include:
+    - image: the referenced image (see mapImage function in src/lib/contentful/assetMapper.js)
+    - type: the type of reference ("asset-hyperlink" | "embedded-asset-block")
+    - linkText: only relevant for "asset-hyperlink" type
+#}
+
+{# render simple link #}
+{% if type == "asset-hyperlink" %}
+
+  <a href="{{ image.url }}" target="_blank" rel="noopener noreferrer">{{ linkText or image.title }}</a>
+
+{# render as image with caption #}
+{% elif type == "embedded-asset-block" %}
+  <p style="width: fit-content; text-align: center;">
+    <img src="{{ image.url }}" alt="{{ image.description or '' }}" style="max-width: 100%; height: auto;" />
+    <br/>
+    <small>{{ image.title }}</small>
+  </p>
+
+{% else %}
+  <!-- Unhandled image reference type "{{ type }}" -->
+{% endif %}
