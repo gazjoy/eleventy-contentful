@@ -1,12 +1,9 @@
 const { documentToHtmlString } = require("@contentful/rich-text-html-renderer");
 const { INLINES, BLOCKS } = require("@contentful/rich-text-types");
-const markdownIt = require("markdown-it")();
-const { formatFileSize } = require("../utils/formatters");
-const { slugify } = require("../utils/helpers");
 const { mapCommitteeRole, mapPage, mapStaffMember, mapVenue } = require("./contentMapper");
 const { removeParagraphsWithinLists } = require("./richTextUtils");
 
-const renderRichTextAsHtml = (value) => {
+const renderRichTextAsHtml = (value, renderPartial) => {
   if (!value) {
     return "";
   }
@@ -15,41 +12,42 @@ const renderRichTextAsHtml = (value) => {
 
   return documentToHtmlString(normalizedValue, {
     renderNode: {
-      [INLINES.ENTRY_HYPERLINK]: renderReference(),
-      [INLINES.ASSET_HYPERLINK]: renderReference(),
-      [INLINES.EMBEDDED_ENTRY]: renderReference(),
-      [BLOCKS.EMBEDDED_ENTRY]: renderReference(),
-      [BLOCKS.EMBEDDED_ASSET]: renderReference(),
+      [INLINES.ENTRY_HYPERLINK]: renderReference(renderPartial),
+      [INLINES.ASSET_HYPERLINK]: renderReference(renderPartial),
+      [INLINES.EMBEDDED_ENTRY]: renderReference(renderPartial),
+      [BLOCKS.EMBEDDED_ENTRY]: renderReference(renderPartial),
+      [BLOCKS.EMBEDDED_ASSET]: renderReference(renderPartial),
     }
   });
 };
 
-const renderReference = () => (node) => {
+const renderReference = (renderPartial) => (node) => {
   //return `<p><small>${JSON.stringify(node)}</small></p>`;
   
   const referenceType = node.nodeType;
   const target = node?.data?.target;
+  const targetId = target?.sys?.id || "unknown";
 
   if (target) {
     const targetType = target.sys.type;
     const linkText = node.content?.[0]?.value;
 
     if (targetType === "Asset") {
-      return renderAssetReference(target, referenceType, linkText);
-    };
+      return renderAssetReference(target, referenceType, linkText, renderPartial);
+    }
   
     if (targetType === "Entry") {
       const entryContentType = target?.sys?.contentType?.sys?.id;
 
       switch (entryContentType) {
         case "committeeRole":
-          return renderCommitteeRoleReference(target, referenceType, linkText);
+          return renderCommitteeRoleReference(target, referenceType, linkText, renderPartial);
         case "page":
-          return renderPageReference(target, referenceType, linkText);
+          return renderPageReference(target, referenceType, linkText, renderPartial);
         case "staffMember":
-          return renderStaffMemberReference(target, referenceType, linkText);
+          return renderStaffMemberReference(target, referenceType, linkText, renderPartial);
         case "venue":
-          return renderVenueReference(target, referenceType, linkText);
+          return renderVenueReference(target, referenceType, linkText, renderPartial);
         default:
           console.warn(`No rendering logic defined for entry content type "${entryContentType}"`);
           return `<!-- Unhandled entry reference of content type "${entryContentType}" -->`;
@@ -57,120 +55,56 @@ const renderReference = () => (node) => {
     }
   }
 
-  console.warn(`Reference of type "${referenceType}" to '${target.sys.id}' was not resolved. It may be deleted or unpublished.`);
-  return `<!-- Unresolved ${referenceType} reference to '${target.sys.id}' -->`;
+  console.warn(`Reference of type "${referenceType}" to '${targetId}' was not resolved. It may be deleted or unpublished.`);
+  return `<!-- Unresolved ${referenceType} reference to '${targetId}' -->`;
 };
 
-const renderAssetReference = (asset, type, linkText) => {
-  const file = asset.fields.file;
-  const assetTitle = asset.fields.title;
-  const assetDescription = asset.fields.description || "";
-  
-  // Render hyperlink to asset URL
-  if (type === INLINES.ASSET_HYPERLINK) {
-    return `<a href="${file.url}" target="_blank" rel="noopener noreferrer">${linkText || assetTitle}</a>`;
-  }
-  
-  if (type === BLOCKS.EMBEDDED_ASSET) {
-    // If an image, render it directly, with a caption
-    if (file.contentType?.startsWith("image/")) {
-      return `<p style="width: fit-content; text-align: center;">
-        <img src="${file.url}" alt="${assetDescription}" style="max-width: 100%; height: auto;" />
-        <br/>
-        <small>${assetTitle}</small>
-      </p>`;
-    }
-
-    // Otherwise, render a link to the asset with file size info and description
-    return `<p>
-      <a href="${file.url}" target="_blank" rel="noopener noreferrer">${assetTitle}</a>
-      (${formatFileSize(file.details.size)})
-      <br/>
-      <small>${assetDescription}</small>
-     </p>`;
-  }
+const renderAssetReference = (asset, type, linkText, renderPartial) => {
+  return renderPartial("rich-text/asset-reference.njk", {
+    type,
+    linkText,
+    asset,
+  });
 };
 
-const renderCommitteeRoleReference = (entry, type, linkText) => {
+const renderCommitteeRoleReference = (entry, type, linkText, renderPartial) => {
   const committeeRole = mapCommitteeRole(entry);
-  const memberNames = committeeRole.members.join("/") || "Vacant";
-  const linkUrl = `mailto:${committeeRole.email}`;
-  const descriptionHtml = markdownIt.renderInline(committeeRole.descriptionMarkdown || "");
-  
-  if (type === INLINES.ENTRY_HYPERLINK) {
-    return `<a href="${linkUrl}">${linkText || committeeRole.name}</a>`;
-  }
 
-  if (type === INLINES.EMBEDDED_ENTRY) {
-    return `<span>${committeeRole.title}: ${memberNames}</span>`;
-  }
-
-  if (type === BLOCKS.EMBEDDED_ENTRY) {
-    return `<p>
-      <strong>${committeeRole.title}</strong><br/>
-      ${descriptionHtml && `${descriptionHtml}<br/>`}
-      Held by: ${memberNames}<br/>
-    </p>`;
-  }
+  return renderPartial("rich-text/committee-role-reference.njk", {
+    type,
+    linkText,
+    committeeRole,
+  });
 };
 
-const renderPageReference = (entry, type, linkText) => {
+const renderPageReference = (entry, type, linkText, renderPartial) => {
   const page = mapPage(entry);
-  
-  // Render hyperlink to page itself
 
-  if (type === INLINES.ENTRY_HYPERLINK
-    || type === INLINES.EMBEDDED_ENTRY) {
-    return `<a href="/${page.urlPath}/">${linkText || page.title}</a>`;
-  }
-
-  if (type === BLOCKS.EMBEDDED_ENTRY) {
-    return `<p><a href="/${page.urlPath}/">${linkText || page.title}</a></p>`;
-  }
+  return renderPartial("rich-text/page-reference.njk", {
+    type,
+    linkText,
+    page,
+  });
 };
 
-const renderStaffMemberReference = (entry, type, linkText) => {
+const renderStaffMemberReference = (entry, type, linkText, renderPartial) => {
   const staffMember = mapStaffMember(entry);
-  const linkUrl = `/coaching-staff#${slugify(staffMember.name)}`;
-  const photoAlt = staffMember.photo?.alt || staffMember.name;
-  
-  if (type === INLINES.ENTRY_HYPERLINK) {
-    return `<a href="${linkUrl}">${linkText || staffMember.name}</a>`;
-  }
 
-  if (type === INLINES.EMBEDDED_ENTRY) {
-    return `<a href="${linkUrl}">
-      ${linkText || staffMember.name}
-      <img src="${staffMember.photo.url}" alt="${photoAlt}" style="height: 20px;" />
-    </a>`;
-  }
-
-  if (type === BLOCKS.EMBEDDED_ENTRY) {
-    return `<div style="display: flex;">
-      <img src="${staffMember.photo.url}" alt="${photoAlt}" style="height: 100px;" />
-      <p><strong>${staffMember.name}</strong><br/>${staffMember.role}</p>
-    </div>`;
-  }
+  return renderPartial("rich-text/staff-member-reference.njk", {
+    type,
+    linkText,
+    staffMember,
+  });
 };
 
-const renderVenueReference = (entry, type, linkText) => {
+const renderVenueReference = (entry, type, linkText, renderPartial) => {
   const venue = mapVenue(entry);
-  
-  if (type === INLINES.ENTRY_HYPERLINK
-    || type === INLINES.EMBEDDED_ENTRY
-  ) {
-    return `<a href="${venue.website}/" target="_blank" rel="noopener noreferrer">${linkText || venue.name}</a>`;
-  }
 
-  if (type === BLOCKS.EMBEDDED_ENTRY) {
-    return `<p>
-      ${venue.name}
-      <br/>
-      <a href="tel:${venue.phoneNumber}" target="_blank" rel="noopener noreferrer">${venue.phoneNumber}</a>
-      <br/>
-      <a href="${venue.website}" target="_blank" rel="noopener noreferrer">${venue.website}</a>
-    </p>`;
-  }
+  return renderPartial("rich-text/venue-reference.njk", {
+    type,
+    linkText,
+    venue,
+  });
 };
 
 module.exports = {

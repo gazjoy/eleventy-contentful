@@ -1,0 +1,5 @@
+{
+    // disable CSS and SCSS validation, use the Tailwind extension instead
+    "css.validate": false,
+    "scss.validate": false
+}

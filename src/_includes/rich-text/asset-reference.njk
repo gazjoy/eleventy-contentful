@@ -1,0 +1,37 @@
+{# 
+    Expects the context to include:
+    - asset: the referenced asset
+    - type: the type of reference ("asset-hyperlink" | "embedded-asset-block")
+    - linkText: only relevant for "asset-hyperlink" type
+#}
+
+{# render simple link #}
+{% if type == "asset-hyperlink" %}
+
+  <a href="{{ asset.fields.file.url }}" target="_blank" rel="noopener noreferrer">{{ linkText or asset.fields.title }}</a>
+
+{% elif type == "embedded-asset-block" %}
+
+    {# if an image, render with caption #}
+  {% if (asset.fields.file.contentType or "").startsWith("image/") %}
+    <p style="width: fit-content; text-align: center;">
+      <img src="{{ asset.fields.file.url }}" alt="{{ asset.fields.description or '' }}" style="max-width: 100%; height: auto;" />
+      <br/>
+      <small>{{ asset.fields.title }}</small>
+    </p>
+
+    {# otherwise, render as a link with file size and description #}
+  {% else %}
+    <p>
+      <a href="{{ asset.fields.file.url }}" target="_blank" rel="noopener noreferrer">{{ asset.fields.title }}</a>
+      ({{ asset.fields.file.details?.size | readableFileSize }})
+      {% if asset.fields.description %}
+        <br/>
+        <small>{{ asset.fields.description }}</small>
+      {% endif %}
+    </p>
+  {% endif %}
+
+{% else %}
+  <!-- Unhandled asset reference type "{{ type }}" -->
+{% endif %}

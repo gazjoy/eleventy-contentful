@@ -1,0 +1,26 @@
+{#
+    Expects the context to include:
+    - venue: the referenced venue - see mapVenue function in src/lib/contentful/mappers.js
+    - type: the type of reference ("entry-hyperlink" | "embedded-entry-inline" | "embedded-entry-block")
+    - linkText: only relevant for "entry-hyperlink" type
+#}
+
+{# render simple link (for embedded inline case also) #}
+{% if type == "entry-hyperlink" or type == "embedded-entry-inline" %}
+
+  <a href="{{ venue.website }}/" target="_blank" rel="noopener noreferrer">{{ linkText or venue.name }}</a>
+
+{# render block embedded entry with additional details #}
+{% elif type == "embedded-entry-block" %}
+
+  <p>
+    {{ venue.name }}
+    <br/>
+    <a href="tel:{{ venue.phoneNumber }}" target="_blank" rel="noopener noreferrer">{{ venue.phoneNumber }}</a>
+    <br/>
+    <a href="{{ venue.website }}" target="_blank" rel="noopener noreferrer">{{ venue.website }}</a>
+  </p>
+
+{% else %}
+  <!-- Unhandled venue reference type "{{ type }}" -->
+{% endif %}

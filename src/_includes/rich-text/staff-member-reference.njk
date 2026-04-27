@@ -1,0 +1,37 @@
+{# 
+    Expects the context to include:
+    - staffMember: the referenced staff member - see mapStaffMember function in src/lib/contentful/mappers.js
+    - type: the type of reference ("entry-hyperlink" | "embedded-entry-inline" | "embedded-entry-block")
+    - linkText: only relevant for "entry-hyperlink" type
+#}
+
+{% set linkUrl = "/coaching-staff/#" + staffMember.name | slugify %}
+
+{# render simple link #}
+{% if type == "entry-hyperlink" %}
+
+  <a href="{{ linkUrl }}">{{ linkText or staffMember.name }}</a>
+
+{# render inline embedded entry as link with thumbnail photo if available #}
+{% elif type == "embedded-entry-inline" %}
+
+  <a href="{{ linkUrl }}">
+    {{ staffMember.name }}
+    {% if staffMember.photo %}
+      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.alt or staffMember.name }}" style="height: 20px;" />
+    {% endif %}
+  </a>
+
+{# render block embedded entry with larger photo and role #}
+{% elif type == "embedded-entry-block" %}
+
+  <div style="display: flex;">
+    {% if staffMember.photo %}
+      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.alt or staffMember.name }}" style="height: 100px;" />
+    {% endif %}
+    <p><strong>{{ staffMember.name }}</strong><br/>{{ staffMember.role }}</p>
+  </div>
+
+{% else %}
+  <!-- Unhandled staffMember reference type "{{ type }}" -->
+{% endif %}

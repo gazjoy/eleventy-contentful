@@ -1,49 +1,17 @@
-const markdownIt = require("markdown-it")();
-const { renderRichTextAsHtml } = require("./src/lib/contentful/richTextRenderer");
-const { formatDates, formatTime } = require("./src/lib/utils/formatters");
-// const CleanCSS = require("clean-css");
-
-const safeFilter = (value, filterFunction) => {
-  if (!value) { return ""; }
-
-  try {
-    return filterFunction(value);
-  } 
-  catch (error) {
-    console.warn(`Error applying filter to value: ${error}`);
-    return "";
-  }
-}
+const filters = require("./src/lib/eleventy/filters.js");
 
 module.exports = function(eleventyConfig) {
 
-  // Contentful rich text
-  eleventyConfig.addFilter("renderRichTextAsHtml",  (value) => safeFilter(value, renderRichTextAsHtml));
-
-  // Markdown (inline)
-  eleventyConfig.addFilter("renderMarkdownAsHtml",  (value) => safeFilter(value, markdownIt.renderInline));
-
-  // Date formatting (human readable)
-  eleventyConfig.addFilter("readableDate", (value) => safeFilter(value, formatDates));
-
-  // Time formatting (human readable)
-  eleventyConfig.addFilter("readableTime", (value) => safeFilter(value, formatTime));
+  eleventyConfig.addPlugin(filters);
 
   // Use original files (don't copy) when running locally
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough"); 
-
   // Copy static files to output (when building for production)
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
 
   return {
     templateFormats: ["md", "njk", "liquid"],
-
-    // If your site lives in a different subdirectory, change this.
-    // Leading or trailing slashes are all normalized away, so don’t worry about it.
-    // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
-    // This is only used for URLs (it does not affect your file structure)
     pathPrefix: "/",
-
     markdownTemplateEngine: "liquid",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",

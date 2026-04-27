@@ -1,0 +1,22 @@
+{# 
+    Expects the context to include:
+    - page: the referenced page - see mapPage function in src/lib/contentful/mappers.js
+    - type: the type of reference ("entry-hyperlink" | "embedded-entry-inline" | "embedded-entry-block")
+    - linkText: only relevant for "entry-hyperlink" type
+#}
+
+{% set pageUrl = "/" + page.urlPath + "/" %}
+
+{# render simple link (for embedded inline case also) #}
+{% if type == "entry-hyperlink" or type == "embedded-entry-inline" %}
+
+  <a href="{{ pageUrl }}">{{ linkText or page.title }}</a>
+
+{# render block embedded entry as link wrapped in a paragraph #}
+{% elif type == "embedded-entry-block" %}
+
+  <p><a href="{{ pageUrl }}">{{ linkText or page.title }}</a></p>
+
+{% else %}
+  <!-- Unhandled page reference type "{{ type }}" -->
+{% endif %}
