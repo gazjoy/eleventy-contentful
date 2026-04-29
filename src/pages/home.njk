@@ -1,6 +1,6 @@
 ---
 eleventyComputed:
-  title: "{{ homepage.title }}"
+  title: "{{ homepage.title | slug }}"
 layout: layouts/base.njk
 permalink: /index.html
 bodyClass: page-home
@@ -19,7 +19,7 @@ bodyClass: page-home
 
   <!-- Gradient overlay -->
   {# <div
-    class="absolute inset-0 bg-gradient-to-b from-[#0d2240]/80 via-[#0d2240]/60 to-[#0d2240]/90"
+    class="absolute inset-0 bg-linear-to-b from-primary/80 via-primary/60 to-primary/90"
   ></div> #}
 
   <!-- Noise effect -->
@@ -44,7 +44,7 @@ bodyClass: page-home
       class="flex flex-col sm:flex-row gap-4 justify-center"
     >
       <a
-        class="btn inline-flex items-center justify-center gap-2 px-7 py-4 bg-secondary hover:bg-[#a81818] text-white rounded-full transition-all duration-200 shadow-xl hover:shadow-[#cc1e1e]/40 hover:-translate-y-0.5"
+        class="btn inline-flex items-center justify-center gap-2 px-7 py-4 bg-secondary hover:bg-[#a81818] text-white rounded-full transition-all duration-200 shadow-xl hover:shadow-secondary/40 hover:-translate-y-0.5"
         href="/learn-to-swim"
       >
         Request a free trial

@@ -6,7 +6,7 @@ const { BLOCKS } = require("@contentful/rich-text-types");
  * nodes anywhere beneath ordered/unordered list nodes.
  */
 const removeParagraphsWithinLists = (richTextJson) => {
-  const jsonClone = JSON.parse(JSON.stringify(richTextJson));
+  const jsonClone = structuredClone(richTextJson);
 
   const isListNode = (node) => {
     return node?.nodeType === BLOCKS.UL_LIST || node?.nodeType === BLOCKS.OL_LIST;

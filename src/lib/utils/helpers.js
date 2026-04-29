@@ -13,12 +13,6 @@ const chunkArray = (array, size) => {
 };
 
 /**
- * Converts a string into a URL-friendly slug, e.g. "Hello World" -> "hello-world"
- * @param {string} text 
- */
-const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-');
-
-/**
  * Options for Luxon DateTime parsing/formatting in UK timezone.
  * Use this whenever creating DateTime objects to ensure consistent timezone handling across the site.
  */
@@ -34,7 +28,6 @@ const toUkDateTime = (dateIsoString) => {
 
 module.exports = {
   chunkArray,
-  slugify,
   luxonDateTimeOptions,
   toUkDateTime
 };
