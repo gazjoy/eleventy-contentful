@@ -1,6 +1,7 @@
 const path = require("path");
 const nunjucks = require("nunjucks");
 const markdownIt = require("markdown-it")();
+var util = require("util");
 const { renderRichTextAsHtml } = require("../contentful/richTextRenderer");
 const { formatDates, formatFileSize, formatTime } = require("../utils/formatters");
 
@@ -32,6 +33,11 @@ const addFilters = (eleventyConfig) => {
   // File size formatting (human readable)
   const readableFileSizeFilter = (value) => safeFilter(value, formatFileSize);
   addSharedFilter(eleventyConfig, "readableFileSize", readableFileSizeFilter);
+
+  // Replace default dump filter with one that is safe to use with complex objects
+  // that might include circular references, which would break the default filter
+  const inspectFilter = (value) => safeFilter(value, (value) => util.inspect(value));
+  addSharedFilter(eleventyConfig, "dump", inspectFilter);
 
   // Add any Eleventy default filters we might want to use in rich text partials
   copyEleventyFiltersToRichTextEnv(eleventyConfig, ["slugify", "slug", "log"]);

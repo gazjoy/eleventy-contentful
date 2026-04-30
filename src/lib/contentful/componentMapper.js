@@ -5,6 +5,30 @@ const { mapImage } = require("./assetMapper");
   Please keep in alphabetical order by content type for easier maintenance.
 */
 
+/**
+ * @typedef {import('./assetMapper.js').Image} Image
+ */
+
+/**
+ * @typedef {Object} ImageFeatureComponent
+ * @property {string} type - "componentImageFeature"
+ * @property {Object} [title]
+ * @property {Image} [image]
+ * @property {Object} [contentRichText]
+ * @property {boolean} [imageOnLeft]
+ */
+
+/**
+ * @typedef {Object} LatestNewsComponent
+ * @property {string} type - "componentLatestNews"
+ * @property {Object} [title]
+ * @property {number} [numberOfPosts]
+ */
+
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {ImageFeatureComponent|LatestNewsComponent|undefined}
+ */
 const mapComponent = (entry) => {
   const type = entry?.sys?.contentType?.sys?.id;
   const fields = entry?.fields || {};
@@ -32,6 +56,10 @@ const mapComponent = (entry) => {
   }
 };
 
+/**
+ * @param {Object[]} components - array of raw Contentful component entries
+ * @returns {Component[]} array of mapped components, with undefined entries filtered out
+ */
 const mapComponents = (components = []) => components
     .map((c) => mapComponent(c))
     .filter(c => c !== undefined);

@@ -7,6 +7,99 @@ const { mapImage } = require("./assetMapper");
     Please keep in alphabetical order for easier maintenance.
 */
 
+/**
+ * @typedef {import('./assetMapper.js').Image} Image
+ * @typedef {import('./componentMapper.js').ImageFeatureComponent} ImageFeatureComponent
+ * @typedef {import('./componentMapper.js').LatestNewsComponent} LatestNewsComponent
+ */
+
+/**
+ * @typedef {Object} CommitteeRole
+ * @property {string} id
+ * @property {string} title
+ * @property {string} descriptionMarkdown
+ * @property {string[]} memberNames - empty if position vacant
+ * @property {string} emailAddress
+ */
+
+/**
+ * @typedef {Object} Event
+ * @property {string} id
+ * @property {string} title
+ * @property {string} slug
+ * @property {Object} startDate - Luxon DateTime
+ * @property {string} startTime in ISO format ("HH:mm")
+ * @property {Object} endDate - Luxon DateTime
+ * @property {Object} descriptionRichText
+ * @property {Venue} venue
+ * @property {string} websiteUrl
+ */
+
+/**
+ * @typedef {Object} Homepage
+ * @property {string} title
+ * @property {(ImageFeatureComponent|LatestNewsComponent)[]} components
+ */
+
+/**
+ * @typedef {Object} NewsPost
+ * @property {string} id
+ * @property {string} title
+ * @property {string} slug
+ * @property {Object} date - Luxon DateTime
+ * @property {Object} bodyRichText
+ * @property {string} authorName
+ */
+
+/**
+ * @typedef {Object} Page
+ * @property {string} id
+ * @property {string} title
+ * @property {string} urlPath - full URL path including parent paths
+ * @property {string|null} parentUrlPath - URL path of parent page, or null if root
+ * @property {Page[]} childPages
+ * @property {Object} lastUpdatedDate - Luxon DateTime
+ * @property {Object} bodyRichText
+ */
+
+/**
+ * @typedef {Object} Session
+ * @property {string} id
+ * @property {string} title
+ * @property {string} day - e.g. "Monday"
+ * @property {string} activity
+ * @property {Venue} venue
+ * @property {string} startTime in ISO format ("HH:mm")
+ * @property {string} endTime in ISO format ("HH:mm")
+ * @property {string[]} squadsIds
+ */
+
+/**
+ * @typedef {Object} Squad
+ * @property {string} id
+ * @property {string} name
+ * @property {Object} descriptionRichText
+ * @property {Object|null} timetable
+ */
+
+/**
+ * @typedef {Object} StaffMember
+ * @property {string} id
+ * @property {string} name
+ * @property {string} role
+ * @property {Image|null} photo
+ * @property {Object} biographyRichText
+ */
+
+/**
+ * @typedef {Object} Venue
+ * @property {string} id
+ * @property {string} name
+ * @property {Object} location - { lat, lon }
+ * @property {string} phoneNumber
+ * @property {string} websiteUrl
+ */
+
 const getFullPagePath = (page) => {
   if (page.fields.parentPage) {
     const parentPath = getFullPagePath(page.fields.parentPage);
@@ -15,16 +108,24 @@ const getFullPagePath = (page) => {
   return page.fields.slug;
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {CommitteeRole}
+ */
 const mapCommitteeRole = (entry) => {
   return {
     id: entry.sys.id,
     title: entry.fields.title,
     descriptionMarkdown: entry.fields.description,
-    members: entry.fields.members || [], // array of member names, e.g. ["Jane Doe", "John Smith"] or [] if vacant
-    email: entry.fields.email,
+    memberNames: entry.fields.members || [],
+    emailAddress: entry.fields.email,
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {Event}
+ */
 const mapEvent = (entry) => {
   return {
     id: entry.sys.id,
@@ -35,10 +136,14 @@ const mapEvent = (entry) => {
     endDate: toUkDateTime(entry.fields.endDate || entry.fields.startDate),
     descriptionRichText: entry.fields.description,
     venue: mapVenue(entry.fields.venue),
-    website: entry.fields.eventInformationLink,
+    websiteUrl: entry.fields.eventInformationLink,
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {Homepage}
+ */
 const mapHomepage = (entry) => {
   return {
     title: entry.fields.title,
@@ -46,6 +151,10 @@ const mapHomepage = (entry) => {
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {NewsPost}
+ */
 const mapNewsPost = (entry) => {
   return {
     id: entry.sys.id,
@@ -53,10 +162,14 @@ const mapNewsPost = (entry) => {
     slug: entry.fields.slug,
     date: toUkDateTime(entry.fields.postingDate || entry.sys.createdAt),
     bodyRichText: entry.fields.body,
-    author: entry.fields.author || "Phoenix Swimming Club",
+    authorName: entry.fields.author || "Phoenix Swimming Club",
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {Page}
+ */
 const mapPage = (entry) => {
   return {
     id: entry.sys.id,
@@ -69,6 +182,10 @@ const mapPage = (entry) => {
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {Session}
+ */
 const mapSession = (entry) => {
   return {
     id: entry.sys.id,
@@ -82,6 +199,10 @@ const mapSession = (entry) => {
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {Squad}
+ */
 const mapSquad = (entry) => {
   return {
     id: entry.sys.id,
@@ -91,6 +212,10 @@ const mapSquad = (entry) => {
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {StaffMember}
+ */
 const mapStaffMember = (entry) => {
   return {
     id: entry.sys.id,
@@ -101,13 +226,17 @@ const mapStaffMember = (entry) => {
   };
 };
 
+/**
+ * @param {Object} entry - raw Contentful entry
+ * @returns {Venue}
+ */
 const mapVenue = (entry) => {
   return {
     id: entry.sys.id,
     name: entry.fields.name,
     location: entry.fields.location, // { lat, lon }
     phoneNumber: entry.fields.phoneNumber,
-    website: entry.fields.website,
+    websiteUrl: entry.fields.website,
   };
 };
 

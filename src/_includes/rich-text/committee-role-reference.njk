@@ -1,16 +1,16 @@
 {#
     Expects the context to include:
-    - committeeRole: the referenced committee role - see mapCommitteeRole function in src/lib/contentful/mappers.js
+    - committeeRole: the referenced committee role (see src/lib/contentful/contentMapper.js)
     - type: the type of reference ("entry-hyperlink" | "embedded-entry-inline" | "embedded-entry-block")
     - linkText: only relevant for "entry-hyperlink" type
 #}
 
-{% set memberNames = (committeeRole.members | join('/')) or "Vacant" %}
+{% set memberNames = (committeeRole.memberNames | join('/')) or "Vacant" %}
 
 {# render simple link #}
 {% if type == "entry-hyperlink" %}
 
-  <a href="mailto:{{ committeeRole.email }}">{{ linkText or committeeRole.name }}</a>
+  <a href="mailto:{{ committeeRole.emailAddress }}">{{ linkText or committeeRole.name }}</a>
 
 {# render inline embedded entry as role with member names #}
 {% elif type == "embedded-entry-inline" %}

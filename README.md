@@ -96,7 +96,5 @@ Eleventy's default filters would not exist on the rich text partial environment,
 - align rich text editor options
   - allowed features (H1, tables etc.)
   - linkable/embeddable content types, and how they should render
-- sitemap?
-- typescript?
 - linting?
 - tests?

@@ -1,6 +1,8 @@
 {#
-	Expects the context to contain a variable called "component".
-	Uses the global "news" data
+	Expects the context to contain a variable called "component" of type 
+	LatestNewsComponent (see src/lib/contentful/componentMapper.js).
+
+	Uses the global "news" data.
 #}
 
 <section>
@@ -10,7 +12,7 @@
 	{% for newsPost in news.slice(0, component.numberOfPosts) %}
 	<div>
 		<h3><a href="/news/{{newsPost.slug}}">{{ newsPost.title }}</a></h3>
-		<small>{{ newsPost.date | readableDate }} by {{ newsPost.author }}</small>		
+		<small>{{ newsPost.date | readableDate }} by {{ newsPost.authorName }}</small>		
 		{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
 	</div>
 	{% endfor %}

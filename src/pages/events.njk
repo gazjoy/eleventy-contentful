@@ -23,8 +23,8 @@ permalink: /events/index.html
 			<p><strong>{{ event.startDate | readableDate(event.endDate) }}</strong> {{event.startTime | readableTime}}</p>
 			<p>{{ event.venue.name }}</p>
 
-			{% if event.website %}
-				<p><a href="{{ event.website }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a></p>
+			{% if event.websiteUrl %}
+				<p><a href="{{ event.websiteUrl }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a></p>
 			{% endif %}
 			
 			{{ event.descriptionRichText | renderRichTextAsHtml | safe }}
