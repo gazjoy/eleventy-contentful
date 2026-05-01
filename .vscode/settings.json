@@ -1,5 +1,10 @@
 {
     // disable CSS and SCSS validation, use the Tailwind extension instead
     "css.validate": false,
-    "scss.validate": false
+    "scss.validate": false,
+
+    // fix ESLint errors on save
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+    }
 }

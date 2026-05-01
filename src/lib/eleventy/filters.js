@@ -1,7 +1,7 @@
 const path = require("path");
 const nunjucks = require("nunjucks");
 const markdownIt = require("markdown-it")();
-var util = require("util");
+const util = require("util");
 const { renderRichTextAsHtml } = require("../contentful/richTextRenderer");
 const { formatDates, formatFileSize, formatTime } = require("../utils/formatters");
 
@@ -36,7 +36,7 @@ const addFilters = (eleventyConfig) => {
 
   // Replace default dump filter with one that is safe to use with complex objects
   // that might include circular references, which would break the default filter
-  const inspectFilter = (value) => safeFilter(value, (value) => util.inspect(value));
+  const inspectFilter = (value) => safeFilter(value, util.inspect);
   addSharedFilter(eleventyConfig, "dump", inspectFilter);
 
   // Add any Eleventy default filters we might want to use in rich text partials

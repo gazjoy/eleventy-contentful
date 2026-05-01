@@ -25,7 +25,7 @@ module.exports = async function () {
 
 const buildHierarchy = (pages) => {
   const pagesByPath = new Map(
-    pages.map(({ parentUrlPath, ...page }) => [page.urlPath, { ...page }])
+    pages.map(({ parentUrlPath: _parentUrlPath, ...page }) => [page.urlPath, { ...page }])
   );
   const hierarchy = [];
 

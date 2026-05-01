@@ -12,17 +12,17 @@ const { mapImage } = require("./assetMapper");
 /**
  * @typedef {Object} ImageFeatureComponent
  * @property {string} type - "componentImageFeature"
- * @property {Object} [title]
- * @property {Image} [image]
- * @property {Object} [contentRichText]
- * @property {boolean} [imageOnLeft]
+ * @property {Object} title
+ * @property {Image|null} image
+ * @property {Object} contentRichText
+ * @property {boolean} imageOnLeft
  */
 
 /**
  * @typedef {Object} LatestNewsComponent
  * @property {string} type - "componentLatestNews"
- * @property {Object} [title]
- * @property {number} [numberOfPosts]
+ * @property {Object} title
+ * @property {number} numberOfPosts
  */
 
 /**

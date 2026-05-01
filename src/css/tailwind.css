@@ -225,7 +225,7 @@ body,
     @apply flex items-center gap-2;
 
     .icon {
-      @apply flex-shrink-0 w-8 h-8 bg-white rounded-full flex items-center justify-center;
+      @apply shrink-0 w-8 h-8 bg-white rounded-full flex items-center justify-center;
       margin-left: -10px;
     }
   }

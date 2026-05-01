@@ -26,7 +26,7 @@ async function fetchAllEntriesForContentType(contentType) {
     allEntries.push(...response.items);
 
     const nextUrl = response.pages?.next;
-    if (!nextUrl) break;
+    if (!nextUrl) { break; }
 
     console.log(`... fetched ${allEntries.length} items so far, need to fetch more ...`);
 

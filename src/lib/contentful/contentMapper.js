@@ -14,6 +14,12 @@ const { mapImage } = require("./assetMapper");
  */
 
 /**
+ * @typedef {Object} Location
+ * @property {number} lat
+ * @property {number} lon
+ */
+
+/**
  * @typedef {Object} CommitteeRole
  * @property {string} id
  * @property {string} title
@@ -95,7 +101,7 @@ const { mapImage } = require("./assetMapper");
  * @typedef {Object} Venue
  * @property {string} id
  * @property {string} name
- * @property {Object} location - { lat, lon }
+ * @property {Location} location
  * @property {string} phoneNumber
  * @property {string} websiteUrl
  */

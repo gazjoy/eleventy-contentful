@@ -10,7 +10,8 @@
     "dev:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
     "start": "npm run clean && run-p dev:*",
-    "build": "run-p build:*",
+    "build": "npm run lint && run-p build:*",
+    "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -37,6 +38,8 @@
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1",
     "rimraf": "^6.1.3"
   }
 }
