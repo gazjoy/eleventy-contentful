@@ -7,20 +7,27 @@
 
 {# render simple link (for embedded inline case also) #}
 {% if type == "entry-hyperlink" or type == "embedded-entry-inline" %}
+  <a href="{{ venue.websiteUrl }}/" target="_blank" rel="noopener noreferrer">{{
+    linkText or venue.name
+  }}</a>
 
-  <a href="{{ venue.websiteUrl }}/" target="_blank" rel="noopener noreferrer">{{ linkText or venue.name }}</a>
-
-{# render block embedded entry with additional details #}
+  {# render block embedded entry with additional details #}
 {% elif type == "embedded-entry-block" %}
-
   <p>
     {{ venue.name }}
-    <br/>
-    <a href="tel:{{ venue.phoneNumber }}" target="_blank" rel="noopener noreferrer">{{ venue.phoneNumber }}</a>
-    <br/>
-    <a href="{{ venue.websiteUrl }}" target="_blank" rel="noopener noreferrer">{{ venue.websiteUrl }}</a>
+    <br />
+    <a
+      href="tel:{{ venue.phoneNumber }}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >{{ venue.phoneNumber }}</a>
+    <br />
+    <a
+      href="{{ venue.websiteUrl }}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >{{ venue.websiteUrl }}</a>
   </p>
-
 {% else %}
   <!-- Unhandled venue reference type "{{ type }}" -->
 {% endif %}

@@ -12,7 +12,7 @@ const DAY_MONTH_YEAR = "EEEE d LLLL yyyy"; // Wednesday 4 August 2021
  * @param {DateTime} endDate The end date of the event (optional)
  */
 const formatDates = (startDate, endDate = null) => {
-  if (!endDate || (startDate.hasSame(endDate, "day"))) {
+  if (!endDate || startDate.hasSame(endDate, "day")) {
     return startDate.toFormat(DAY_MONTH_YEAR);
   }
 
@@ -37,7 +37,7 @@ const formatTime = (timeString) => {
   return dateTime.toFormat("h:mma").toLowerCase(); // e.g. 18:30 -> 6:30pm
 };
 
-/** 
+/**
  * Formats a file size in a human-readable format, e.g. 1.23 MB
  * @param {number} sizeInBytes The file size in bytes
  * @param {number} decimalPlaces The number of decimal places to include for KB and MB (default: 1)
@@ -46,14 +46,14 @@ const formatFileSize = (sizeInBytes, decimalPlaces = 1) => {
   if (sizeInBytes < 1024) {
     return `${sizeInBytes} bytes`;
   } else if (sizeInBytes < 1024 * 1024) {
-    return `${(sizeInBytes / 1024).toFixed(decimalPlaces)} KB`; 
+    return `${(sizeInBytes / 1024).toFixed(decimalPlaces)} KB`;
   } else {
     return `${(sizeInBytes / (1024 * 1024)).toFixed(decimalPlaces)} MB`;
   }
-}
+};
 
 module.exports = {
   formatDates,
   formatTime,
-  formatFileSize
+  formatFileSize,
 };

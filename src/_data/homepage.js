@@ -6,8 +6,7 @@ module.exports = async function () {
 
   const homepageEntries = await fetchAllEntriesForContentType("homepage");
 
-  const homepage = homepageEntries
-    .map(i => mapHomepage(i))[0]; // we expect exactly one homepage entry
+  const homepage = homepageEntries.map((i) => mapHomepage(i))[0]; // we expect exactly one homepage entry
   //console.log(`*** Mapped homepage: ${JSON.stringify(homepage)}`);
 
   console.log(`... fetched homepage.`);

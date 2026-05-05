@@ -7,14 +7,18 @@
 
 <section>
 
-	<h2>{{ component.title }}</h2>
+  <h2>{{ component.title }}</h2>
 
-	{% for newsPost in news.slice(0, component.numberOfPosts) %}
-	<div>
-		<h3><a href="/news/{{newsPost.slug}}">{{ newsPost.title }}</a></h3>
-		<small>{{ newsPost.date | readableDate }} by {{ newsPost.authorName }}</small>		
-		{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
-	</div>
-	{% endfor %}
+  {% for newsPost in news.slice(0, component.numberOfPosts) %}
+    <div>
+      <h3>
+        <a href="/news/{{newsPost.slug}}">{{ newsPost.title }}</a>
+      </h3>
+      <small>{{ newsPost.date | readableDate }}
+        by
+        {{ newsPost.authorName }}</small>
+      {{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
+    </div>
+  {% endfor %}
 
 </section>

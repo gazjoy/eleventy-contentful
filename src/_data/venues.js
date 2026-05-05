@@ -14,4 +14,3 @@ module.exports = async function () {
   console.log(`... fetched ${venues.length} venues.`);
   return venues;
 };
-

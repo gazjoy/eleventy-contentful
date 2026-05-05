@@ -29,15 +29,15 @@ module.exports = [
       // catch common bugs
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-undef": "error",
-      "no-console": "off",  // console.log is used throughout for build logging
+      "no-console": "off", // console.log is used throughout for build logging
       "no-shadow": "warn",
       "no-param-reassign": "warn",
 
       // code style (minimal)
-      "eqeqeq": ["error", "always"],
+      eqeqeq: ["error", "always"],
       "no-var": "error",
       "prefer-const": "warn",
-      "curly": ["error", "all"],
+      curly: ["error", "all"],
     },
   },
 

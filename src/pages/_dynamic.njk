@@ -8,6 +8,7 @@ pagination:
   alias: page
   addAllPagesToCollections: true
 permalink: /{{ page.urlPath }}/index.html
+
 ---
 
 <article>
@@ -19,11 +20,11 @@ permalink: /{{ page.urlPath }}/index.html
 
     <h2>Child Pages:</h2>
     <ul>
-    
-    {% for childPage in page.childPages %}	
-      <li><a href="/{{ childPage.urlPath }}">{{ childPage.title }}</a></li>
-    {% endfor %}
+      {% for childPage in page.childPages %}
+        <li>
+          <a href="/{{ childPage.urlPath }}">{{ childPage.title }}</a>
+        </li>
+      {% endfor %}
     </ul>
   {% endif %}
-
 </article>

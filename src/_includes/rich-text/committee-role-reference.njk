@@ -5,29 +5,31 @@
     - linkText: only relevant for "entry-hyperlink" type
 #}
 
-{% set memberNames = (committeeRole.memberNames | join('/')) or "Vacant" %}
+{% set memberNames = (committeeRole.memberNames | join('/'))or "Vacant" %}
 
 {# render simple link #}
 {% if type == "entry-hyperlink" %}
+  <a href="mailto:{{ committeeRole.emailAddress }}">{{
+    linkText or committeeRole.name
+  }}</a>
 
-  <a href="mailto:{{ committeeRole.emailAddress }}">{{ linkText or committeeRole.name }}</a>
-
-{# render inline embedded entry as role with member names #}
+  {# render inline embedded entry as role with member names #}
 {% elif type == "embedded-entry-inline" %}
+  <span>{{ committeeRole.title }}:
+    {{ memberNames }}</span>
 
-  <span>{{ committeeRole.title }}: {{ memberNames }}</span>
-
-{# render block embedded entry with role, member names, and description #}
+  {# render block embedded entry with role, member names, and description #}
 {% elif type == "embedded-entry-block" %}
-
   <p>
-    <strong>{{ committeeRole.title }}</strong><br/>
+    <strong>{{ committeeRole.title }}</strong><br />
     {% if committeeRole.descriptionMarkdown %}
-      {{ committeeRole.descriptionMarkdown | renderMarkdownAsHtml | safe }}<br/>
+      {{
+        committeeRole.descriptionMarkdown | renderMarkdownAsHtml | safe
+      }}<br />
     {% endif %}
-    Held by: {{ memberNames }}<br/>
+    Held by:
+    {{ memberNames }}<br />
   </p>
-
 {% else %}
   <!-- Unhandled committeeRole reference type "{{ type }}" -->
 {% endif %}

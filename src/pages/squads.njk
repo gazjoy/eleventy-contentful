@@ -2,19 +2,27 @@
 title: Competitive Squads
 layout: layouts/base.njk
 permalink: /competitive-squads/index.html
+
 ---
 
 <h1>{{ title }}</h1>
 
 {% for squad in squads %}
-
   <h2>{{ squad.name }}</h2>
   <div>{{ squad.descriptionRichText | renderRichTextAsHtml | safe }}</div>
 
   <style>
-    table { border-collapse: collapse; }
-    td, th { border: 1px solid black; padding: 5px; text-align: left; }
-  </style>
+table {
+  border-collapse: collapse;
+}
+td,
+th {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: left;
+}
+
+</style>
 
   <table>
     <tr>
@@ -25,33 +33,37 @@ permalink: /competitive-squads/index.html
     </tr>
 
     {%- for day, sessions in squad.timetable -%}
-      
       {%- for session in sessions -%}
         <tr>
           {%- if loop.first -%}
-            <th rowspan="{{ sessions.length }}">{{day}}</th>
+            <th rowspan="{{ sessions.length }}">{{ day }}</th>
           {%- endif -%}
 
-          <td>{{session.activity}}</td>
-          <td>{{session.startTime}} - {{session.endTime}}</td>
+          <td>{{ session.activity }}</td>
+          <td>
+            {{ session.startTime }}
+            -
+            {{ session.endTime }}
+          </td>
 
           {%- if loop.first -%}
-            <td rowspan="{{ sessions.length }}"><a href="{{session.venue.websiteUrl}}">{{session.venue.name}}</a></td>
+            <td rowspan="{{ sessions.length }}">
+              <a href="{{session.venue.websiteUrl}}">{{
+                session.venue.name
+              }}</a>
+            </td>
           {%- endif -%}
         </tr>
       {%- else -%}
         <tr>
-          <th>{{day}}</th>
+          <th>{{ day }}</th>
           <td colspan="3">No training</td>
         </tr>
       {%- endfor -%}
-
     {%- endfor -%}
-    
   </table>
 
   {% if not loop.last %}
-    <hr/>
+    <hr />
   {% endif %}
-
 {% endfor %}

@@ -32,15 +32,17 @@
  * @returns {File|null} mapped file, or null
  */
 const mapFile = (asset) => {
-  return asset ? {
-    id: asset.sys.id,
-    url: asset.fields.file.url,
-    title: asset.fields.title,
-    description: asset.fields.description,
-    fileName: asset.fields.file.fileName,
-    contentMimeType: asset.fields.file.contentType,
-    fileSizeBytes: asset.fields.file.details?.size || NaN,
-  } : null;
+  return asset
+    ? {
+        id: asset.sys.id,
+        url: asset.fields.file.url,
+        title: asset.fields.title,
+        description: asset.fields.description,
+        fileName: asset.fields.file.fileName,
+        contentMimeType: asset.fields.file.contentType,
+        fileSizeBytes: asset.fields.file.details?.size || NaN,
+      }
+    : null;
 };
 
 /**
@@ -50,11 +52,13 @@ const mapFile = (asset) => {
 const mapImage = (asset) => {
   const file = mapFile(asset);
 
-  return file ? {
-    ...file,
-    widthPx: asset.fields.file.details?.image?.width || NaN,
-    heightPx: asset.fields.file.details?.image?.height || NaN,
-  } : null;
+  return file
+    ? {
+        ...file,
+        widthPx: asset.fields.file.details?.image?.width || NaN,
+        heightPx: asset.fields.file.details?.image?.height || NaN,
+      }
+    : null;
 };
 
 module.exports = {

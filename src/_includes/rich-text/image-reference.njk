@@ -7,17 +7,21 @@
 
 {# render simple link #}
 {% if type == "asset-hyperlink" %}
+  <a href="{{ image.url }}" target="_blank" rel="noopener noreferrer">{{
+    linkText or image.title
+  }}</a>
 
-  <a href="{{ image.url }}" target="_blank" rel="noopener noreferrer">{{ linkText or image.title }}</a>
-
-{# render as image with caption #}
+  {# render as image with caption #}
 {% elif type == "embedded-asset-block" %}
   <p style="width: fit-content; text-align: center;">
-    <img src="{{ image.url }}" alt="{{ image.description or '' }}" style="max-width: 100%; height: auto;" />
-    <br/>
+    <img
+      src="{{ image.url }}"
+      alt="{{ image.description or '' }}"
+      style="max-width: 100%; height: auto;"
+    />
+    <br />
     <small>{{ image.title }}</small>
   </p>
-
 {% else %}
   <!-- Unhandled image reference type "{{ type }}" -->
 {% endif %}

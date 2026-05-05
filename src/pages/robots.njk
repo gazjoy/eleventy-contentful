@@ -1,16 +1,11 @@
----
+--- 
 permalink: /robots.txt
 eleventyExcludeFromCollections: true
+
 ---
 
 {%- if config.allowRobots -%}
-
-User-agent: *
-Disallow:
-
+  User-agent: * Disallow:
 {%- else -%}
-
-User-agent: *
-Disallow: /
-
+  User-agent: * Disallow: /
 {%- endif -%}

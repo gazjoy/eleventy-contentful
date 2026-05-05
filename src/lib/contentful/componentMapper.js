@@ -60,9 +60,8 @@ const mapComponent = (entry) => {
  * @param {Object[]} components - array of raw Contentful component entries
  * @returns {Component[]} array of mapped components, with undefined entries filtered out
  */
-const mapComponents = (components = []) => components
-    .map((c) => mapComponent(c))
-    .filter(c => c !== undefined);
+const mapComponents = (components = []) =>
+  components.map((c) => mapComponent(c)).filter((c) => c !== undefined);
 
 module.exports = {
   mapComponent,

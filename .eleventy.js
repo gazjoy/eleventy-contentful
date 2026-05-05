@@ -1,11 +1,10 @@
 const filters = require("./src/lib/eleventy/filters.js");
 
-module.exports = function(eleventyConfig) {
-
+module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(filters);
 
   // Use original files (don't copy) when running locally
-  eleventyConfig.setServerPassthroughCopyBehavior("passthrough"); 
+  eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   // Copy static files to output (when building for production)
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
 
@@ -19,7 +18,7 @@ module.exports = function(eleventyConfig) {
       input: "src",
       includes: "_includes",
       data: "_data",
-      output: "_site"
-    }
+      output: "_site",
+    },
   };
 };

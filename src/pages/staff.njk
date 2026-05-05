@@ -2,21 +2,25 @@
 title: Coaching Staff
 layout: layouts/base.njk
 permalink: /coaching-staff/index.html
+
 ---
 
 <h1>{{ title }}</h1>
 
 {% for staffMember in staff %}
+  <h2 id="{{ staffMember.name | slug }}">{{ staffMember.name }}</h2>
+  <p>
+    <strong>{{ staffMember.role }}</strong>
+  </p>
 
-  <h2 id={{ staffMember.name | slug }}>{{ staffMember.name }}</h2>
-  <p><strong>{{ staffMember.role }}</strong></p>
-  
-  <img src="{{staffMember.photo.url}}" alt="{{staffMember.photo.description or staffMember.name }}" />
+  <img
+    src="{{staffMember.photo.url}}"
+    alt="{{staffMember.photo.description or staffMember.name }}"
+  />
 
   <div>{{ staffMember.biographyRichText | renderRichTextAsHtml | safe }}</div>
 
   {% if not loop.last %}
-    <hr/>
+    <hr />
   {% endif %}
-
 {% endfor %}

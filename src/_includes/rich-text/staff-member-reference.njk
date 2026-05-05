@@ -9,29 +9,35 @@
 
 {# render simple link #}
 {% if type == "entry-hyperlink" %}
-
   <a href="{{ linkUrl }}">{{ linkText or staffMember.name }}</a>
 
-{# render inline embedded entry as link with thumbnail photo if available #}
+  {# render inline embedded entry as link with thumbnail photo if available #}
 {% elif type == "embedded-entry-inline" %}
-
   <a href="{{ linkUrl }}">
     {{ staffMember.name }}
     {% if staffMember.photo %}
-      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.description or staffMember.name }}" style="height: 20px;" />
+      <img
+        src="{{ staffMember.photo.url }}"
+        alt="{{ staffMember.photo.description or staffMember.name }}"
+        style="height: 20px;"
+      />
     {% endif %}
   </a>
 
-{# render block embedded entry with larger photo and role #}
+  {# render block embedded entry with larger photo and role #}
 {% elif type == "embedded-entry-block" %}
-
   <div style="display: flex;">
     {% if staffMember.photo %}
-      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.description or staffMember.name }}" style="height: 100px;" />
+      <img
+        src="{{ staffMember.photo.url }}"
+        alt="{{ staffMember.photo.description or staffMember.name }}"
+        style="height: 100px;"
+      />
     {% endif %}
-    <p><strong>{{ staffMember.name }}</strong><br/>{{ staffMember.role }}</p>
+    <p>
+      <strong>{{ staffMember.name }}</strong><br />{{ staffMember.role }}
+    </p>
   </div>
-
 {% else %}
   <!-- Unhandled staffMember reference type "{{ type }}" -->
 {% endif %}

@@ -153,7 +153,7 @@ const mapEvent = (entry) => {
 const mapHomepage = (entry) => {
   return {
     title: entry.fields.title,
-    components: mapComponents(entry.fields.components)
+    components: mapComponents(entry.fields.components),
   };
 };
 
@@ -181,10 +181,12 @@ const mapPage = (entry) => {
     id: entry.sys.id,
     title: entry.fields.title,
     urlPath: getFullPagePath(entry),
-    parentUrlPath: entry.fields.parentPage ? getFullPagePath(entry.fields.parentPage) : null,
+    parentUrlPath: entry.fields.parentPage
+      ? getFullPagePath(entry.fields.parentPage)
+      : null,
     childPages: [], // will be populated in buildHierarchy (see pages.js)
     lastUpdatedDate: new Date(entry.sys.updatedAt || entry.sys.createdAt),
-    bodyRichText: entry.fields.pageContent
+    bodyRichText: entry.fields.pageContent,
   };
 };
 
@@ -201,7 +203,7 @@ const mapSession = (entry) => {
     venue: mapVenue(entry.fields.venue),
     startTime: entry.fields.startTime,
     endTime: entry.fields.endTime,
-    squadsIds: entry.fields.squads?.map(squad => squad.sys.id) || [], // only need IDs here
+    squadsIds: entry.fields.squads?.map((squad) => squad.sys.id) || [], // only need IDs here
   };
 };
 

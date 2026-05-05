@@ -1,7 +1,12 @@
 const { documentToHtmlString } = require("@contentful/rich-text-html-renderer");
 const { INLINES, BLOCKS } = require("@contentful/rich-text-types");
 const { mapFile, mapImage } = require("./assetMapper");
-const { mapCommitteeRole, mapPage, mapStaffMember, mapVenue } = require("./contentMapper");
+const {
+  mapCommitteeRole,
+  mapPage,
+  mapStaffMember,
+  mapVenue,
+} = require("./contentMapper");
 const { removeParagraphsWithinLists } = require("./richTextUtils");
 
 const renderRichTextAsHtml = (value, renderPartial) => {
@@ -18,13 +23,13 @@ const renderRichTextAsHtml = (value, renderPartial) => {
       [INLINES.EMBEDDED_ENTRY]: renderReference(renderPartial),
       [BLOCKS.EMBEDDED_ENTRY]: renderReference(renderPartial),
       [BLOCKS.EMBEDDED_ASSET]: renderReference(renderPartial),
-    }
+    },
   });
 };
 
 const renderReference = (renderPartial) => (node) => {
   //return `<p><small>***<br/>${JSON.stringify(node)}<br/>***</small></p>`; // for debugging
-  
+
   const referenceType = node.nodeType;
   const target = node?.data?.target;
   const targetId = target?.sys?.id || "unknown";
@@ -38,39 +43,53 @@ const renderReference = (renderPartial) => (node) => {
 
       if (fileType?.startsWith("image/")) {
         return renderImageReference(target, referenceType, linkText, renderPartial);
-      } 
+      }
       // add other asset types (e.g. video) as needed
       else {
         return renderFileReference(target, referenceType, linkText, renderPartial);
       }
     }
-  
+
     if (targetType === "Entry") {
       const entryContentType = target?.sys?.contentType?.sys?.id;
 
       switch (entryContentType) {
         case "committeeRole":
-          return renderCommitteeRoleReference(target, referenceType, linkText, renderPartial);
+          return renderCommitteeRoleReference(
+            target,
+            referenceType,
+            linkText,
+            renderPartial
+          );
         case "page":
           return renderPageReference(target, referenceType, linkText, renderPartial);
         case "staffMember":
-          return renderStaffMemberReference(target, referenceType, linkText, renderPartial);
+          return renderStaffMemberReference(
+            target,
+            referenceType,
+            linkText,
+            renderPartial
+          );
         case "venue":
           return renderVenueReference(target, referenceType, linkText, renderPartial);
         default:
-          console.warn(`No rendering logic defined for entry content type "${entryContentType}"`);
+          console.warn(
+            `No rendering logic defined for entry content type "${entryContentType}"`
+          );
           return `<!-- Unhandled entry reference of content type "${entryContentType}" -->`;
       }
     }
   }
 
-  console.warn(`Reference of type "${referenceType}" to '${targetId}' was not resolved. It may be deleted or unpublished.`);
+  console.warn(
+    `Reference of type "${referenceType}" to '${targetId}' was not resolved. It may be deleted or unpublished.`
+  );
   return `<!-- Unresolved ${referenceType} reference to '${targetId}' -->`;
 };
 
 const renderImageReference = (asset, type, linkText, renderPartial) => {
   const image = mapImage(asset);
-  
+
   return renderPartial("rich-text/image-reference.njk", {
     type,
     linkText,

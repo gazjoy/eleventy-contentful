@@ -7,7 +7,7 @@ module.exports = async function () {
   const newsPostEntries = await fetchAllEntriesForContentType("newsPost");
 
   const newsPosts = newsPostEntries
-    .map(i => mapNewsPost(i))
+    .map((i) => mapNewsPost(i))
     .sort((a, b) => b.date - a.date); // sort newest first
   //console.log(`*** Mapped, sorted news posts: ${JSON.stringify(newsPosts)}`);
 

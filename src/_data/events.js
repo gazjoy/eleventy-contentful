@@ -8,7 +8,7 @@ module.exports = async function () {
 
   const eventEntries = await fetchAllEntriesForContentType("event");
 
-  const events = eventEntries.map(i => mapEvent(i));
+  const events = eventEntries.map((i) => mapEvent(i));
   //console.log(`*** Mapped events: ${JSON.stringify(events)}`);
 
   console.log(`... done. ${events.length} events fetched.`);
@@ -17,12 +17,14 @@ module.exports = async function () {
 
   const data = {
     // future and current events, sorted date ascending
-    upcoming: events.filter(e => e.endDate >= today).sort((a, b) => a.startDate - b.startDate),
+    upcoming: events
+      .filter((e) => e.endDate >= today)
+      .sort((a, b) => a.startDate - b.startDate),
 
     // past events, sorted date descending, grouped by year
     past: Map.groupBy(
-      events.filter(e => e.endDate < today).sort((a, b) => b.startDate - a.startDate),
-      e => e.startDate.year
+      events.filter((e) => e.endDate < today).sort((a, b) => b.startDate - a.startDate),
+      (e) => e.startDate.year
     ),
   };
 

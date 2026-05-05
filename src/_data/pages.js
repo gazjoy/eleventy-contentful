@@ -13,10 +13,10 @@ module.exports = async function () {
 
   console.log(`... fetched ${pages.length} pages.`);
 
-  // Return the data in different structures, just for convenience. 
+  // Return the data in different structures, just for convenience.
   const data = {
     flatList: pages,
-    hierarchy: buildHierarchy(pages), 
+    hierarchy: buildHierarchy(pages),
   };
   //console.log(`*** Pages data: ${JSON.stringify(data)}`);
 

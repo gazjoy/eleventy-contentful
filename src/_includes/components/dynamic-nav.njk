@@ -4,44 +4,42 @@
 #}
 
 {% macro renderNavLink(url, title, currentUrl) %}
-	{% set dynamicClass = "" %}
-	{% if "🔒" in title %}
-		{% set dynamicClass = "site-nav__link--pay" %}
-	{% endif %}
-	{% if url == currentUrl %}
-		<strong class="site-nav__current">{{ title }}</strong>
-	{% else %}
-		<a href="{{ url }}" class="site-nav__link {{ dynamicClass }}">{{ title }}</a>
-	{% endif %}
+  {% set dynamicClass = "site-nav__link--pay" if "🔒" in title else "" %}
+
+  {% if url == currentUrl %}
+    <strong class="site-nav__current">{{ title }}</strong>
+  {% else %}
+    <a href="{{ url }}" class="site-nav__link {{ dynamicClass }}">{{ title }}</a>
+  {% endif %}
 {% endmacro %}
 
 {% macro renderNavWithToggle(url, title, currentUrl, hasChildren) %}
-	<div class="flex items-center gap-2 w-full">
-		<div class="flex-1">
-			{{ renderNavLink(url, title, currentUrl) }}
-		</div>
-		{% if hasChildren %}
-		<button class="nav-submenu-toggle lg:hidden shrink-0" aria-expanded="false" aria-label="Toggle submenu">
-			<svg class="w-6 h-6 icon-closed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M5 12h14" />
-			</svg>
-			<svg class="w-6 h-6 icon-open hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14" />
-			</svg>
-		</button>
-		{% endif %}
-	</div>
+  <div class="flex items-center gap-2 w-full">
+    <div class="flex-1">
+      {{ renderNavLink(url, title, currentUrl) }}
+    </div>
+    {% if hasChildren %}
+      <button class="nav-submenu-toggle lg:hidden shrink-0" aria-expanded="false" aria-label="Toggle submenu">
+        <svg class="w-6 h-6 icon-closed" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M5 12h14"/>
+        </svg>
+        <svg class="w-6 h-6 icon-open hidden" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"/>
+        </svg>
+      </button>
+    {% endif %}
+  </div>
 {% endmacro %}
 
 <nav class="site-nav">
-	<ul class="flex flex-col lg:flex-row gap-1 lg:gap-2">
-		<li>{{ renderNavLink("/about/", "About", page.url) }}</li>
-		<li>{{ renderNavLink("/learn-to-swim/", "Learn to Swim", page.url) }}</li>
-		<li>{{ renderNavLink("/competitive-squads/", "Competitive Squads", page.url) }}</li>
-		<li>{{ renderNavLink("/events/", "Events", page.url) }}</li>
-		<li>{{ renderNavLink("/news/", "News", page.url) }}</li>
-		<li>{{ renderNavLink("/payments/", "🔒 Pay fees", page.url) }}</li>
-{# 
+  <ul class="flex flex-col lg:flex-row gap-1 lg:gap-2">
+    <li>{{ renderNavLink("/about/", "About", page.url) }}</li>
+    <li>{{ renderNavLink("/learn-to-swim/", "Learn to Swim", page.url) }}</li>
+    <li>{{ renderNavLink("/competitive-squads/", "Competitive Squads", page.url) }}</li>
+    <li>{{ renderNavLink("/events/", "Events", page.url) }}</li>
+    <li>{{ renderNavLink("/news/", "News", page.url) }}</li>
+    <li>{{ renderNavLink("/payments/", "🔒 Pay fees", page.url) }}</li>
+    {# 
 		{% if site.showShopLink %}
 	
 		{% for level1Page in pages.hierarchy %}
@@ -72,5 +70,5 @@
 		<li>{{ renderNavLink("/volunteering/", "Volunteering", page.url) }}</li>
 		<li>{{ renderNavLink("/contact-static/", "Static contact", page.url) }}</li>
 		 #}
-	</ul>
+  </ul>
 </nav>

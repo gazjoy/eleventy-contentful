@@ -9,14 +9,13 @@
 
 {# render simple link (for embedded inline case also) #}
 {% if type == "entry-hyperlink" or type == "embedded-entry-inline" %}
-
   <a href="{{ pageUrl }}">{{ linkText or page.title }}</a>
 
-{# render block embedded entry as link wrapped in a paragraph #}
+  {# render block embedded entry as link wrapped in a paragraph #}
 {% elif type == "embedded-entry-block" %}
-
-  <p><a href="{{ pageUrl }}">{{ linkText or page.title }}</a></p>
-
+  <p>
+    <a href="{{ pageUrl }}">{{ linkText or page.title }}</a>
+  </p>
 {% else %}
   <!-- Unhandled page reference type "{{ type }}" -->
 {% endif %}

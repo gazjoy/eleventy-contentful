@@ -7,8 +7,7 @@ module.exports = async function () {
   const squadEntries = await fetchAllEntriesForContentType("squad");
   const sessionEntries = await fetchAllEntriesForContentType("session");
 
-  const sessions = sessionEntries
-    .map((i) => mapSession(i));
+  const sessions = sessionEntries.map((i) => mapSession(i));
   //console.log(`*** Mapped sessions: ${JSON.stringify(sessions)}`);
 
   const squads = squadEntries
@@ -26,19 +25,26 @@ module.exports = async function () {
 };
 
 const buildTimetableForSquad = (sessions, squad) => {
-  const daysInOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  
+  const daysInOrder = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
   const timetable = {};
 
   for (const day of daysInOrder) {
-    const sessionsForDay = sessions.filter(session => 
-      session.day === day && 
-      session.squadsIds.includes(squad.id)
+    const sessionsForDay = sessions.filter(
+      (session) => session.day === day && session.squadsIds.includes(squad.id)
     );
 
-    timetable[day] = sessionsForDay?.sort((a, b) => a.startTime.localeCompare(b.startTime)) || []; 
+    timetable[day] =
+      sessionsForDay?.sort((a, b) => a.startTime.localeCompare(b.startTime)) || [];
   }
 
   return timetable;
 };
-

@@ -1,14 +1,14 @@
 const { DateTime } = require("luxon");
 
 /**
- * Splits an array into chunks of the specified size. 
+ * Splits an array into chunks of the specified size.
  * The last chunk may be smaller if the array length is not a multiple of the chunk size.
- * @param {any[]} array 
- * @param {number} size 
+ * @param {any[]} array
+ * @param {number} size
  */
 const chunkArray = (array, size) => {
   const chunks = [];
-  for (let i = 0; i < array.length; i += size) { 
+  for (let i = 0; i < array.length; i += size) {
     chunks.push(array.slice(i, i + size));
   }
   return chunks;
@@ -26,10 +26,10 @@ const luxonDateTimeOptions = { zone: "Europe/London" };
  */
 const toUkDateTime = (dateIsoString) => {
   return DateTime.fromISO(dateIsoString, luxonDateTimeOptions);
-}
+};
 
 module.exports = {
   chunkArray,
   luxonDateTimeOptions,
-  toUkDateTime
+  toUkDateTime,
 };

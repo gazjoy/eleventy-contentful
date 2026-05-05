@@ -11,15 +11,19 @@ const richTextPartialsEnvironment = new nunjucks.Environment(
 );
 
 const addFilters = (eleventyConfig) => {
-  // Contentful rich text - this one is a bit special because it needs to be able to render partials 
+  // Contentful rich text - this one is a bit special because it needs to be able to render partials
   // for embedded entries/assets, so we pass in the partial rendering function as a second argument.
   // We also DON'T add this filter to the rich text partials environment because we don't want to
   // allow the risk of infinite recursion due to circular references in rich text fields.
-  const renderRichTextFilter = (value) => safeFilter(value, (richTextValue) => renderRichTextAsHtml(richTextValue, renderRichTextPartial));
+  const renderRichTextFilter = (value) =>
+    safeFilter(value, (richTextValue) =>
+      renderRichTextAsHtml(richTextValue, renderRichTextPartial)
+    );
   eleventyConfig.addFilter("renderRichTextAsHtml", renderRichTextFilter);
 
   // Markdown (inline)
-  const renderMarkdownFilter = (value) => safeFilter(value, (markdownValue) => markdownIt.renderInline(markdownValue));
+  const renderMarkdownFilter = (value) =>
+    safeFilter(value, (markdownValue) => markdownIt.renderInline(markdownValue));
   addSharedFilter(eleventyConfig, "renderMarkdownAsHtml", renderMarkdownFilter);
 
   // Date formatting (human readable)
@@ -43,7 +47,8 @@ const addFilters = (eleventyConfig) => {
   copyEleventyFiltersToRichTextEnv(eleventyConfig, ["slugify", "slug", "log"]);
 };
 
-const renderRichTextPartial = (templatePath, data = {}) => richTextPartialsEnvironment.render(templatePath, data);
+const renderRichTextPartial = (templatePath, data = {}) =>
+  richTextPartialsEnvironment.render(templatePath, data);
 
 const addSharedFilter = (eleventyConfig, name, filterFunction) => {
   eleventyConfig.addFilter(name, filterFunction);
@@ -60,15 +65,16 @@ const copyEleventyFiltersToRichTextEnv = (eleventyConfig, filterNames) => {
 };
 
 const safeFilter = (value, filterFunction) => {
-  if (!value) { return ""; }
+  if (!value) {
+    return "";
+  }
 
   try {
     return filterFunction(value);
-  } 
-  catch (error) {
+  } catch (error) {
     console.warn(`Error applying filter to value: ${error}`);
     return "";
   }
-}
+};
 
 module.exports = addFilters;
