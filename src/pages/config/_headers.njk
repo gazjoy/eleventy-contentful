@@ -1,0 +1,17 @@
+---
+permalink: /_headers
+layout: false
+eleventyExcludeFromCollections: true
+
+---
+{#- 
+  This file is used to configure HTTP response headers for Netlify deployments.
+  See https://docs.netlify.com/manage/routing/headers/.
+  The syntax is fragile, so be careful when editing this file and inspect the generated output.
+  In particular, pay attention to the whitespace and the "-" characters in the Nunjucks syntax.
+-#}
+
+/*
+{%- for key, value in config.responseHeaders %}
+  {{ key }}: {{ value }}
+{%- endfor -%}

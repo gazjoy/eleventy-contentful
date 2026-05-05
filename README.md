@@ -36,6 +36,8 @@ Netlify runs `npm run build` and publishes the `_site` output folder.
 
 Environment variables (see [`.env.example`](/.env.example)) must be configured in the Netlify site settings under **Site configuration > Environment variables**.
 
+You can inspect which commit of the code is deployed via the `X-Commit-Ref` response header included in all page responses from Netlify.
+
 ## 2. Project Technical Overview
 
 This is a statically generated website requiring Node.js.
@@ -78,6 +80,7 @@ The use of HTML and JavaScript goes without saying.
     - `eleventy` - helpers for configuring the eleventy setup
     - `utils` - other re-usable helper code
   - `pages` - Nunjucks page templates and route definitions
+    - `config` - Templates for non-HTML pages, such as sitemap.xml and robots.txt
   - `static` - files that will be copied directly to the output with no processing, such as images
 
 ### 2.3. Custom Filters

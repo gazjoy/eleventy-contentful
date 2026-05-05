@@ -1,0 +1,18 @@
+--- 
+permalink: /robots.txt
+layout: false
+eleventyExcludeFromCollections: true
+
+---
+{#- 
+  See https://www.robotstxt.org/robotstxt.html.
+  The syntax is fragile, so be careful when editing this file and inspect the generated output.
+  In particular, pay attention to the whitespace and the "-" characters in the Nunjucks syntax.
+-#}
+
+User-agent: *
+{% if config.allowRobots -%}
+  Disallow:
+{%- else -%}
+  Disallow: /
+{%- endif -%}
