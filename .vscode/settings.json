@@ -1,10 +1,39 @@
 {
-    // disable CSS and SCSS validation, use the Tailwind extension instead
+    /* LINTING */
+
+    // disable CSS and SCSS validation, to use the Tailwind extension instead
     "css.validate": false,
     "scss.validate": false,
 
     // fix ESLint errors on save
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
+    },
+
+    /* FORMATTING */
+
+    "editor.formatOnSave": true,
+
+    // formatting rules - see also /.prettierrc (which takes precedence over these)
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    
+    // use Prettier for formatting JavaScript, JSON, Markdown and CSS, 
+    // and the Nunjucks extension for Nunjucks files
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[nunjucks]": {
+        "editor.defaultFormatter": "dwkns.nunjucks-11ty-plus",
     }
 }
