@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "^24"
+  },
   "scripts": {
     "clean": "rimraf _site",
     "dev:css": "npx tailwindcss -i ./src/css/tailwind.css -o ./_site/css/tailwind.css --watch",

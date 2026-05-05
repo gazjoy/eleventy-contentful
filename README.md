@@ -1,8 +1,13 @@
-## 1. - Developer Quick Start
+## 1. Developer Quick Start
 
-### 1.1. Running Locally
+### 1.1 Setup
 
-- Copy file [`/.env.example`](/.env.example) to [`/.env`](/.env) and fill out the values as necessary ()
+- Installation of [FNM](https://www.fnmnode.com/) or [NVM](https://www.nvmnode.com/) is highly recommended. Otherwise, install the required Node.js version (see [package.json](./package.json)).
+- Copy file [`/.env.example`](/.env.example) to [`/.env`](/.env) and fill out the values as explained there.
+- If using VSCode, install the recommended extensions.
+
+### 1.2. Running Locally
+
 - In a terminal, run:
 
 ```
@@ -12,14 +17,31 @@ npm run start
 
 - Go to http://localhost:8080
 
-### 1.2. Golden Rules
+Hot reloading is available for most Nunjucks templates.
+
+### 1.3. Golden Rules for Development
 
 - Keep code simple and readable, and files well organised. Follow existing patterns and conventions.
 - Minimise dependencies. Only install new packages if they bring real benefit.
 - Use Nunjucks templates wherever possible for presentation, and keep Javascript focussed on data shaping and orchestration.
-- Use UK date/time handling (see [section 3.1](#31-date-and-time-handling))
+- Use UK date/time handling (see [section 3.1](#31-date-and-time-handling)).
+- Use Tailwind for all styling.
+- Keep on top of dependency vulnerabilities via `npm audit`.
+
+### 1.4. Deployment
+
+The site is hosted on **Netlify** and deployed automatically when changes are pushed to the `main` branch.
+
+Netlify runs `npm run build` and publishes the `_site` output folder.
+
+Environment variables (see [`.env.example`](/.env.example)) must be configured in the Netlify site settings under **Site configuration > Environment variables**.
 
 ## 2. Project Technical Overview
+
+This is a statically generated website requiring Node.js.
+Please keep the Node version in sync between [package.json](./package.json), [.node-version](./.node-version) and [.nvmrc](./.nvmrc).
+
+The use of HTML and JavaScript goes without saying.
 
 ### 2.1. Key Technologies
 
@@ -79,6 +101,12 @@ As well as the custom filters listed below, Eleventy's default filters are avail
 
 Linting for JavaScript is provided by **ESLint**. This is configured to run when building the site and, if using VSCode, when saving files.
 
+You can also run the following in your terminal to perform linting on the whole project:
+
+```
+npm run lint
+```
+
 For the time being, tests are considered an unnecessary overhead. If testing feels necessary in future then **Jest** (https://jestjs.io/) would be the recommended framework.
 
 #### 2.4.2. Formatting and Consistency
@@ -126,9 +154,9 @@ The exception to this is the `renderRichTextAsHtml` filter, which is excluded fr
 
 Eleventy's default filters would not exist on the rich text partial environment, so any default filters that might need to be used within the rich text partials are explicitly copied across.
 
----
-
 ## 4. To-Do List
+
+An informal list of ideas for areas to work on next.
 
 - automatic periodic build of site?
   - to cover e.g. whether events are listed as past or upcoming
