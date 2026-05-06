@@ -2,7 +2,7 @@
 
 ### 1.1 Setup
 
-- Installation of [FNM](https://www.fnmnode.com/) or [NVM](https://www.nvmnode.com/) is highly recommended. Otherwise, install the required Node.js version (see [package.json](./package.json)).
+- Installation of [FNM](https://www.fnmnode.com/) or [NVM](https://www.nvmnode.com/) is highly recommended. Otherwise, install the required Node.js version (see [package.json](/package.json)).
 - Copy file [`/.env.example`](/.env.example) to [`/.env`](/.env) and fill out the values as explained there.
 - If using VSCode, install the recommended extensions.
 
@@ -19,12 +19,24 @@ npm run start
 
 Hot reloading is available for most Nunjucks templates.
 
+#### 1.2.1. Content Cache
+
+By default, content is cached locally for 60 mins, to avoid hitting Contentful's API limits when building the site frequently during development.
+
+Edit the cache duration or disable it entirely (set to 0) via your [`.env`](/.env) or, to clear the cache, run:
+
+```
+npm clean:cache
+```
+
+The cached data (at [\_cache](/_cache/)) can also be manually edited for testing purposes.
+
 ### 1.3. Golden Rules for Development
 
 - Keep code simple and readable, and files well organised. Follow existing patterns and conventions.
 - Minimise dependencies. Only install new packages if they bring real benefit.
 - Use Nunjucks templates wherever possible for presentation, and keep Javascript focussed on data shaping and orchestration.
-- Use UK date/time handling (see [section 3.1](#31-date-and-time-handling)).
+- Use UK timezone for handling of all dates/times in content (see [section 3.1](#31-date-and-time-handling)).
 - Use Tailwind for all styling.
 - Keep on top of dependency vulnerabilities via `npm audit`.
 
@@ -32,7 +44,7 @@ Hot reloading is available for most Nunjucks templates.
 
 The site is hosted on **Netlify** and deployed automatically when changes are pushed to the `main` branch.
 
-Netlify runs `npm run build` and publishes the `_site` output folder.
+Netlify runs `npm run build` and publishes the [\_site](/_site) output folder.
 
 Environment variables (see [`.env.example`](/.env.example)) must be configured in the Netlify site settings under **Site configuration > Environment variables**.
 
@@ -41,7 +53,7 @@ You can inspect which commit of the code is deployed via the `X-Commit-Ref` resp
 ## 2. Project Technical Overview
 
 This is a statically generated website requiring Node.js.
-Please keep the Node version in sync between [package.json](./package.json), [.node-version](./.node-version) and [.nvmrc](./.nvmrc).
+Please keep the Node version in sync between [package.json](/package.json), [.node-version](/.node-version) and [.nvmrc](/.nvmrc).
 
 The use of HTML and JavaScript goes without saying.
 
@@ -66,9 +78,10 @@ The use of HTML and JavaScript goes without saying.
 
 ### 2.2. Project Structure
 
-- `_site` - where the built output is placed. Do not edit directly
+- \_site - where the built output is placed. Do not edit directly (this will get cleaned and overwritten anyway when running locally)
 - `src` - all source code for the site
-  - _`_data`_ - data loaders that fetch and prepare Contentful content for templates
+  - `_cache` - a cache of Contentful content, used locally only
+  - `_data` - data loaders that fetch and prepare Contentful content for templates
   - `_includes` - re-usable Nunjucks partials
     - `components` - UI components
     - `layouts` - page layout templates, including `base.njk`
@@ -80,7 +93,7 @@ The use of HTML and JavaScript goes without saying.
     - `eleventy` - helpers for configuring the eleventy setup
     - `utils` - other re-usable helper code
   - `pages` - Nunjucks page templates and route definitions
-    - `config` - Templates for non-HTML pages, such as sitemap.xml and robots.txt
+    - `config` - templates for non-HTML pages, such as sitemap.xml and robots.txt
   - `static` - files that will be copied directly to the output with no processing, such as images
 
 ### 2.3. Custom Filters

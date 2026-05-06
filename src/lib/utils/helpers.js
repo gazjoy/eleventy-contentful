@@ -1,6 +1,14 @@
 const { DateTime } = require("luxon");
 
 /**
+ * Parses a value as an integer, returning a default value if parsing fails.
+ */
+const safeParseInt = (value, defaultValue) => {
+  const parsed = Number.parseInt(value);
+  return Number.isNaN(parsed) ? defaultValue : parsed;
+};
+
+/**
  * Splits an array into chunks of the specified size.
  * The last chunk may be smaller if the array length is not a multiple of the chunk size.
  * @param {any[]} array
@@ -29,6 +37,7 @@ const toUkDateTime = (dateIsoString) => {
 };
 
 module.exports = {
+  safeParseInt,
   chunkArray,
   luxonDateTimeOptions,
   toUkDateTime,

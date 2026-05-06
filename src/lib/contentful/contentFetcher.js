@@ -1,13 +1,28 @@
 const { deliveryApiClient } = require("./apiClient");
+const { withJsonCache } = require("../utils/jsonFileCache");
 
 const PAGE_SIZE = 1000; // max allowed by Contentful
 
 /**
- * Fetches all entries for a given content type using cursor pagination
+ * Fetches all entries for a given content type using cursor pagination.
+ * Results are cached locally by default to reduce repeated API calls during local development.
  * @param {string} contentType - The content type ID to fetch
+ * @param {boolean} [useCache=true] - Whether to read/write the local cache for this fetch
  * @returns {Promise<Array>} Array of all entries
  */
-async function fetchAllEntriesForContentType(contentType) {
+async function fetchAllEntriesForContentType(contentType, useCache = true) {
+  if (useCache) {
+    const cacheKey = `contentful/${contentType}`;
+
+    return withJsonCache(cacheKey, () =>
+      fetchAllEntriesForContentTypeUncached(contentType)
+    );
+  }
+
+  return fetchAllEntriesForContentTypeUncached(contentType);
+}
+
+async function fetchAllEntriesForContentTypeUncached(contentType) {
   const allEntries = [];
 
   let query = {
@@ -18,6 +33,8 @@ async function fetchAllEntriesForContentType(contentType) {
   };
 
   while (query) {
+    console.log(`[contentful] fetching entries: ${JSON.stringify(query)}`);
+
     const response = await deliveryApiClient.getEntries(query);
     if (response.errors) {
       console.warn(

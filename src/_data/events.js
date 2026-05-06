@@ -1,5 +1,5 @@
 const { DateTime } = require("luxon");
-const { fetchAllEntriesForContentType } = require("../lib/contentful/paginationHelper");
+const { fetchAllEntriesForContentType } = require("../lib/contentful/contentFetcher");
 const { mapEvent } = require("../lib/contentful/contentMapper");
 const { luxonDateTimeOptions } = require("../lib/utils/helpers");
 

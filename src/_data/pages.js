@@ -1,4 +1,4 @@
-const { fetchAllEntriesForContentType } = require("../lib/contentful/paginationHelper");
+const { fetchAllEntriesForContentType } = require("../lib/contentful/contentFetcher");
 const { mapPage } = require("../lib/contentful/contentMapper");
 
 module.exports = async function () {
