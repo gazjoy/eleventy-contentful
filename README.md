@@ -38,7 +38,7 @@ _Note: It is unimportant whether caching is enabled or not for production, becau
 - Keep code simple and readable, and files well organised. Follow existing patterns and conventions.
 - Minimise dependencies. Only install new packages if they bring real benefit.
 - Use Nunjucks templates wherever possible for presentation, and keep Javascript focussed on data shaping and orchestration.
-- Use UK timezone for handling of all dates/times in content (see [section 3.1](#31-date-and-time-handling)).
+- Use UK timezone for handling of all dates/times in content (see [section 3.2](#32-date-and-time-handling)).
 - Use Tailwind for all styling.
 - Keep on top of dependency vulnerabilities via `npm audit`.
 - Keep this README updated and accurate, it should be the definitive instruction manual for both humans and AI assistants.
@@ -195,7 +195,7 @@ However, this filter is _not_ available within the rich text partials - this is 
 
 Custom filters are registered in [filters.js](/src/lib/eleventy/filters.js), which acts as a plugin for the base [Eleventy config](/.eleventy.js).
 
-Custom filters are added to both the primary Eleventy environment and the separate Nunjucks environment used for rendering rich text partials (see [section 3.2](#32-rich-text-rendering)).
+Custom filters are added to both the primary Eleventy environment and the separate Nunjucks environment used for rendering rich text partials (see [section 3.3](#33-rich-text-rendering)).
 The exception to this is the `renderRichTextAsHtml` filter, which is excluded from the rich text partial environment to avoid infinite recursion.
 
 Eleventy's default filters would not exist on the rich text partial environment, so any default filters that might need to be used within the rich text partials are explicitly copied across.
