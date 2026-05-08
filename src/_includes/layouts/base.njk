@@ -23,23 +23,13 @@
         <div class="flex items-center justify-between">
           <!-- Logo -->
           <div class="shrink-0">
-            <a
-              href="/"
-              class="logo flex items-center gap-2 md:gap-3 hover:opacity-80"
-            >
-              <img src="/images/CPSC-Logo.png" alt="Cannock Phoenix" />
-              <div class="hidden">
-                <div class="text-xs font-semibold tracking-wide">
-                  CANNOCK PHOENIX
-                </div>
-                <div class="text-xs md:text-sm font-bold">Swimming Club</div>
-              </div>
-            </a>
+            {% set logoProps = { href: "/", size: "md", showText: true } %}
+            {% include "components/logo.njk" %}
           </div>
 
           <!-- Center: Desktop Nav (lg+) | Empty on mobile -->
           <div class="hidden lg:flex items-center justify-between gap-8 ml-8">
-            {% include "components/dynamic-nav.njk" %}
+            {% include "components/navbar-menu.njk" %}
           </div>
 
           <!-- Right: Login + Menu Toggle -->
@@ -102,7 +92,7 @@
         <!-- Mobile Menu: Nav (stacked below) -->
         <nav id="nav-menu" class="hidden lg:hidden flex-col pb-4 mt-4">
           <div class="flex flex-col gap-4 pt-4 border-t border-white/20">
-            {% include "components/dynamic-nav.njk" %}
+            {% include "components/navbar-menu.njk" %}
           </div>
         </nav>
       </div>
@@ -117,65 +107,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             <div class="lg:col-span-1">
-              <div class="flex items-center gap-2.5 select-none">
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 64 64"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-label="Cannock Phoenix Swimming Club crest"
-                >
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="31"
-                    fill="#0d2240"
-                    stroke="#ffffff"
-                    stroke-width="2"
-                  >
-                  </circle>
-                  <path
-                    d="M8 44 Q16 40 24 44 Q32 48 40 44 Q48 40 56 44 L56 54 Q48 58 40 54 Q32 50 24 54 Q16 58 8 54 Z"
-                    fill="#cc1e1e"
-                    opacity="0.85"
-                  >
-                  </path>
-                  <path
-                    d="M32 8 C28 14 22 16 24 22 C22 20 20 22 22 26 C20 24 18 27 21 30 C24 33 28 31 30 35 C31 37 32 40 32 40 C32 40 33 37 34 35 C36 31 40 33 43 30 C46 27 44 24 42 26 C44 22 42 20 40 22 C42 16 36 14 32 8Z"
-                    fill="#cc1e1e"
-                  >
-                  </path>
-                  <path
-                    d="M32 14 C30 18 27 19 28 23 C27 21 26 22.5 27.5 25 C26 24 25 26 27 28 C29 30 31 29 32 32 C33 29 35 30 37 28 C39 26 38 24 36.5 25 C38 22.5 37 21 36 23 C37 19 34 18 32 14Z"
-                    fill="#ffffff"
-                    opacity="0.3"
-                  >
-                  </path>
-                  <text
-                    x="32"
-                    y="49"
-                    text-anchor="middle"
-                    fill="#ffffff"
-                    font-size="7"
-                    font-family="Montserrat, sans-serif"
-                    font-weight="700"
-                    letter-spacing="1"
-                  >
-                    CPSC
-                  </text>
-                </svg>
-                <div class="flex flex-col leading-none">
-                  <span
-                    class="text-xs tracking-widest uppercase text-white/80"
-                    style="font-family: Montserrat, sans-serif; font-size: 0.6rem;"
-                  >Cannock Phoenix</span>
-                  <span
-                    class="tracking-wide text-white"
-                    style="font-family: Montserrat, sans-serif; font-size: 0.85rem; font-weight: 800;"
-                  >Swimming Club</span>
-                </div>
-              </div>
+              {% include "components/footer-logo.njk" %}
               <p
                 class="mt-4 text-white/60 text-sm leading-relaxed"
                 style="font-family: Inter, sans-serif;"
@@ -409,46 +341,6 @@
       </div>
     </footer>
 
-    <script>
-    const menuToggle = document.getElementById("menu-toggle");
-const navMenu = document.getElementById("nav-menu");
-const iconHamburger = document.getElementById("icon-hamburger");
-const iconClose = document.getElementById("icon-close");
-
-menuToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("hidden");
-  iconHamburger.classList.toggle("hidden");
-  iconClose.classList.toggle("hidden");
-});
-
-// Handle submenu toggles on mobile
-navMenu.querySelectorAll(".nav-submenu-toggle").forEach(button => {
-  button.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const submenu = button.closest("li").querySelector(".nav-submenu");
-    if (submenu) {
-      submenu.classList.toggle("hidden");
-      const isExpanded = button.getAttribute("aria-expanded") === "true";
-      button.setAttribute("aria-expanded", !isExpanded);
-
-      // Toggle icon visibility
-      const closedIcon = button.querySelector(".icon-closed");
-      const openIcon = button.querySelector(".icon-open");
-      closedIcon.classList.toggle("hidden");
-      openIcon.classList.toggle("hidden");
-    }
-  });
-});
-
-// Close menu when a link is clicked
-navMenu.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    navMenu.classList.add("hidden");
-    iconHamburger.classList.remove("hidden");
-    iconClose.classList.add("hidden");
-  });
-});
-    </script>
+    <script src="/js/navbar.js"></script>
   </body>
 </html>

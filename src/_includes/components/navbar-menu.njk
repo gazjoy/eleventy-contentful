@@ -1,0 +1,185 @@
+{#
+  Navbar Mega-Menu Component
+  
+  Renders desktop mega-menu with button toggles for each section.
+  Mobile menu handled separately via base layout hamburger toggle.
+  
+  Each section has:
+  - id: unique identifier
+  - label: display name
+  - pages: array of { label, path, description }
+  
+  Uses button + aria-expanded for accessibility and JS interactivity.
+#}
+
+{% set sections = [
+  {
+    id: "learn",
+    label: "Learn",
+    pages: [
+      { label: "Learn to Swim", path: "/learn-to-swim/" },
+      { label: "Teachers", path: "/coaching-staff/" },
+      { label: "Timetable & Locations", path: "/learn/timetable/" }
+    ]
+  },
+  {
+    id: "compete",
+    label: "Compete",
+    pages: [
+      { label: "Competitive Squads", path: "/competitive-squads/" },
+      { label: "Masters", path: "/masters/" },
+      { label: "Coaches", path: "/coaching-staff/" },
+      { label: "Timetable & Locations", path: "/timetable/" }
+    ]
+  },
+  {
+    id: "club",
+    label: "Our Club",
+    pages: [
+      { label: "About", path: "/about/" },
+      { label: "History", path: "/about/history/" },
+      { label: "Contact", path: "/contact/" },
+      { label: "Committee", path: "/about/committee/" },
+      { label: "Welfare & Concerns", path: "/welfare/" },
+      { label: "Club Policies", path: "/club-policies/" },
+      { label: "Fundraising & Sponsorship", path: "/fundraising/" },
+      { label: "Volunteering", path: "/volunteering/" }
+    ]
+  },
+  {
+    id: "events",
+    label: "Club Events",
+    pages: [
+      { label: "Events & Galas", path: "/events/" },
+      { label: "Results", path: "/results/" }
+    ]
+  },
+  {
+    id: "members",
+    label: "Members",
+    pages: [
+      { label: "Pay Fees", path: "/payments/" },
+      { label: "Resources", path: "/resources/" },
+      { label: "Swim Manager", path: "/swim-manager/" }
+    ]
+  },
+  {
+    id: "join",
+    label: "Join Phoenix",
+    pages: [
+      { label: "Request a Trial", path: "/join/" },
+      { label: "FAQs", path: "/faqs/" },
+      { label: "Membership Fees", path: "/membership-fees/" }
+    ]
+  }
+] %}
+
+<nav class="site-nav" role="navigation" aria-label="Primary navigation">
+  <ul class="flex flex-col lg:flex-row gap-1 lg:gap-2">
+    {% for section in sections %}
+      <li class="nav-section">
+        <button
+          class="nav-section__button"
+          data-section="{{ section.id }}"
+          aria-expanded="false"
+          aria-label="Toggle {{ section.label }} menu"
+          aria-controls="submenu-{{ section.id }}"
+        >
+          <span class="nav-section__label">{{ section.label }}</span>
+          <svg
+            class="nav-section__icon transition-transform"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <!-- Desktop Submenu (lg+) -->
+        <div
+          id="submenu-{{ section.id }}"
+          class="nav-submenu hidden lg:absolute lg:top-full lg:left-0 lg:min-w-72 lg:bg-white lg:text-primary lg:shadow-lg lg:rounded-lg lg:p-4 lg:mt-2"
+          role="menu"
+        >
+          <ul class="flex flex-col gap-1">
+            {% for page in section.pages %}
+              <li role="none">
+                <a
+                  href="{{ page.path }}"
+                  class="nav-submenu__link block px-3 py-2 rounded hover:bg-primary/10 transition-colors text-sm"
+                  role="menuitem"
+                >
+                  {{ page.label }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+
+<style>
+  /* Desktop mega-menu positioning */
+  .nav-section {
+    position: relative;
+  }
+
+  .nav-section__button {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-section__button:hover,
+  .nav-section__button[aria-expanded="true"] {
+    opacity: 0.8;
+  }
+
+  /* Rotate chevron when expanded */
+  .nav-section__button[aria-expanded="true"] .nav-section__icon {
+    transform: rotate(180deg);
+  }
+
+  /* Mobile: submenu slides down */
+  .nav-submenu {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
+    max-height: 500px;
+  }
+
+  /* Desktop: submenu positioned absolutely */
+  @media (min-width: 1024px) {
+    .nav-submenu {
+      max-height: none !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      display: none;
+    }
+
+    .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
+      display: block;
+    }
+  }
+</style>

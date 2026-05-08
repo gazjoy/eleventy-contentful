@@ -1,0 +1,50 @@
+{#
+  Reusable Logo Component
+  
+  Props (set as logoProps object before including):
+  - href: optional URL to wrap logo in link (default: '/')
+  - size: 'sm', 'md', or 'lg' (controls spacing and text size, default: 'md')
+  - showText: boolean to show club name text (default: true)
+#}
+
+{% set logoProps = logoProps or {} %}
+{% set href = logoProps.href or "/" %}
+{% set size = logoProps.size or "md" %}
+{% set showText = logoProps.showText if logoProps.showText is defined else true %}
+
+{% set sizeClasses = {
+  'sm': { img: 'w-10 h-10', gap: 'gap-1.5', textContainer: 'text-xs' },
+  'md': { img: 'w-12 h-12', gap: 'gap-2', textContainer: 'text-sm' },
+  'lg': { img: 'w-16 h-16', gap: 'gap-3', textContainer: 'text-base' }
+} %}
+
+{% set activeSize = sizeClasses[size] or sizeClasses['md'] %}
+
+{% set logoContent %}
+  <img 
+    src="/images/CPSC-Logo.png" 
+    alt="Cannock Phoenix Swimming Club logo"
+    class="shrink-0 {{ activeSize.img }}"
+  />
+  {% if showText %}
+    <div class="hidden sm:block">
+      <div class="font-semibold tracking-wide {{ activeSize.textContainer }}">
+        CANNOCK PHOENIX
+      </div>
+      <div class="font-bold {{ activeSize.textContainer }}">Swimming Club</div>
+    </div>
+  {% endif %}
+{% endset %}
+
+{% if href %}
+  <a 
+    href="{{ href }}"
+    class="logo flex items-center {{ activeSize.gap }} hover:opacity-80 transition-opacity"
+  >
+    {{ logoContent | safe }}
+  </a>
+{% else %}
+  <div class="logo flex items-center {{ activeSize.gap }}">
+    {{ logoContent | safe }}
+  </div>
+{% endif %}
