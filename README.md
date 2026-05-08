@@ -26,12 +26,12 @@ By default, content is cached locally for 60 mins, to avoid hitting Contentful's
 Edit the cache duration or disable it entirely (set to 0) via your [`.env`](/.env) or, to clear the cache, run:
 
 ```
-npm clean:cache
+npm run clean:cache
 ```
 
 The cached data (at [\_cache](/_cache/)) can also be manually edited for testing purposes.
 
-_Note: It is unimportant whether caching is enabled or not for production, because the file system will start off clean for each build so fresh content will always be fetched._
+_Note: It is unimportant whether caching is enabled or not for production, because the file system will start off clean for each build, so fresh content will always be fetched._
 
 ### 1.3. Golden Rules for Development
 
@@ -83,9 +83,9 @@ The use of HTML and JavaScript goes without saying.
 
 ### 2.2. Project Structure
 
-- \_site - where the built output is placed. Do not edit directly (this will get cleaned and overwritten anyway when running locally)
+- `_cache` - a cache of Contentful content, used locally only
+- `_site` - where the built output is placed. Do not edit directly (this will get cleaned and overwritten anyway when running locally)
 - `src` - all source code for the site
-  - `_cache` - a cache of Contentful content, used locally only
   - `_data` - data loaders that fetch and prepare Contentful content for templates
   - `_includes` - re-usable Nunjucks partials
     - `components` - UI components
