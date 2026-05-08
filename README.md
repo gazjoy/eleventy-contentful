@@ -31,6 +31,8 @@ npm clean:cache
 
 The cached data (at [\_cache](/_cache/)) can also be manually edited for testing purposes.
 
+_Note: It is unimportant whether caching is enabled or not for production, because the file system will start off clean for each build so fresh content will always be fetched._
+
 ### 1.3. Golden Rules for Development
 
 - Keep code simple and readable, and files well organised. Follow existing patterns and conventions.
@@ -39,6 +41,7 @@ The cached data (at [\_cache](/_cache/)) can also be manually edited for testing
 - Use UK timezone for handling of all dates/times in content (see [section 3.1](#31-date-and-time-handling)).
 - Use Tailwind for all styling.
 - Keep on top of dependency vulnerabilities via `npm audit`.
+- Keep this README updated and accurate, it should be the definitive instruction manual for both humans and AI assistants.
 
 ### 1.4. Deployment
 
@@ -59,6 +62,8 @@ The use of HTML and JavaScript goes without saying.
 
 ### 2.1. Key Technologies
 
+- **Netlify** (hosting & CDN):
+  https://docs.netlify.com/start/overview/
 - **Eleventy** (static site generation):
   https://www.11ty.dev/docs/
 - **Nunjucks** (templating):
@@ -131,13 +136,38 @@ Formatting is not enforced on build but, if using VSCode, will run when saving f
 
 Try to follow patterns and naming conventions set by existing files.
 
-#### 2.4.3. Comments and Readability
+#### 2.4.3. Naming, Comments and Readability
+
+Name files, functions and variables descriptively.
+
+A domain term (e.g. "event", "staffMember", "photo") should only be used for an object. Specific aspects of those items should be named clearly to avoid confusion:
+
+- a string value `"Joe Bloggs"` should be called `staffMemberName` rather than `staffMember`
+- a string value of `"https://img.com/pic.jpg"` should be called `photoUrl` rather than `photo`
+
+Numeric values should be named with their unit, unless it is obvious:
+
+- use `timeoutMs` rather than `timeout`
+- `minSwimmerAge` is acceptable, as it can be assumed to be in years
 
 Comments should be used only where they add value. Try to make the code itself as readable as possible, especially in areas which might be extended or modified in future.
 
+JSDoc comments should be used if the intention is to describe a JavaScript function or object structure - this automatically provides intellisense for that function/object when used elsewhere.
+
 ## 3. Content and Code Design
 
-### 3.1. Date and Time Handling
+### 3.1. Content Modelling in Contentful
+
+- All content types should have a clear **Name** and useful **Description** (including examples if necessary).
+- All fields should have useful **Help text**.
+- **Enable localization of this field** should never be ticked; all content is only in English.
+- Where field format is important (e.g. email addresses, times etc.), tick **Match a specific pattern** and use a regex if there is no suitable pattern provided.
+  - Keep regexes consistent across fields that model the same data type.
+- _Rich text_ fields should be consistent in their allowed **Formatting** options, and should always have **Accept only specified entry type** ticked for all links/embeds.
+- _Reference_ fields should always have **Accept only specified entry type** ticked and the appropriate type(s) selected.
+- All content types should have the _JSON Viewer_ app added to their **Entry editors**.
+
+### 3.2. Date and Time Handling
 
 It is assumed that Cannock Phoenix is only concerned with dates and times in the UK.
 To avoid relying on content editors to select the correct UTC offset for the date they are entering, "Date and time" fields in Contentful should always be modelled as either "Date only" or "Date and time without timezone".
@@ -146,7 +176,7 @@ I.e. the editor need not consider daylight savings at all.
 Then, when these values are received in the frontend code, they should immediately be parsed as Luxon DateTime objects using the UK time zone, via the "Europe/London" IANA code (see `luxonDateTimeOptions` in [helpers.js](/src/lib/utils/helpers.js)).
 This ensures that all dates and times are given the correct offset (either +0 or +1, depending on whether GMT or BST is in effect on the date and at the time being modelled), allowing accurate calculations.
 
-### 3.2. Rich Text Rendering
+### 3.3. Rich Text Rendering
 
 Contentful's "Rich text" fields store a structured representation of the text as JSON, and the Contentful SDK is used to render this as HTML.
 See [richTextRenderer.js](/src/lib/contentful/richTextRenderer.js).
@@ -161,7 +191,7 @@ This is achieved by creating a new Nunjucks environment to render the partials f
 The rendering is made available to templates via the `renderRichTextAsHtml` filter.
 However, this filter is _not_ available within the rich text partials - this is to avoid any risk of infinite recursion in the case where a rich text field contains circular references of content entries.
 
-### 3.3. Filter Configuration
+### 3.4. Filter Configuration
 
 Custom filters are registered in [filters.js](/src/lib/eleventy/filters.js), which acts as a plugin for the base [Eleventy config](/.eleventy.js).
 
@@ -175,11 +205,13 @@ Eleventy's default filters would not exist on the rich text partial environment,
 An informal list of ideas for areas to work on next.
 
 - automatic periodic build of site?
-  - to cover e.g. whether events are listed as past or upcoming
-- preview site?
-  - rely on user clicking build?
-  - auto-build triggered by webhook on save?
-  - automatic periodic build? (would need to be fairly frequent)
+  - this feels like the simplest way of handling content updates, as long as the interval is short enough
+  - note that the alternative way to surface content updates (triggering a build off a publish webhook) would not cover time-related calculated content, e.g. whether events are listed as past or upcoming, or the copyright year in the footer
+- preview site? (probably a nice to have rather than essential)
+  - rely on user clicking build button in the CMS?
+  - or an auto-build triggered by webhook on save?
+  - automatic periodic build (see above) could also work, but the interval would need to be very short (~1min?) which could hit contentful/netlify limits
 - align rich text editor options
-  - allowed features (H1, tables etc.)
-  - linkable/embeddable content types, and how they should render
+  - we want consistency in the CMS
+  - consider allowed features (e.g. should editors be able to include H1s, tables etc.?)
+  - consider linkable/embeddable content types, and how they should render for different types of references (inline vs block vs link) - needs to match up with what richTextRenderer.js supports
