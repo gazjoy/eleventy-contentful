@@ -1,93 +1,106 @@
 {#
   Navbar Mega-Menu Component
   
-  Renders desktop mega-menu with button toggles for each section.
-  Mobile menu handled separately via base layout hamburger toggle.
+  Renders desktop full-width mega-menu and mobile accordion.
+  Each section has: label, description, accent color, inline SVG icon paths.
   
-  Each section has:
-  - id: unique identifier
-  - label: display name
-  - pages: array of { label, path, description }
+  Desktop: Button → full-width dropdown panel with:
+    - Left: Colored icon box + label + description
+    - Right: Grid of page links with descriptions and "new" badges
+    - Special: Club News link in "Our Club" only
   
-  Uses button + aria-expanded for accessibility and JS interactivity.
+  Mobile: Accordion expands/collapses smoothly
 #}
-
 {% set sections = [
   {
     id: "learn",
     label: "Learn",
+    description: "Learn to swim with us",
+    accentColor: "#0891b2",
+    svgPaths: ["M21.21 15.89A10 10 0 1 0 3.6 8.989", "M22.4 3v5h-5"],
     pages: [
-      { label: "Learn to Swim", path: "/learn-to-swim/" },
-      { label: "Teachers", path: "/coaching-staff/" },
-      { label: "Timetable & Locations", path: "/learn/timetable/" }
+      { label: "Learn to Swim", path: "/learn-to-swim/", description: "Our Swim England programme — Stages 1 to 7" },
+      { label: "Teachers", path: "/coaching-staff/", description: "Our qualified teaching staff" },
+      { label: "Timetable & Locations", path: "/learn/timetable/", description: "Learn to Swim session times and pool locations" }
     ]
   },
   {
     id: "compete",
     label: "Compete",
+    description: "Train and compete with us",
+    accentColor: "#ea580c",
+    svgPaths: ["M6 9H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2", "M12 14v8", "M19 9v-3a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v3"],
     pages: [
-      { label: "Competitive Squads", path: "/competitive-squads/" },
-      { label: "Masters", path: "/masters/" },
-      { label: "Coaches", path: "/coaching-staff/" },
-      { label: "Timetable & Locations", path: "/timetable/" }
+      { label: "Competitive Squads", path: "/competitive-squads/", description: "Development and county-level training" },
+      { label: "Masters", path: "/masters/", description: "Adult competitive swimming for 18+", badge: "new" },
+      { label: "Coaches", path: "/coaching-staff/", description: "Our competitive squad coaching team" },
+      { label: "Timetable & Locations", path: "/timetable/", description: "Squad session times and pool locations" }
     ]
   },
   {
     id: "club",
     label: "Our Club",
+    description: "Who we are",
+    accentColor: "#db2777",
+    svgPaths: ["M3 21v-4a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v4", "M9 21h6", "M9 5h6", "M9 9h6"],
     pages: [
-      { label: "About", path: "/about/" },
-      { label: "History", path: "/about/history/" },
-      { label: "Contact", path: "/contact/" },
-      { label: "Committee", path: "/about/committee/" },
-      { label: "Welfare & Concerns", path: "/welfare/" },
-      { label: "Club Policies", path: "/club-policies/" },
-      { label: "Fundraising & Sponsorship", path: "/fundraising/" },
-      { label: "Volunteering", path: "/volunteering/" }
+      { label: "About", path: "/about/", description: "Our story, values, and mission" },
+      { label: "History", path: "/about/history/", description: "Over 45 years of competitive swimming" },
+      { label: "Contact", path: "/contact/", description: "Get in touch with the right person" },
+      { label: "Committee", path: "/about/committee/", description: "Elected officers and volunteers" },
+      { label: "Welfare & Concerns", path: "/welfare/", description: "Welfare officers and raising a safeguarding concern" },
+      { label: "Club Policies", path: "/club-policies/", description: "Safeguarding, codes of conduct, GDPR and privacy" },
+      { label: "Fundraising & Sponsorship", path: "/fundraising/", description: "Support the club and get involved" },
+      { label: "Volunteering", path: "/volunteering/", description: "Give your time and make a difference" }
     ]
   },
   {
     id: "events",
     label: "Club Events",
+    description: "Galas, meets and results",
+    accentColor: "#16a34a",
+    svgPaths: ["M3 11v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-11", "M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2", "M3 11h18"],
     pages: [
-      { label: "Events & Galas", path: "/events/" },
-      { label: "Results", path: "/results/" }
+      { label: "Events & Galas", path: "/events/", description: "Upcoming galas, open meets and club nights" },
+      { label: "Results", path: "/results/", description: "Recent competition and gala results", badge: "new" }
     ]
   },
   {
     id: "members",
     label: "Members",
+    description: "For current members",
+    accentColor: "#ca8a04",
+    svgPaths: ["M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", "M9 10h6", "M9 14h6"],
     pages: [
-      { label: "Pay Fees", path: "/payments/" },
-      { label: "Resources", path: "/resources/" },
-      { label: "Swim Manager", path: "/swim-manager/" }
+      { label: "Pay Fees", path: "/payments/", description: "Set up Direct Debit via GoCardless" },
+      { label: "Resources", path: "/resources/", description: "Downloads, documents and useful links", badge: "new" },
+      { label: "Swim Manager", path: "/swim-manager/", description: "Log in to your squad account", badge: "new" }
     ]
   },
   {
     id: "join",
     label: "Join Phoenix",
+    description: "Become a member",
+    accentColor: "#0891b2",
+    svgPaths: ["M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", "M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", "M23 21v-2a4 4 0 0 0-3-3.87", "M16 3.13a4 4 0 0 1 0 7.75"],
     pages: [
-      { label: "Request a Trial", path: "/join/" },
-      { label: "FAQs", path: "/faqs/" },
-      { label: "Membership Fees", path: "/membership-fees/" }
+      { label: "Request a Trial", path: "/join/", description: "Book your free taster session" },
+      { label: "FAQs", path: "/faqs/", description: "Common questions answered" },
+      { label: "Membership Fees", path: "/membership-fees/", description: "Transparent pricing for all programmes" }
     ]
   }
 ] %}
-
 <nav class="site-nav" role="navigation" aria-label="Primary navigation">
   <ul class="flex flex-col lg:flex-row gap-1 lg:gap-2">
     {% for section in sections %}
-      <li class="nav-section">
-        <button
-          class="nav-section__button"
-          data-section="{{ section.id }}"
-          aria-expanded="false"
-          aria-label="Toggle {{ section.label }} menu"
-          aria-controls="submenu-{{ section.id }}"
-        >
+      <li
+        class="nav-section">
+        <!-- Top-Level Button: Label + Chevron Only (no icon) -->
+        <button class="nav-section__button" data-section="{{ section.id }}" aria-expanded="false" aria-label="Toggle {{ section.label }} menu" aria-controls="submenu-{{ section.id }}">
           <span class="nav-section__label">{{ section.label }}</span>
+          <!-- Chevron (rotates on expand) -->
           <svg
-            class="nav-section__icon transition-transform"
+            class="nav-section__chevron"
             width="16"
             height="16"
             viewBox="0 0 24 24"
@@ -96,43 +109,134 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
-          >
+            aria-hidden="true">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
-
-        <!-- Desktop Submenu (lg+) -->
-        <div
-          id="submenu-{{ section.id }}"
-          class="nav-submenu hidden lg:absolute lg:top-full lg:left-0 lg:min-w-72 lg:bg-white lg:text-primary lg:shadow-lg lg:rounded-lg lg:p-4 lg:mt-2"
-          role="menu"
-        >
-          <ul class="flex flex-col gap-1">
-            {% for page in section.pages %}
-              <li role="none">
-                <a
-                  href="{{ page.path }}"
-                  class="nav-submenu__link block px-3 py-2 rounded hover:bg-primary/10 transition-colors text-sm"
-                  role="menuitem"
-                >
-                  {{ page.label }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
+        <!-- Submenu Panel -->
+        <div id="submenu-{{ section.id }}" class="nav-submenu" role="menu">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
+            <div
+              class="flex flex-col lg:flex-row gap-0 lg:gap-10 xl:gap-14">
+              <!-- Section Identity (Left) - Desktop Only -->
+              <div class="hidden lg:block w-52 shrink-0 pt-1">
+                <div
+                  class="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
+                  style="background-color: {{ section.accentColor }}18;">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="color: {{ section.accentColor }};"
+                    aria-hidden="true">
+                    {% for path in section.svgPaths %}
+                      <path d="{{ path }}"/>
+                    {% endfor %}
+                  </svg>
+                </div>
+                <p class="text-primary font-montserrat font-black text-sm mb-1">
+                  {{ section.label }}
+                </p>
+                <p class="text-primary/50 font-inter text-sm leading-snug">
+                  {{ section.description }}
+                </p>
+              </div>
+              <!-- Page Links Grid (Right) -->
+              <ul
+                class="flex-1 grid max-lg:flex max-lg:flex-col gap-1 list-none"
+                style="grid-template-columns: {% if section.id == 'club' %}repeat(3, 1fr){% elseif section.pages | length <= 3
+                  %}repeat(auto-fit, minmax(150px, 1fr)){% else %}repeat(auto-fit, minmax(180px, 1fr)){% endif %};">
+                {% for page in section.pages %}
+                  <li>
+                    <a
+                    href="{{ page.path }}" class="group max-lg:flex max-lg:flex-row max-lg:items-center max-lg:gap-3 max-lg:px-4 max-lg:py-2.5 max-lg:rounded-lg max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:transition-all max-lg:hover:bg-white/8 max-lg:hover:text-white
+                                                                                                                   lg:flex lg:flex-col lg:gap-0.5 lg:px-4 lg:py-3 lg:rounded-xl lg:transition-all lg:hover:bg-primary/5">
+                    <!-- Mobile dot + label / Desktop: label + badge + description below -->
+                    <div class="flex items-center gap-2">
+                      <span class="text-sm font-inter font-medium text-primary max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:whitespace-nowrap">
+                        {{ page.label }}
+                      </span>
+                      {% if page.badge == "new" %}
+                        <span class="hidden lg:inline-block px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">
+                          New
+                        </span>
+                      {% endif %}
+                    </div>
+                    <!-- Desktop only: description -->
+                    <span class="hidden lg:block text-primary/40 text-xs leading-snug">
+                      {{ page.description }}
+                    </span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <!-- Club News (Our Club section only) -->
+            {% if section.id == "club" %}
+              <ul class="mt-5 pt-4 border-t border-gray-100 list-none">
+                <li>
+                  <a href="/news/" class="group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all hover:bg-pink-50">
+                  <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background-color: #db277718;">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="color: #db2777;"
+                      aria-hidden="true">
+                      <path d="M4 11h16V7a2 2 0 00-2-2H6a2 2 0 00-2 2v4z"/>
+                      <path d="M4 15a2 2 0 012 2v4a2 2 0 01-2 2h0V15z"/>
+                      <path d="M6 15h12v6H6z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-primary font-inter font-semibold text-sm">
+                      Club News
+                    </p>
+                    <p class="text-primary/45 text-xs">
+                      Results, announcements and everything happening at Phoenix
+                    </p>
+                  </div>
+                  <svg
+                    width="14"
+                    height="14"
+                    class="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="color: #db2777;"
+                    aria-hidden="true">
+                    <path d="M5 12h14"/>
+                    <path d="M12 5l7 7-7 7"/>
+                  </svg>
+                  </a>
+                </li>
+              </ul>
+            {% endif %}
+          </div>
         </div>
       </li>
     {% endfor %}
   </ul>
 </nav>
-
 <style>
-  /* Desktop mega-menu positioning */
+  /* Navigation Structure */
   .nav-section {
     position: relative;
   }
-
+  /* Top-level buttons */
   .nav-section__button {
     background: none;
     border: none;
@@ -142,44 +246,134 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: inherit;
-    text-decoration: none;
-    transition: opacity 0.2s;
+    font-size: 0.875rem;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
   }
-
   .nav-section__button:hover,
   .nav-section__button[aria-expanded="true"] {
-    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.15);
+    font-weight: 600;
   }
-
-  /* Rotate chevron when expanded */
-  .nav-section__button[aria-expanded="true"] .nav-section__icon {
+  /* Mobile: buttons fill width with space between */
+  @media(max-width: 1023px) {
+    .nav-section__button {
+      width: 100%;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      background: none;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .nav-section__button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    .nav-section__button[aria-expanded="true"] {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-weight: 600;
+    }
+  }
+  /* Chevron rotation on expand */
+  .nav-section__chevron {
+    opacity: 0.5;
+    transition: transform 0.2s;
+  }
+  .nav-section__button[aria-expanded="true"] .nav-section__chevron {
     transform: rotate(180deg);
   }
-
-  /* Mobile: submenu slides down */
+  /* Submenu: Mobile (accordion) + Desktop (full-width) */
   .nav-submenu {
+    /* Mobile: hidden by default, slide down when expanded */
+    display: none;
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.3s ease-out;
   }
-
+  /* Mobile: Show submenu when button is expanded */
   .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
-    max-height: 500px;
+    display: block;
+    max-height: 600px;
   }
-
-  /* Desktop: submenu positioned absolutely */
-  @media (min-width: 1024px) {
+  /* Submenu container mobile styling */
+  @media(max-width: 1023px) {
     .nav-submenu {
-      max-height: none !important;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      display: none;
+      padding-left: 0;
+      padding-top: 0;
+      margin-top: 0;
     }
-
+  }
+  /* Desktop (lg+): Full-width panels positioned below header */
+  @media(min-width: 1024px) {
+    .nav-submenu {
+      /* Always hidden unless aria-expanded="true" */
+      display: none;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 60px;
+      width: 100vw;
+      background-color: white;
+      color: #0d2240;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      margin-left: calc(-50vw + 50%);
+      max-height: none;
+      overflow: visible;
+    }
+    /* Show desktop submenu when expanded */
     .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
       display: block;
+    }
+  }
+  /* Mobile: Adjust positioning for 64px header (h-16) */
+  @media(max-width: 1023px) {
+    .nav-submenu {
+      position: static;
+      top: auto;
+      left: auto;
+      right: auto;
+      width: auto;
+      background-color: transparent;
+      color: white;
+      box-shadow: none;
+      margin: 0;
+      display: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease-out;
+      padding: 0;
+    }
+    .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
+      display: block;
+      max-height: 384px;
+      overflow-y: auto;
+      padding-left: 0.75rem;
+    }
+    /* Club News styling on mobile */
+    .nav-submenu .group {
+      margin-top: 0.5rem;
+      padding: 0.875rem 1rem;
+      background: none;
+      gap: 1rem;
+      border-radius: 0.75rem;
+    }
+    .nav-submenu .group:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .nav-submenu .group > div:last-child {
+      flex: 1;
+    }
+    .nav-submenu .group > div:last-child > p {
+      color: white;
+      font-weight: 600;
+    }
+    .nav-submenu .group > div:last-child > p:last-of-type {
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
     }
   }
 </style>

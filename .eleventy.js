@@ -8,6 +8,7 @@ module.exports = function (eleventyConfig) {
   // Copy static files to output (when building for production)
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
   eleventyConfig.addPassthroughCopy({ "src/js": "/js" });
+  eleventyConfig.addPassthroughCopy({ "src/css/components": "/css/components" });
 
   return {
     templateFormats: ["md", "njk", "liquid"],

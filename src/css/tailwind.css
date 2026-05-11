@@ -9,6 +9,14 @@
   --color-light: #f8f9fa;
   --color-dark: #0a1b30;
 
+  /* Section accent colors */
+  --color-section-learn: #0891b2;
+  --color-section-compete: #ea580c;
+  --color-section-club: #db2777;
+  --color-section-events: #16a34a;
+  --color-section-members: #ca8a04;
+  --color-section-join: #0891b2;
+
   --font-montserrat: "Montserrat", sans-serif;
   --font-inter:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -20,14 +28,14 @@
 /* Typography */
 
 :root {
-  --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
-  --step--1: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1rem);
-  --step-0: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
-  --step-1: clamp(1.35rem, 1.2631rem + 0.3864vw, 1.5625rem);
-  --step-2: clamp(1.62rem, 1.4837rem + 0.6057vw, 1.9531rem);
-  --step-3: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
-  --step-4: clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem);
-  --step-5: clamp(2.7994rem, 2.384rem + 1.8461vw, 3.8147rem);
+  --step--2: clamp(0.6076rem, 0.5617rem + 0.2043vw, 0.72rem);
+  --step--1: clamp(0.7292rem, 0.6593rem + 0.3106vw, 0.9rem);
+  --step-0: clamp(0.875rem, 0.7727rem + 0.4545vw, 1.125rem);
+  --step-1: clamp(1.05rem, 0.9043rem + 0.6477vw, 1.4063rem);
+  --step-2: clamp(1.26rem, 1.0563rem + 0.9051vw, 1.7578rem);
+  --step-3: clamp(1.512rem, 1.2317rem + 1.2459vw, 2.1973rem);
+  --step-4: clamp(1.8144rem, 1.4331rem + 1.6949vw, 2.7466rem);
+  --step-5: clamp(2.1773rem, 1.6635rem + 2.2835vw, 3.4332rem);
 }
 h1 {
   font-size: var(--step-5);
