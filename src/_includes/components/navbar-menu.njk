@@ -16,7 +16,7 @@
     id: "learn",
     label: "Learn",
     description: "Learn to swim with us",
-    accentColor: "#0891b2",
+    accentVar: "--color-section-learn",
     svgPaths: ["M21.21 15.89A10 10 0 1 0 3.6 8.989", "M22.4 3v5h-5"],
     pages: [
       { label: "Learn to Swim", path: "/learn-to-swim/", description: "Our Swim England programme — Stages 1 to 7" },
@@ -28,7 +28,7 @@
     id: "compete",
     label: "Compete",
     description: "Train and compete with us",
-    accentColor: "#ea580c",
+    accentVar: "--color-section-compete",
     svgPaths: ["M6 9H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2", "M12 14v8", "M19 9v-3a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v3"],
     pages: [
       { label: "Competitive Squads", path: "/competitive-squads/", description: "Development and county-level training" },
@@ -41,7 +41,7 @@
     id: "club",
     label: "Our Club",
     description: "Who we are",
-    accentColor: "#db2777",
+    accentVar: "--color-section-club",
     svgPaths: ["M3 21v-4a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v4", "M9 21h6", "M9 5h6", "M9 9h6"],
     pages: [
       { label: "About", path: "/about/", description: "Our story, values, and mission" },
@@ -58,7 +58,7 @@
     id: "events",
     label: "Club Events",
     description: "Galas, meets and results",
-    accentColor: "#16a34a",
+    accentVar: "--color-section-events",
     svgPaths: ["M3 11v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-11", "M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2", "M3 11h18"],
     pages: [
       { label: "Events & Galas", path: "/events/", description: "Upcoming galas, open meets and club nights" },
@@ -69,7 +69,7 @@
     id: "members",
     label: "Members",
     description: "For current members",
-    accentColor: "#ca8a04",
+    accentVar: "--color-section-members",
     svgPaths: ["M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", "M9 10h6", "M9 14h6"],
     pages: [
       { label: "Pay Fees", path: "/payments/", description: "Set up Direct Debit via GoCardless" },
@@ -81,7 +81,7 @@
     id: "join",
     label: "Join Phoenix",
     description: "Become a member",
-    accentColor: "#0891b2",
+    accentVar: "--color-section-join",
     svgPaths: ["M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", "M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", "M23 21v-2a4 4 0 0 0-3-3.87", "M16 3.13a4 4 0 0 1 0 7.75"],
     pages: [
       { label: "Request a Trial", path: "/join/", description: "Book your free taster session" },
@@ -94,13 +94,13 @@
   <ul class="flex flex-col lg:flex-row gap-1 lg:gap-2">
     {% for section in sections %}
       <li
-        class="nav-section">
+        class="relative" style="--section-accent: var({{ section.accentVar }});">
         <!-- Top-Level Button: Label + Chevron Only (no icon) -->
-        <button class="nav-section__button" data-section="{{ section.id }}" aria-expanded="false" aria-label="Toggle {{ section.label }} menu" aria-controls="submenu-{{ section.id }}">
+        <button class="nav-section__button flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-inter font-medium transition-all duration-200 hover:bg-white/15 hover:font-semibold max-lg:w-full max-lg:justify-between max-lg:rounded-xl max-lg:bg-transparent max-lg:px-4 max-lg:py-3 max-lg:font-normal max-lg:text-white/80 max-lg:hover:bg-white/10 max-lg:hover:text-white" data-section="{{ section.id }}" aria-expanded="false" aria-label="Toggle {{ section.label }} menu" aria-controls="submenu-{{ section.id }}">
           <span class="nav-section__label">{{ section.label }}</span>
           <!-- Chevron (rotates on expand) -->
           <svg
-            class="nav-section__chevron"
+            class="nav-section__chevron opacity-50 transition-transform duration-200"
             width="16"
             height="16"
             viewBox="0 0 24 24"
@@ -114,7 +114,12 @@
           </svg>
         </button>
         <!-- Submenu Panel -->
-        <div id="submenu-{{ section.id }}" class="nav-submenu" role="menu">
+        <div
+          id="submenu-{{ section.id }}"
+          class="nav-submenu hidden max-h-0 overflow-hidden transition-[max-height] duration-300 ease-out lg:fixed lg:left-0
+            lg:right-0 lg:top-15 lg:w-screen lg:bg-white lg:text-primary lg:shadow-xl lg:ml-[calc(-50vw+50%)] lg:max-h-none
+            lg:overflow-visible"
+          role="menu">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
             <div
               class="flex flex-col lg:flex-row gap-0 lg:gap-10 xl:gap-14">
@@ -122,7 +127,7 @@
               <div class="hidden lg:block w-52 shrink-0 pt-1">
                 <div
                   class="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
-                  style="background-color: {{ section.accentColor }}18;">
+                  style="background-color: color-mix(in srgb, var(--section-accent) 12%, white);">
                   <svg
                     width="20"
                     height="20"
@@ -132,7 +137,7 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    style="color: {{ section.accentColor }};"
+                    style="color: var(--section-accent);"
                     aria-hidden="true">
                     {% for path in section.svgPaths %}
                       <path d="{{ path }}"/>
@@ -154,23 +159,24 @@
                 {% for page in section.pages %}
                   <li>
                     <a
-                    href="{{ page.path }}" class="group max-lg:flex max-lg:flex-row max-lg:items-center max-lg:gap-3 max-lg:px-4 max-lg:py-2.5 max-lg:rounded-lg max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:transition-all max-lg:hover:bg-white/8 max-lg:hover:text-white
-                                                                                                                   lg:flex lg:flex-col lg:gap-0.5 lg:px-4 lg:py-3 lg:rounded-xl lg:transition-all lg:hover:bg-primary/5">
-                    <!-- Mobile dot + label / Desktop: label + badge + description below -->
-                    <div class="flex items-center gap-2">
-                      <span class="text-sm font-inter font-medium text-primary max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:whitespace-nowrap">
-                        {{ page.label }}
-                      </span>
-                      {% if page.badge == "new" %}
-                        <span class="hidden lg:inline-block px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">
-                          New
+                      href="{{ page.path }}" class="group max-lg:flex max-lg:flex-row max-lg:items-center max-lg:gap-3 max-lg:px-4 max-lg:py-2.5 max-lg:rounded-lg max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:transition-all max-lg:hover:bg-white/8 max-lg:hover:text-white
+                                                                                                                                           lg:flex lg:flex-col lg:gap-0.5 lg:px-4 lg:py-3 lg:rounded-xl lg:transition-all lg:hover:bg-primary/5">
+                      <!-- Mobile dot + label / Desktop: label + badge + description below -->
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm font-inter font-medium text-primary max-lg:text-sm max-lg:font-normal max-lg:text-white/60
+                            max-lg:whitespace-nowrap">
+                          {{ page.label }}
                         </span>
-                      {% endif %}
-                    </div>
-                    <!-- Desktop only: description -->
-                    <span class="hidden lg:block text-primary/40 text-xs leading-snug">
-                      {{ page.description }}
-                    </span>
+                        {% if page.badge == "new" %}
+                          <span class="hidden lg:inline-block px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">
+                            New
+                          </span>
+                        {% endif %}
+                      </div>
+                      <!-- Desktop only: description -->
+                      <span class="hidden lg:block text-primary/40 text-xs leading-snug">
+                        {{ page.description }}
+                      </span>
                     </a>
                   </li>
                 {% endfor %}
@@ -180,47 +186,49 @@
             {% if section.id == "club" %}
               <ul class="mt-5 pt-4 border-t border-gray-100 list-none">
                 <li>
-                  <a href="/news/" class="group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all hover:bg-pink-50">
-                  <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background-color: #db277718;">
+                  <a href="/news/" class="group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all hover:bg-primary/5">
+                    <div
+                      class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                      style="background-color: color-mix(in srgb, var(--section-accent) 12%, white);">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="color: var(--section-accent);"
+                        aria-hidden="true">
+                        <path d="M4 11h16V7a2 2 0 00-2-2H6a2 2 0 00-2 2v4z"/>
+                        <path d="M4 15a2 2 0 012 2v4a2 2 0 01-2 2h0V15z"/>
+                        <path d="M6 15h12v6H6z"/>
+                      </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-primary font-inter font-semibold text-sm">
+                        Club News
+                      </p>
+                      <p class="text-primary/45 text-xs">
+                        Results, announcements and everything happening at Phoenix
+                      </p>
+                    </div>
                     <svg
-                      width="16"
-                      height="16"
+                      width="14"
+                      height="14"
+                      class="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      style="color: #db2777;"
+                      style="color: var(--section-accent);"
                       aria-hidden="true">
-                      <path d="M4 11h16V7a2 2 0 00-2-2H6a2 2 0 00-2 2v4z"/>
-                      <path d="M4 15a2 2 0 012 2v4a2 2 0 01-2 2h0V15z"/>
-                      <path d="M6 15h12v6H6z"/>
+                      <path d="M5 12h14"/>
+                      <path d="M12 5l7 7-7 7"/>
                     </svg>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-primary font-inter font-semibold text-sm">
-                      Club News
-                    </p>
-                    <p class="text-primary/45 text-xs">
-                      Results, announcements and everything happening at Phoenix
-                    </p>
-                  </div>
-                  <svg
-                    width="14"
-                    height="14"
-                    class="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    style="color: #db2777;"
-                    aria-hidden="true">
-                    <path d="M5 12h14"/>
-                    <path d="M12 5l7 7-7 7"/>
-                  </svg>
                   </a>
                 </li>
               </ul>
@@ -231,149 +239,3 @@
     {% endfor %}
   </ul>
 </nav>
-<style>
-  /* Navigation Structure */
-  .nav-section {
-    position: relative;
-  }
-  /* Top-level buttons */
-  .nav-section__button {
-    background: none;
-    border: none;
-    color: inherit;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    font-family: Inter, sans-serif;
-    font-weight: 500;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
-  }
-  .nav-section__button:hover,
-  .nav-section__button[aria-expanded="true"] {
-    background: rgba(255, 255, 255, 0.15);
-    font-weight: 600;
-  }
-  /* Mobile: buttons fill width with space between */
-  @media(max-width: 1023px) {
-    .nav-section__button {
-      width: 100%;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      border-radius: 0.75rem;
-      background: none;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.8);
-    }
-    .nav-section__button:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
-    .nav-section__button[aria-expanded="true"] {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      font-weight: 600;
-    }
-  }
-  /* Chevron rotation on expand */
-  .nav-section__chevron {
-    opacity: 0.5;
-    transition: transform 0.2s;
-  }
-  .nav-section__button[aria-expanded="true"] .nav-section__chevron {
-    transform: rotate(180deg);
-  }
-  /* Submenu: Mobile (accordion) + Desktop (full-width) */
-  .nav-submenu {
-    /* Mobile: hidden by default, slide down when expanded */
-    display: none;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-out;
-  }
-  /* Mobile: Show submenu when button is expanded */
-  .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
-    display: block;
-    max-height: 600px;
-  }
-  /* Submenu container mobile styling */
-  @media(max-width: 1023px) {
-    .nav-submenu {
-      padding-left: 0;
-      padding-top: 0;
-      margin-top: 0;
-    }
-  }
-  /* Desktop (lg+): Full-width panels positioned below header */
-  @media(min-width: 1024px) {
-    .nav-submenu {
-      /* Always hidden unless aria-expanded="true" */
-      display: none;
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 60px;
-      width: 100vw;
-      background-color: white;
-      color: #0d2240;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-      margin-left: calc(-50vw + 50%);
-      max-height: none;
-      overflow: visible;
-    }
-    /* Show desktop submenu when expanded */
-    .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
-      display: block;
-    }
-  }
-  /* Mobile: Adjust positioning for 64px header (h-16) */
-  @media(max-width: 1023px) {
-    .nav-submenu {
-      position: static;
-      top: auto;
-      left: auto;
-      right: auto;
-      width: auto;
-      background-color: transparent;
-      color: white;
-      box-shadow: none;
-      margin: 0;
-      display: none;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.3s ease-out;
-      padding: 0;
-    }
-    .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
-      display: block;
-      max-height: 384px;
-      overflow-y: auto;
-      padding-left: 0.75rem;
-    }
-    /* Club News styling on mobile */
-    .nav-submenu .group {
-      margin-top: 0.5rem;
-      padding: 0.875rem 1rem;
-      background: none;
-      gap: 1rem;
-      border-radius: 0.75rem;
-    }
-    .nav-submenu .group:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-    .nav-submenu .group > div:last-child {
-      flex: 1;
-    }
-    .nav-submenu .group > div:last-child > p {
-      color: white;
-      font-weight: 600;
-    }
-    .nav-submenu .group > div:last-child > p:last-of-type {
-      color: rgba(255, 255, 255, 0.6);
-      font-weight: 400;
-    }
-  }
-</style>

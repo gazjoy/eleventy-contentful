@@ -40,6 +40,7 @@ _Note: It is unimportant whether caching is enabled or not for production, becau
 - Use Nunjucks templates wherever possible for presentation, and keep Javascript focussed on data shaping and orchestration.
 - Use UK timezone for handling of all dates/times in content (see [section 3.2](#32-date-and-time-handling)).
 - Use Tailwind for all styling.
+- Do not use inline styling and avoid using `!important`
 - Keep on top of dependency vulnerabilities via `npm audit`.
 - Keep this README updated and accurate, it should be the definitive instruction manual for both humans and AI assistants.
 

@@ -4,5 +4,12 @@ permalink: /about-static/index.html
 
 ---
 
-<h1>{{ aboutPage.title }}</h1>
-<div>{{ aboutPage.bodyRichText | renderRichTextAsHtml | safe }}</div>
+{% set heroSectionLabel = "Our Club" %}
+{% set heroAccentColor = "#db2777" %}
+{% set heroSvgPaths = ["M3 21v-4a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v4", "M9 21h6", "M9 5h6", "M9 9h6"] %}
+{% set heroTitle = aboutPage.title %}
+{% set heroSubtitle = "Over 45 years of nurturing swimmers, building community and rising to the challenge — just like a phoenix." %}
+{% include "components/page-hero.njk" %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div>{{ aboutPage.bodyRichText | renderRichTextAsHtml | safe }}</div>
+</div>

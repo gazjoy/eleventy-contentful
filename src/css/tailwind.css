@@ -8,6 +8,7 @@
   --color-accent: #5cb85c;
   --color-light: #f8f9fa;
   --color-dark: #0a1b30;
+  --color-white: #ffffff;
 
   /* Section accent colors */
   --color-section-learn: #0891b2;
@@ -17,12 +18,34 @@
   --color-section-members: #ca8a04;
   --color-section-join: #0891b2;
 
+  /* Navbar color tokens */
+  --color-navbar-on-dark: var(--color-white);
+  --color-navbar-on-dark-strong: rgba(255, 255, 255, 0.6);
+  --color-navbar-on-dark-soft: rgba(255, 255, 255, 0.25);
+  --color-navbar-overlay-expanded: rgba(255, 255, 255, 0.15);
+  --color-navbar-overlay-expanded-mobile: rgba(255, 255, 255, 0.1);
+  --color-navbar-overlay-hover: rgba(255, 255, 255, 0.08);
+
   --font-montserrat: "Montserrat", sans-serif;
   --font-inter:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 
   --text-xs: var(--step--2);
   --text-sm: var(--step--1);
+}
+
+/* Base */
+
+a[href],
+button,
+[role="button"],
+label[for],
+input[type="checkbox"],
+input[type="radio"],
+input[type="submit"],
+input[type="reset"],
+select {
+  cursor: pointer;
 }
 
 /* Typography */
@@ -223,7 +246,8 @@ body,
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   @apply cursor-pointer text-white px-4 py-2 md:px-6 md:py-2 rounded-full text-base font-semibold transition focus:outline-3 focus:outline-offset-3;
   &.btn--primary {
     @apply bg-primary hover:bg-slate-900 focus:outline-slate-950 active:bg-slate-950;
@@ -259,3 +283,9 @@ body,
   [href^="/"]:not([href^="//"]))):after {
   content: ' ↗️';
 } */
+
+/* Shimmer animation for hero */
+@keyframes shimmer {
+  0% { background-position: 150% center; }
+  100% { background-position: -50% center; }
+}
