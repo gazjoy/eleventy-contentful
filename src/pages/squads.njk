@@ -11,43 +11,30 @@ permalink: /competitive-squads/index.html
   <h2>{{ squad.name }}</h2>
   <div>{{ squad.descriptionRichText | renderRichTextAsHtml | safe }}</div>
 
-  <style>
-table {
-  border-collapse: collapse;
-}
-td,
-th {
-  border: 1px solid black;
-  padding: 5px;
-  text-align: left;
-}
-
-</style>
-
-  <table>
+  <table class="border-collapse">
     <tr>
-      <th>Day</th>
-      <th>Session Type</th>
-      <th>Time</th>
-      <th>Location</th>
+      <th class="border border-black p-1 text-left">Day</th>
+      <th class="border border-black p-1 text-left">Session Type</th>
+      <th class="border border-black p-1 text-left">Time</th>
+      <th class="border border-black p-1 text-left">Location</th>
     </tr>
 
     {%- for day, sessions in squad.timetable -%}
       {%- for session in sessions -%}
         <tr>
           {%- if loop.first -%}
-            <th rowspan="{{ sessions.length }}">{{ day }}</th>
+            <th class="border border-black p-1 text-left" rowspan="{{ sessions.length }}">{{ day }}</th>
           {%- endif -%}
 
-          <td>{{ session.activity }}</td>
-          <td>
+          <td class="border border-black p-1 text-left">{{ session.activity }}</td>
+          <td class="border border-black p-1 text-left">
             {{ session.startTime }}
             -
             {{ session.endTime }}
           </td>
 
           {%- if loop.first -%}
-            <td rowspan="{{ sessions.length }}">
+            <td class="border border-black p-1 text-left" rowspan="{{ sessions.length }}">
               <a href="{{session.venue.websiteUrl}}">{{
                 session.venue.name
               }}</a>
@@ -56,8 +43,8 @@ th {
         </tr>
       {%- else -%}
         <tr>
-          <th>{{ day }}</th>
-          <td colspan="3">No training</td>
+          <th class="border border-black p-1 text-left">{{ day }}</th>
+          <td class="border border-black p-1 text-left" colspan="3">No training</td>
         </tr>
       {%- endfor -%}
     {%- endfor -%}

@@ -33,6 +33,17 @@ The cached data (at [\_cache](/_cache/)) can also be manually edited for testing
 
 _Note: It is unimportant whether caching is enabled or not for production, because the file system will start off clean for each build, so fresh content will always be fetched._
 
+#### 1.2.2. npm Scripts
+
+The following scripts are available:
+
+- `npm run start` - install dependencies, build the site, and start the dev server (localhost:8080)
+- `npm run build` - full build: run ESLint, build Eleventy, and output to `_site/`
+- `npm run build:eleventy` - build only the Eleventy site (faster for rapid iteration)
+- `npm run dev:eleventy` - start Eleventy dev server with file watching (localhost:8081)
+- `npm run lint` - run ESLint on all JavaScript files
+- `npm run clean:cache` - clear the Contentful content cache
+
 ### 1.3. Golden Rules for Development
 
 - Keep code simple and readable, and files well organised. Follow existing patterns and conventions.
@@ -101,6 +112,11 @@ The use of HTML and JavaScript goes without saying.
   - `pages` - Nunjucks page templates and route definitions
     - `config` - templates for non-HTML pages, such as sitemap.xml and robots.txt
   - `static` - files that will be copied directly to the output with no processing, such as images
+- `reference` - design reference materials (root level, not inside `src`)
+  - `figma-make-react-export` - React component prototype exported from Figma design.
+    Use this as the specification for implementing pages and components.
+    Inspect individual component files (e.g. `App.tsx`, component pages) to understand layout,
+    responsive behaviour, and visual design before building the Nunjucks template equivalent.
 
 ### 2.3. Custom Filters
 
@@ -155,6 +171,18 @@ Comments should be used only where they add value. Try to make the code itself a
 
 JSDoc comments should be used if the intention is to describe a JavaScript function or object structure - this automatically provides intellisense for that function/object when used elsewhere.
 
+### 2.5. Design Reference
+
+The project includes a React prototype at [`reference/figma-make-react-export/`](reference/figma-make-react-export/) that serves as the exact visual and interaction specification for the site.
+
+When building or updating a page or component:
+1. Inspect the corresponding component in the React prototype to understand layout, spacing, and responsive behaviour
+2. Identify which Tailwind utilities are needed to replicate the design
+3. Build the Nunjucks template using Tailwind utilities first (see section 3.5)
+4. Refer back to the prototype if visual discrepancies appear
+
+Run the prototype locally with `npm run dev` from within the `reference/figma-make-react-export/` folder to test responsive behaviour at different viewport sizes.
+
 ## 3. Content and Code Design
 
 ### 3.1. Content Modelling in Contentful
@@ -201,7 +229,93 @@ The exception to this is the `renderRichTextAsHtml` filter, which is excluded fr
 
 Eleventy's default filters would not exist on the rich text partial environment, so any default filters that might need to be used within the rich text partials are explicitly copied across.
 
-## 4. To-Do List
+### 3.5. Component Architecture and CSS Philosophy
+
+#### Building Components from the Design Reference
+
+When converting a React component from `reference/figma-make-react-export/` to a Nunjucks template:
+1. Create a new file in [`src/_includes/components/`](src/_includes/components/) with a descriptive kebab-case name
+2. Structure the Nunjucks template to accept parameters for content (e.g. `heroTitle`, `heroImage`, `accentColor`)
+3. Use Tailwind responsive utilities exclusively for styling
+4. Follow the mobile-first approach: base styles apply to mobile, use `lg:` prefix for desktop (1024px breakpoint)
+
+#### CSS-First Approach
+
+Tailwind utilities are always the first choice for styling:
+- Responsive layout: use `hidden lg:flex`, `max-lg:flex-col lg:flex-row`, etc.
+- Spacing: use `pt-4`, `mb-8`, `gap-3`, etc.
+- Typography: use `text-sm`, `font-bold`, `leading-relaxed`, etc.
+- Colours: use `bg-primary`, `text-secondary`, etc.
+
+#### When Custom CSS is Necessary
+
+Only add custom CSS to [`src/css/components/`](src/css/components/) when:
+- A Tailwind utility cannot achieve the desired effect (e.g. pseudo-elements with dynamic values, complex selectors)
+- The custom rule applies to a specific component and is reusable across that component
+- Performance or maintainability would suffer without it
+
+Keep custom CSS minimal: ideally < 50 lines per file.
+Never use `!important` - if you feel you need it, restructure the HTML to use Tailwind utilities instead.
+
+Example: Navbar section indicators use `::before` pseudo-elements tied to a `data-section` attribute, which Tailwind cannot achieve alone (see [`src/css/components/navbar.css`](src/css/components/navbar.css)).
+
+#### Mobile-First and Viewport-Specific Animations
+
+Design animations with both mobile and desktop in mind:
+- Use `max-lg:` prefix to apply mobile-specific animations (e.g. `max-lg:animate-accordion-open`)
+- Use `lg:` prefix for desktop animations (e.g. `lg:animate-panel-slide`)
+- This prevents layout shifting when animations run in opposite directions on different viewports
+
+When defining keyframes, ensure mobile and desktop animations are consistent in direction to avoid visual jumps on viewport resize.
+
+### 3.6. Accessibility and Semantic HTML
+
+All pages must follow semantic HTML principles and WCAG 2.1 Level AA accessibility standards.
+
+#### Semantic Structure
+
+- Use appropriate HTML elements: `<nav>`, `<main>`, `<section>`, `<article>`, `<header>`, `<footer>`, `<ul>`/`<li>` for lists, etc.
+- Avoid using `<div>` for structural elements; use semantic elements instead
+- Page regions should use appropriate `<section>` elements with clear purpose
+- Navigation menus should use `<nav>` with `<ul>`/`<li>` structure (even if list bullets are hidden with Tailwind's `list-none`)
+
+#### Images and Icons
+
+- All `<img>` tags must have descriptive `alt` text
+- Decorative images should use `aria-hidden="true"` to hide them from screen readers
+- SVG icons used in components should include `aria-label` or `role` attributes as appropriate
+
+#### Interactive Elements
+
+- Ensure sufficient colour contrast between text and background (minimum 4.5:1 for normal text, 3:1 for large text)
+- Focus states must be visible; avoid removing outline styles without providing an alternative
+- Forms must include associated `<label>` elements (use `for` attribute)
+- All buttons must have descriptive text or `aria-label`
+
+## 4. Implementation Status
+
+### 4.1. Completed Pages and Components
+
+- **Header** - Fixed navigation with logo, desktop menu, mobile menu indicator, CTA button
+- **Navigation Mega-Menu** - 6-section menu (Learn, Compete, Our Club, Club Events, Members, Join Phoenix) with desktop panels and mobile accordion
+- **Page Hero Component** - Reusable sub-page hero with section label, icon, title, subtitle, and wave divider
+- **Homepage Hero** - Full-screen gradient overlay with shimmer animation, heading, CTA buttons, and wave divider
+- **Footer** - Logo, Swim England affiliation section
+
+### 4.2. Planned Pages and Components
+
+- Sub-page section navigation (sidebar for nested pages)
+- Content pages (About, Events, Learn to Swim, Staff, Venues, etc.) wired to Contentful
+- News/blog post pages
+- Forms (contact, newsletter signup, etc.)
+
+### 4.3. Known Limitations and Deferred Tasks
+
+- **SVG Rendering** - SVG paths in navbar section icons are not currently rendering. Will be addressed via SVG standardization task.
+- **Header Scroll Behaviour** - Design shows transparent header on homepage scroll top, transitioning to solid blue after scrolling ~40px. Not yet implemented.
+- **Contentful Integration** - Homepage hero and footer are currently hardcoded; should be content-driven from Contentful.
+
+## 5. Future Enhancements
 
 An informal list of ideas for areas to work on next.
 

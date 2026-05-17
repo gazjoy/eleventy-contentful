@@ -13,11 +13,11 @@
 
   {# render as image with caption #}
 {% elif type == "embedded-asset-block" %}
-  <p style="width: fit-content; text-align: center;">
+  <p class="w-fit text-center">
     <img
       src="{{ image.url }}"
       alt="{{ image.description or '' }}"
-      style="max-width: 100%; height: auto;"
+      class="max-w-full h-auto"
     />
     <br />
     <small>{{ image.title }}</small>

@@ -19,19 +19,19 @@
       <img
         src="{{ staffMember.photo.url }}"
         alt="{{ staffMember.photo.description or staffMember.name }}"
-        style="height: 20px;"
+        class="h-5"
       />
     {% endif %}
   </a>
 
   {# render block embedded entry with larger photo and role #}
 {% elif type == "embedded-entry-block" %}
-  <div style="display: flex;">
+  <div class="flex">
     {% if staffMember.photo %}
       <img
         src="{{ staffMember.photo.url }}"
         alt="{{ staffMember.photo.description or staffMember.name }}"
-        style="height: 100px;"
+        class="h-[100px]"
       />
     {% endif %}
     <p>
