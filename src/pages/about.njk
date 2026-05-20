@@ -4,12 +4,21 @@ permalink: /about-static/index.html
 
 ---
 
+{% from "components/section-nav.njk" import sectionNav %}
 {% set heroSectionLabel = "Our Club" %}
 {% set heroAccentColor = "#db2777" %}
 {% set heroSvgPaths = ["M3 21v-4a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v4", "M9 21h6", "M9 5h6", "M9 9h6"] %}
 {% set heroTitle = aboutPage.title %}
 {% set heroSubtitle = "Over 45 years of nurturing swimmers, building community and rising to the challenge — just like a phoenix." %}
 {% include "components/page-hero.njk" %}
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div>{{ aboutPage.bodyRichText | renderRichTextAsHtml | safe }}</div>
+{% set sectionPages = [
+  { label: "About", path: "/about/" },
+  { label: "History", path: "/about/history/" },
+  { label: "Committee", path: "/about/committee/" },
+  { label: "Contact", path: "/contact/" }
+] %}
+{% call sectionNav(sectionPages, heroAccentColor, heroSectionLabel, page.url, heroTitle, heroSvgPaths) %}
+<div class="py-12">
+  {{ aboutPage.bodyRichText | renderRichTextAsHtml | safe }}
 </div>
+{% endcall %}

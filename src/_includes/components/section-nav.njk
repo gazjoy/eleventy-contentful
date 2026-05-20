@@ -1,0 +1,118 @@
+{#
+  Section Nav Component (Macro)
+
+  Wraps page content with:
+  - Desktop: sticky left sidebar listing sibling pages in the current section
+  - Mobile: a collapsible "In this section" strip pinned below the navbar
+
+  Usage:
+    {% from "components/section-nav.njk" import sectionNav %}
+    {% call sectionNav(sectionPages, accentColor, sectionLabel, currentPath, currentPageLabel) %}
+      ... page content ...
+    {% endcall %}
+
+  Parameters:
+  - sectionPages:      array of { label, path } objects
+  - accentColor:       CSS hex color string, e.g. "#db2777"
+  - sectionLabel:      display name of the section, e.g. "Our Club"
+  - currentPath:       current page URL — pass Eleventy's page.url
+  - currentPageLabel:  display name of the current page for the mobile breadcrumb
+  - iconPaths:         (optional) array of SVG path `d` strings for the section icon
+#}
+{% macro sectionNav(sectionPages, accentColor, sectionLabel, currentPath, currentPageLabel, iconPaths) %}
+  {# ── Mobile: sticky section strip ──────────────────────────── #}
+  <div class="lg:hidden sticky top-16 z-30 bg-white border-b border-gray-200">
+    <button
+      type="button"
+      class="w-full flex items-center justify-between px-4 py-3 text-left"
+      aria-expanded="false"
+      aria-controls="section-nav-drawer"
+      data-section-nav-toggle>
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="text-primary/50 text-sm shrink-0">{{ sectionLabel }}</span>
+        <svg
+          class="text-primary/30 shrink-0"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"><polyline points="9 18 15 12 9 6"/>
+        </svg>
+        <span class="text-primary text-sm font-semibold truncate">{{ currentPageLabel }}</span>
+      </div>
+      <svg
+        class="text-primary/40 shrink-0 transition-transform duration-200"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        data-section-nav-chevron
+        aria-hidden="true"><polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div
+      id="section-nav-drawer"
+      class="overflow-hidden transition-[max-height] duration-300 ease-out max-h-0 bg-[#f5f8fc]"
+      aria-hidden="true">
+      <nav class="grid grid-cols-2 gap-1 p-3" aria-label="{{ sectionLabel }} pages">
+        {% for p in sectionPages %}
+          {% set isActive = p.path == currentPath %}
+          <a href="{{ p.path }}" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm transition-colors {{ 'font-semibold text-white' if isActive else 'text-primary/65 hover:text-primary hover:bg-primary/5' }}" {% if isActive %} style="background-color: {{ accentColor }};" aria-current="page" {% endif %}>{{ p.label }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </div>
+  {# ── Content area: sidebar on desktop, full width on mobile ── #}
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+      class="lg:flex">
+      {# Desktop sidebar #}
+      <aside class="hidden lg:block w-52 xl:w-60 shrink-0 bg-[#f5f8fc] rounded-t-2xl" aria-label="{{ sectionLabel }} section navigation">
+        <div class="sticky top-15 max-h-[calc(100vh-60px)] overflow-y-auto pt-10 pb-16 px-4">
+          <div class="flex items-center gap-2 px-3 mb-4">
+            {% if iconPaths %}
+              <div
+                class="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+                style="background-color: {{ accentColor }}18;">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="color: {{ accentColor }};"
+                  aria-hidden="true">
+                  {% for path in iconPaths %}
+                    <path d="{{ path }}"/>
+                  {% endfor %}
+                </svg>
+              </div>
+            {% endif %}
+            <span class="text-xs uppercase tracking-wider font-bold font-montserrat" style="color: {{ accentColor }};">{{ sectionLabel }}</span>
+          </div>
+          <nav class="space-y-0.5" aria-label="{{ sectionLabel }} pages">
+            {% for p in sectionPages %}
+              {% set isActive = p.path == currentPath %}
+              <a href="{{ p.path }}" class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all {{ 'font-semibold text-white shadow-sm' if isActive else 'text-primary/60 hover:text-primary hover:bg-primary/5' }}" {% if isActive %} style="background-color: {{ accentColor }};" aria-current="page" {% endif %}>
+                <span class="w-1.5 h-1.5 rounded-full shrink-0 transition-colors {{ 'bg-white/70' if isActive else 'bg-primary/20
+                  group-hover:bg-primary/40' }}"></span>
+                {{ p.label }}
+              </a>
+            {% endfor %}
+          </nav>
+        </div>
+      </aside>
+      {# Main content #}
+      <div class="flex-1 min-w-0 bg-white lg:pl-8">
+        {{ caller() }}
+      </div>
+    </div>
+  </div>
+{% endmacro %}

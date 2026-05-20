@@ -6,70 +6,49 @@ permalink: /events/index.html
 ---
 
 <h1>{{ title }}</h1>
-
 <h2>Upcoming Events</h2>
-
 {% for event in events.upcoming %}
   <div class="flex">
     {% include "components/event-date-badge.njk" %}
-
     <div>
       {% if loop.first %}
         <p>
           <em>Next Event!</em>
         </p>
       {% endif %}
-
       <h3>{{ event.title }}</h3>
-
       <p>
         <strong>{{ event.startDate | readableDate(event.endDate) }}</strong>
         {{ event.startTime | readableTime }}
       </p>
       <p>{{ event.venue.name }}</p>
-
       {% if event.websiteUrl %}
         <p>
-          <a
-            href="{{ event.websiteUrl }}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Event details (opens in a new tab)</a>
+          <a href="{{ event.websiteUrl }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a>
         </p>
       {% endif %}
-
       {{ event.descriptionRichText | renderRichTextAsHtml | safe }}
     </div>
   </div>
 {% endfor %}
-
 <h2>Past Events</h2>
-
 <div id="past-events-by-year">
   <div class="flex gap-2">
     {% for year, pastEvents in events.past %}
-      <button
-        type="button"
-        data-year-tab="{{ year }}"
-        class="px-4 py-2 border border-[#222] rounded-full bg-white min-w-[5rem]"
-      >
+      <button type="button" data-year-tab="{{ year }}" class="px-4 py-2 border border-[#222] rounded-full bg-white min-w-20">
         {{ year }}
       </button>
     {% endfor %}
   </div>
-
   {% for year, pastEvents in events.past %}
     <div data-year-panel="{{ year }}" class="hidden">
       {% for event in pastEvents %}
         <div class="flex gap-6 items-start mb-10">
           {% include "components/event-date-badge.njk" %}
-
           <div>
             <h3>{{ event.title }}</h3>
             <p>
-              <strong>{{
-                event.startDate | readableDate(event.endDate)
-              }}</strong>
+              <strong>{{ event.startDate | readableDate(event.endDate) }}</strong>
               {{ event.startTime | readableTime }}
             </p>
             {% if event.venue %}
@@ -81,54 +60,44 @@ permalink: /events/index.html
     </div>
   {% endfor %}
 </div>
-
 <script>
-(function() {
-  const container = document.getElementById("past-events-by-year");
-
-  const yearButtons = Array.from(container.querySelectorAll("[data-year-tab]"));
-  const yearPanels = Array.from(
-    container.querySelectorAll("[data-year-panel]"),
-  );
-
-  if (!yearButtons.length || !yearPanels.length) {
-    return;
-  }
-
-  let activeIndex = 0;
-
-  const render = () => {
+  (function () {
+    const container = document.getElementById("past-events-by-year");
+    const yearButtons = Array.from(container.querySelectorAll("[data-year-tab]"));
+    const yearPanels = Array.from(container.querySelectorAll("[data-year-panel]"),);
+    if (! yearButtons.length || ! yearPanels.length) {
+      return;
+    }
+    let activeIndex = 0;
+    const render = () => {
+      yearButtons.forEach((button, index) => {
+        const isActive = index === activeIndex;
+        button.style.background = isActive
+          ? "#666"
+          : "#fff";
+        button.style.color = isActive
+          ? "#fff"
+          : "#111";
+        button.setAttribute(
+          "aria-pressed",
+          isActive
+            ? "true"
+            : "false",
+        );
+        button.style.cursor = "pointer";
+      });
+      yearPanels.forEach((panel, index) => {
+        panel.style.display = index === activeIndex
+          ? "block"
+          : "none";
+      });
+    };
     yearButtons.forEach((button, index) => {
-      const isActive = index === activeIndex;
-      button.style.background = isActive
-        ? "#666"
-        : "#fff";
-      button.style.color = isActive
-        ? "#fff"
-        : "#111";
-      button.setAttribute(
-        "aria-pressed",
-        isActive
-          ? "true"
-          : "false",
-      );
-      button.style.cursor = "pointer";
+      button.addEventListener("click", () => {
+        activeIndex = index;
+        render();
+      });
     });
-
-    yearPanels.forEach((panel, index) => {
-      panel.style.display = index === activeIndex
-        ? "block"
-        : "none";
-    });
-  };
-
-  yearButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      activeIndex = index;
-      render();
-    });
-  });
-
-  render();
-})();
+    render();
+  })();
 </script>

@@ -11,20 +11,55 @@ permalink: /{{ page.urlPath }}/index.html
 
 ---
 
-<article>
-  <h1>{{ page.title }}</h1>
-  <div>{{ page.bodyRichText | renderRichTextAsHtml | safe }}</div>
-
-  {% if page.childPages.length > 0 %}
-    <hr />
-
-    <h2>Child Pages:</h2>
-    <ul>
-      {% for childPage in page.childPages %}
-        <li>
-          <a href="/{{ childPage.urlPath }}">{{ childPage.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-</article>
+{% from "components/section-nav.njk" import sectionNav %}
+{#
+  Section config lookup — maps root URL path to section definition.
+  Add new sections here as each is built out.
+#}
+{% set sectionConfigs = {
+  "about": {
+    label: "Our Club",
+    accentColor: "#db2777",
+    iconPaths: ["M3 21v-4a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v4", "M9 21h6", "M9 5h6", "M9 9h6"],
+    pages: [
+      { label: "About", path: "/about/" },
+      { label: "History", path: "/about/history/" },
+      { label: "Committee", path: "/about/committee/" },
+      { label: "Contact", path: "/contact/" }
+    ]
+  }
+} %}
+{% set rootPath = page.urlPath.split("/")[0] %}
+{% set section = sectionConfigs[rootPath] %}
+{% if section %}
+  {# ── Section page: hero + section nav sidebar ─────────────────── #}
+  {% set heroSectionLabel = section.label %}
+  {% set heroAccentColor = section.accentColor %}
+  {% set heroSvgPaths = section.iconPaths %}
+  {% set heroTitle = page.title %}
+  {% include "components/page-hero.njk" %}
+  {% call sectionNav(section.pages, section.accentColor, section.label, "/" + page.urlPath + "/", page.title, section.iconPaths) %}
+  <div class="py-12">
+    {{ page.bodyRichText | renderRichTextAsHtml | safe }}
+  </div>
+  {% endcall %}
+{% else %}
+  {# ── Standalone page: plain layout ────────────────────────────── #}
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article>
+      <h1>{{ page.title }}</h1>
+      <div>{{ page.bodyRichText | renderRichTextAsHtml | safe }}</div>
+      {% if page.childPages.length > 0 %}
+        <hr/>
+        <h2>Child Pages:</h2>
+        <ul>
+          {% for childPage in page.childPages %}
+            <li>
+              <a href="/{{ childPage.urlPath }}">{{ childPage.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </article>
+  </div>
+{% endif %}

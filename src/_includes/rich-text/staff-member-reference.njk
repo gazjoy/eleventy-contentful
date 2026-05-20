@@ -4,40 +4,28 @@
     - type: the type of reference ("entry-hyperlink" | "embedded-entry-inline" | "embedded-entry-block")
     - linkText: only relevant for "entry-hyperlink" type
 #}
-
 {% set linkUrl = "/coaching-staff/#" + staffMember.name | slugify %}
-
 {# render simple link #}
 {% if type == "entry-hyperlink" %}
   <a href="{{ linkUrl }}">{{ linkText or staffMember.name }}</a>
-
   {# render inline embedded entry as link with thumbnail photo if available #}
 {% elif type == "embedded-entry-inline" %}
   <a href="{{ linkUrl }}">
     {{ staffMember.name }}
     {% if staffMember.photo %}
-      <img
-        src="{{ staffMember.photo.url }}"
-        alt="{{ staffMember.photo.description or staffMember.name }}"
-        class="h-5"
-      />
+      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.description or staffMember.name }}" class="h-5"/>
     {% endif %}
   </a>
-
   {# render block embedded entry with larger photo and role #}
 {% elif type == "embedded-entry-block" %}
   <div class="flex">
     {% if staffMember.photo %}
-      <img
-        src="{{ staffMember.photo.url }}"
-        alt="{{ staffMember.photo.description or staffMember.name }}"
-        class="h-[100px]"
-      />
+      <img src="{{ staffMember.photo.url }}" alt="{{ staffMember.photo.description or staffMember.name }}" class="h-25"/>
     {% endif %}
     <p>
-      <strong>{{ staffMember.name }}</strong><br />{{ staffMember.role }}
+      <strong>{{ staffMember.name }}</strong><br/>{{ staffMember.role }}
     </p>
   </div>
-{% else %}
+  {% else %}
   <!-- Unhandled staffMember reference type "{{ type }}" -->
 {% endif %}

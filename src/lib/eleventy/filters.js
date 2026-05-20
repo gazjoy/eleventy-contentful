@@ -34,6 +34,20 @@ const addFilters = (eleventyConfig) => {
   const readableTimeFilter = (value) => safeFilter(value, formatTime);
   addSharedFilter(eleventyConfig, "readableTime", readableTimeFilter);
 
+  // Luxon format string — e.g. "LLL" → "Apr", "d" → "26", "yyyy" → "2026"
+  // See https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+  // Note: written outside safeFilter because safeFilter does not forward extra arguments.
+  const luxonFormatFilter = (value, format) => {
+    if (!value) return "";
+    try {
+      return value.toFormat(format);
+    } catch (error) {
+      console.warn(`Error applying luxonFormat filter: ${error}`);
+      return "";
+    }
+  };
+  addSharedFilter(eleventyConfig, "luxonFormat", luxonFormatFilter);
+
   // File size formatting (human readable)
   const readableFileSizeFilter = (value) => safeFilter(value, formatFileSize);
   addSharedFilter(eleventyConfig, "readableFileSize", readableFileSizeFilter);
