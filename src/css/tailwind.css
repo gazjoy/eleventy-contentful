@@ -83,6 +83,33 @@ select {
   h6 {
     @apply text-step-0;
   }
+  p a[href] {
+    @apply underline underline-offset-2;
+  }
+  ul {
+    @apply list-disc pl-6;
+  }
+  ol {
+    @apply list-decimal pl-6;
+  }
+  blockquote {
+    @apply border-l-4 border-gray-300 pl-6 ml-0 my-6 italic;
+  }
+  table {
+    @apply w-full border-collapse;
+  }
+  th {
+    @apply bg-primary text-white font-semibold text-left px-4 py-3 text-sm;
+  }
+  td {
+    @apply px-4 py-3 border-b border-gray-200 text-sm;
+  }
+  tr:last-child td {
+    @apply border-b-0;
+  }
+  hr {
+    @apply my-8 border-gray-200;
+  }
 }
 
 h1,
@@ -125,6 +152,10 @@ body,
 /* Navigation */
 
 .site-nav {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
   > ul {
     @apply flex flex-col lg:flex-row gap-1 lg:gap-2;
   }
@@ -148,14 +179,9 @@ body,
 }
 
 #nav-menu {
-  li {
-    @apply py-2 border-b border-white/20;
-  }
-  ul ul {
-    @apply border-t border-white/20;
-  }
-  ul > li:last-child {
-    border: 0;
+  ul {
+    list-style: none;
+    padding-left: 0;
   }
 }
 
@@ -184,6 +210,11 @@ body,
 
 .site-footer {
   @apply bg-dark text-white;
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
 
   & .site-footer__inner {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8;
@@ -254,12 +285,12 @@ body,
 .btn {
   display: inline-flex;
   align-items: center;
-  @apply cursor-pointer text-white px-4 py-2 md:px-6 md:py-2 rounded-full text-base font-semibold transition focus:outline-3 focus:outline-offset-3;
+  @apply cursor-pointer text-white px-4 py-2 md:px-6 md:py-2 rounded-full text-base font-semibold transition hover:shadow-md focus:outline-3 focus:outline-offset-3;
   &.btn--primary {
-    @apply bg-primary hover:bg-slate-900 focus:outline-slate-950 active:bg-slate-950;
+    @apply bg-primary hover:bg-slate-700 focus:outline-slate-950 active:bg-slate-950;
   }
   &.btn--secondary {
-    @apply bg-secondary hover:bg-red-800 focus:outline-red-800 active:bg-red-800;
+    @apply bg-secondary hover:bg-red-700 focus:outline-red-800 active:bg-red-800;
   }
   &.btn--block {
     display: block;
@@ -289,6 +320,39 @@ body,
   [href^="/"]:not([href^="//"]))):after {
   content: ' ↗️';
 } */
+
+/* Rich text content areas */
+
+@layer components {
+  .rich-text {
+    p {
+      @apply mb-4 leading-relaxed;
+    }
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mt-8 mb-3;
+    }
+    ul,
+    ol {
+      @apply mb-4;
+    }
+    li {
+      @apply mb-1;
+    }
+    a[href] {
+      @apply underline underline-offset-2;
+    }
+    > *:first-child {
+      margin-top: 0;
+    }
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
 
 /* Shimmer animation for hero */
 @keyframes shimmer {

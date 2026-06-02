@@ -18,7 +18,7 @@ permalink: /about-static/index.html
   { label: "Contact", path: "/contact/" }
 ] %}
 {% call sectionNav(sectionPages, heroAccentColor, heroSectionLabel, page.url, heroTitle, heroSvgPaths) %}
-<div class="py-12">
+<div class="py-12 rich-text">
   {{ aboutPage.bodyRichText | renderRichTextAsHtml | safe }}
 </div>
 {% endcall %}

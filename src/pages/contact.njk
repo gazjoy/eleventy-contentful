@@ -5,7 +5,7 @@ permalink: /contact-static/index.html
 ---
 
 <h1>{{ contactPage.title }}</h1>
-<div>{{ contactPage.bodyRichText | renderRichTextAsHtml | safe }}</div>
+<div class="rich-text">{{ contactPage.bodyRichText | renderRichTextAsHtml | safe }}</div>
 
 <h2>Static form demo</h2>
 <form action="https://api.staticforms.dev/submit" method="POST">

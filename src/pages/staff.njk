@@ -18,7 +18,7 @@ permalink: /coaching-staff/index.html
     alt="{{staffMember.photo.description or staffMember.name }}"
   />
 
-  <div>{{ staffMember.biographyRichText | renderRichTextAsHtml | safe }}</div>
+  <div class="rich-text">{{ staffMember.biographyRichText | renderRichTextAsHtml | safe }}</div>
 
   {% if not loop.last %}
     <hr />

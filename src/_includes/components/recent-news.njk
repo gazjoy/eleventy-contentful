@@ -17,7 +17,7 @@
       <small>{{ newsPost.date | readableDate }}
         by
         {{ newsPost.authorName }}</small>
-      {{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}
+      <div class="rich-text">{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}</div>
     </div>
   {% endfor %}
 

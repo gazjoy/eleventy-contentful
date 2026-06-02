@@ -17,7 +17,6 @@
     label: "Learn",
     description: "Learn to swim with us",
     accentVar: "--color-section-learn",
-    svgPaths: ["M21.21 15.89A10 10 0 1 0 3.6 8.989", "M22.4 3v5h-5"],
     pages: [
       { label: "Learn to Swim", path: "/learn-to-swim/", description: "Our Swim England programme — Stages 1 to 7" },
       { label: "Teachers", path: "/coaching-staff/", description: "Our qualified teaching staff" },
@@ -29,7 +28,6 @@
     label: "Compete",
     description: "Train and compete with us",
     accentVar: "--color-section-compete",
-    svgPaths: ["M6 9H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2", "M12 14v8", "M19 9v-3a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v3"],
     pages: [
       { label: "Competitive Squads", path: "/competitive-squads/", description: "Development and county-level training" },
       { label: "Masters", path: "/masters/", description: "Adult competitive swimming for 18+", badge: "new" },
@@ -42,7 +40,6 @@
     label: "Our Club",
     description: "Who we are",
     accentVar: "--color-section-club",
-    svgPaths: ["M3 21v-4a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v4", "M9 21h6", "M9 5h6", "M9 9h6"],
     pages: [
       { label: "About", path: "/about/", description: "Our story, values, and mission" },
       { label: "History", path: "/about/history/", description: "Over 45 years of competitive swimming" },
@@ -59,7 +56,6 @@
     label: "Club Events",
     description: "Galas, meets and results",
     accentVar: "--color-section-events",
-    svgPaths: ["M3 11v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-11", "M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2", "M3 11h18"],
     pages: [
       { label: "Events & Galas", path: "/events/", description: "Upcoming galas, open meets and club nights" },
       { label: "Results", path: "/results/", description: "Recent competition and gala results", badge: "new" }
@@ -70,7 +66,6 @@
     label: "Members",
     description: "For current members",
     accentVar: "--color-section-members",
-    svgPaths: ["M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", "M9 10h6", "M9 14h6"],
     pages: [
       { label: "Pay Fees", path: "/payments/", description: "Set up Direct Debit via GoCardless" },
       { label: "Resources", path: "/resources/", description: "Downloads, documents and useful links", badge: "new" },
@@ -82,7 +77,6 @@
     label: "Join Phoenix",
     description: "Become a member",
     accentVar: "--color-section-join",
-    svgPaths: ["M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", "M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", "M23 21v-2a4 4 0 0 0-3-3.87", "M16 3.13a4 4 0 0 1 0 7.75"],
     pages: [
       { label: "Request a Trial", path: "/join/", description: "Book your free taster session" },
       { label: "FAQs", path: "/faqs/", description: "Common questions answered" },
@@ -95,9 +89,14 @@
     {% for section in sections %}
       <li
         class="relative" style="--section-accent: var({{ section.accentVar }});">
-        <!-- Top-Level Button: Label + Chevron Only (no icon) -->
+        <!-- Top-Level Button: Icon (mobile) + Label + Chevron -->
         <button class="nav-section__button flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-inter font-medium transition-all duration-200 hover:bg-white/15 hover:font-semibold max-lg:w-full max-lg:justify-between max-lg:rounded-xl max-lg:bg-transparent max-lg:px-4 max-lg:py-3 max-lg:font-normal max-lg:text-white/80 max-lg:hover:bg-white/10 max-lg:hover:text-white" data-section="{{ section.id }}" aria-expanded="false" aria-label="Toggle {{ section.label }} menu" aria-controls="submenu-{{ section.id }}">
-          <span class="nav-section__label">{{ section.label }}</span>
+          <span class="flex items-center gap-3">
+            <svg class="lg:hidden w-5 h-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true" style="color: var(--section-accent);">
+              <use href="#icon-{{ section.id }}"/>
+            </svg>
+            <span class="nav-section__label">{{ section.label }}</span>
+          </span>
           <!-- Chevron (rotates on expand) -->
           <svg
             class="nav-section__chevron opacity-50 transition-transform duration-200"
@@ -120,7 +119,7 @@
             lg:right-0 lg:top-15 lg:w-screen lg:bg-white lg:text-primary lg:shadow-xl lg:ml-[calc(-50vw+50%)] lg:max-h-none
             lg:overflow-visible"
           role="menu">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
+          <div class="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 py-2">
             <div
               class="flex flex-col lg:flex-row gap-0 lg:gap-10 xl:gap-14">
               <!-- Section Identity (Left) - Desktop Only -->
@@ -128,20 +127,8 @@
                 <div
                   class="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
                   style="background-color: color-mix(in srgb, var(--section-accent) 12%, white);">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    style="color: var(--section-accent);"
-                    aria-hidden="true">
-                    {% for path in section.svgPaths %}
-                      <path d="{{ path }}"/>
-                    {% endfor %}
+                  <svg width="20" height="20" aria-hidden="true" style="color: var(--section-accent);">
+                    <use href="#icon-{{ section.id }}"/>
                   </svg>
                 </div>
                 <p class="text-primary font-montserrat font-black text-sm mb-1">
@@ -153,14 +140,14 @@
               </div>
               <!-- Page Links Grid (Right) -->
               <ul
-                class="flex-1 grid max-lg:flex max-lg:flex-col gap-1 list-none"
+                class="flex-1 grid max-lg:flex max-lg:flex-col list-none"
                 style="grid-template-columns: {% if section.id == 'club' %}repeat(3, 1fr){% elseif section.pages | length <= 3
                   %}repeat(auto-fit, minmax(150px, 1fr)){% else %}repeat(auto-fit, minmax(180px, 1fr)){% endif %};">
                 {% for page in section.pages %}
                   <li>
                     <a
-                      href="{{ page.path }}" class="group max-lg:flex max-lg:flex-row max-lg:items-center max-lg:gap-3 max-lg:px-4 max-lg:py-2.5 max-lg:rounded-lg max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:transition-all max-lg:hover:bg-white/8 max-lg:hover:text-white
-                                                                                                                                           lg:flex lg:flex-col lg:gap-0.5 lg:px-4 lg:py-3 lg:rounded-xl lg:transition-all lg:hover:bg-primary/5">
+                      href="{{ page.path }}" class="group max-lg:flex max-lg:flex-row max-lg:items-center max-lg:gap-2 max-lg:px-2 max-lg:py-1.5 max-lg:rounded-lg max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:transition-all max-lg:hover:bg-white/8 max-lg:hover:text-white
+                                                                                                                                                                                                                   lg:flex lg:flex-col lg:gap-0.5 lg:px-4 lg:py-3 lg:rounded-xl lg:transition-all lg:hover:bg-primary/5">
                       <!-- Mobile dot + label / Desktop: label + badge + description below -->
                       <div class="flex items-center gap-2">
                         <span class="text-sm font-inter font-medium text-primary max-lg:text-sm max-lg:font-normal max-lg:text-white/60

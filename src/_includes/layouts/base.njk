@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/components/navbar.css"/>
   </head>
   <body class="{{ bodyClass | default('') }}">
+    {% include "svg/icons-sprite.svg" %}
     {% include "components/header.njk" %}
     <main class="pt-16 lg:pt-15">
       {{ content | safe }}

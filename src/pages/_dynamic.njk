@@ -39,7 +39,7 @@ permalink: /{{ page.urlPath }}/index.html
   {% set heroTitle = page.title %}
   {% include "components/page-hero.njk" %}
   {% call sectionNav(section.pages, section.accentColor, section.label, "/" + page.urlPath + "/", page.title, section.iconPaths) %}
-  <div class="py-12">
+  <div class="py-12 rich-text">
     {{ page.bodyRichText | renderRichTextAsHtml | safe }}
   </div>
   {% endcall %}
@@ -48,7 +48,7 @@ permalink: /{{ page.urlPath }}/index.html
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <article>
       <h1>{{ page.title }}</h1>
-      <div>{{ page.bodyRichText | renderRichTextAsHtml | safe }}</div>
+      <div class="rich-text">{{ page.bodyRichText | renderRichTextAsHtml | safe }}</div>
       {% if page.childPages.length > 0 %}
         <hr/>
         <h2>Child Pages:</h2>

@@ -29,7 +29,6 @@
   .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
     max-height: 24rem;
     overflow-y: auto;
-    padding-left: 0.75rem;
   }
 
   .nav-submenu .group {

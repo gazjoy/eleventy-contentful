@@ -13,8 +13,9 @@
   const navButtons = document.querySelectorAll("[data-section]");
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("nav-menu");
-  const iconHamburger = document.getElementById("icon-hamburger");
-  const iconClose = document.getElementById("icon-close");
+  const iconHamburger = document.getElementById("menu-icon-open");
+  const iconClose = document.getElementById("menu-icon-close");
+  const header = document.querySelector(".site-header");
 
   // ── Desktop mega-menu interactions ─────────────────────────
   if (navButtons.length > 0) {

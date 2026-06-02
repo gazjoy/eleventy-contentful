@@ -27,7 +27,7 @@ permalink: /events/index.html
           <a href="{{ event.websiteUrl }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a>
         </p>
       {% endif %}
-      {{ event.descriptionRichText | renderRichTextAsHtml | safe }}
+      <div class="rich-text">{{ event.descriptionRichText | renderRichTextAsHtml | safe }}</div>
     </div>
   </div>
 {% endfor %}
