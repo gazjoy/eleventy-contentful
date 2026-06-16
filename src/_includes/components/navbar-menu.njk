@@ -90,7 +90,7 @@
       <li
         class="relative" style="--section-accent: var({{ section.accentVar }});">
         <!-- Top-Level Button: Icon (mobile) + Label + Chevron -->
-        <button class="nav-section__button flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-inter font-medium transition-all duration-200 hover:bg-white/15 hover:font-semibold max-lg:w-full max-lg:justify-between max-lg:rounded-xl max-lg:bg-transparent max-lg:px-4 max-lg:py-3 max-lg:font-normal max-lg:text-white/80 max-lg:hover:bg-white/10 max-lg:hover:text-white" data-section="{{ section.id }}" aria-expanded="false" aria-label="Toggle {{ section.label }} menu" aria-controls="submenu-{{ section.id }}">
+        <button class="nav-section__button flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-inter font-medium transition-all duration-200 hover:bg-white/15 hover:font-semibold" data-section="{{ section.id }}" aria-expanded="false" aria-label="Toggle {{ section.label }} menu" aria-controls="submenu-{{ section.id }}">
           <span class="flex items-center gap-3">
             <svg class="lg:hidden w-5 h-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true" style="color: var(--section-accent);">
               <use href="#icon-{{ section.id }}"/>
@@ -115,10 +115,9 @@
         <!-- Submenu Panel -->
         <div
           id="submenu-{{ section.id }}"
-          class="nav-submenu hidden max-h-0 overflow-hidden transition-[max-height] duration-300 ease-out lg:fixed lg:left-0
-            lg:right-0 lg:top-15 lg:w-screen lg:bg-white lg:text-primary lg:shadow-xl lg:ml-[calc(-50vw+50%)] lg:max-h-none
-            lg:overflow-visible"
+          class="nav-submenu lg:fixed lg:left-0 lg:right-0 lg:top-15 lg:w-screen lg:bg-white lg:text-primary lg:shadow-xl lg:ml-[calc(-50vw+50%)]"
           role="menu">
+          <div class="nav-submenu__inner">
           <div class="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 py-2">
             <div
               class="flex flex-col lg:flex-row gap-0 lg:gap-10 xl:gap-14">
@@ -140,30 +139,21 @@
               </div>
               <!-- Page Links Grid (Right) -->
               <ul
-                class="flex-1 grid max-lg:flex max-lg:flex-col list-none"
+                class="flex-1 grid list-none"
                 style="grid-template-columns: {% if section.id == 'club' %}repeat(3, 1fr){% elseif section.pages | length <= 3
                   %}repeat(auto-fit, minmax(150px, 1fr)){% else %}repeat(auto-fit, minmax(180px, 1fr)){% endif %};">
                 {% for page in section.pages %}
                   <li>
-                    <a
-                      href="{{ page.path }}" class="group max-lg:flex max-lg:flex-row max-lg:items-center max-lg:gap-2 max-lg:px-2 max-lg:py-1.5 max-lg:rounded-lg max-lg:text-sm max-lg:font-normal max-lg:text-white/60 max-lg:transition-all max-lg:hover:bg-white/8 max-lg:hover:text-white
-                                                                                                                                                                                                                   lg:flex lg:flex-col lg:gap-0.5 lg:px-4 lg:py-3 lg:rounded-xl lg:transition-all lg:hover:bg-primary/5">
-                      <!-- Mobile dot + label / Desktop: label + badge + description below -->
+                    <a href="{{ page.path }}" class="nav-link">
                       <div class="flex items-center gap-2">
-                        <span class="text-sm font-inter font-medium text-primary max-lg:text-sm max-lg:font-normal max-lg:text-white/60
-                            max-lg:whitespace-nowrap">
-                          {{ page.label }}
-                        </span>
+                        <span class="nav-link__label">{{ page.label }}</span>
                         {% if page.badge == "new" %}
                           <span class="hidden lg:inline-block px-1.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">
                             New
                           </span>
                         {% endif %}
                       </div>
-                      <!-- Desktop only: description -->
-                      <span class="hidden lg:block text-primary/40 text-xs leading-snug">
-                        {{ page.description }}
-                      </span>
+                      <span class="nav-link__description">{{ page.description }}</span>
                     </a>
                   </li>
                 {% endfor %}
@@ -220,6 +210,7 @@
                 </li>
               </ul>
             {% endif %}
+          </div>
           </div>
         </div>
       </li>

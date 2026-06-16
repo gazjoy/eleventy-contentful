@@ -1,0 +1,478 @@
+---
+title: Fundraising & Sponsorship
+layout: layouts/base.njk
+permalink: /fundraising/index.html
+---
+
+{% from "components/section-nav.njk" import sectionNav %}
+{#
+  Variables:
+    heroSectionLabel  — section identity label
+    heroAccentColor   — pink (#db2777) — the Our Club section colour
+    heroSvgPaths      — Building2 icon paths (icon-club)
+    heroTitle         — page title
+    heroSubtitle      — intro text
+#}
+{% set heroSectionLabel = "Our Club" %}
+{% set heroAccentColor = "#db2777" %}
+{% set heroSvgPaths = [
+  "M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16",
+  "M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2",
+  "M10 12h4",
+  "M10 8h4",
+  "M14 21v-3a2 2 0 0 0-4 0v3"
+] %}
+{% set heroTitle = "Fundraising & Sponsorship" %}
+{% set heroSubtitle = "Every pound raised goes directly back into the club — keeping fees accessible, improving facilities, and supporting our swimmers." %}
+{% include "components/page-hero.njk" %}
+{% set sectionPages = [
+  { label: "About", path: "/about/" },
+  { label: "History", path: "/about/history/" },
+  { label: "Contact", path: "/contact/" },
+  { label: "Committee", path: "/about/committee/" },
+  { label: "Welfare & Concerns", path: "/welfare/" },
+  { label: "Club Policies", path: "/club-policies/" },
+  { label: "Fundraising & Sponsorship", path: "/fundraising/" },
+  { label: "Volunteering", path: "/volunteering/" }
+] %}
+{% call sectionNav(sectionPages, heroAccentColor, heroSectionLabel, page.url, heroTitle, heroSvgPaths) %}
+
+{# ── Ongoing Fundraisers — grey band ──────────────────────── #}
+{# Negative margins negate the lg:pl-8 on the sectionNav content div and the px-4/px-6 on mobile #}
+<section class="bg-[#f5f8fc] -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-ml-8 lg:pl-8 py-12">
+
+  <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Ongoing Fundraisers</p>
+  <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2">Raise money while you live your life</h2>
+  <p class="text-primary/60 max-w-xl text-sm font-inter mt-2 mb-8">These schemes run all year round — sign up once and they work in the background for you.</p>
+
+  <div class="space-y-6 mb-14">
+
+    {# easyfundraising #}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="p-6 sm:p-8 flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+        {# Text #}
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <svg
+                  class="text-secondary"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path d="m17 2 4 4-4 4"/>
+                  <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                  <path d="m7 22-4-4 4-4"/>
+                  <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                </svg>
+                <span class="text-secondary text-xs uppercase tracking-widest font-semibold font-montserrat">Ongoing</span>
+              </div>
+              <h3 class="font-montserrat font-extrabold text-[1.1rem] text-primary">easyfundraising</h3>
+              <p class="text-primary/55 text-sm mt-0.5 font-inter">You shop, brands donate — for free</p>
+            </div>
+            <span class="inline-flex items-center px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold font-inter rounded-full border border-green-200">Free to join</span>
+          </div>
+          <p class="text-primary/65 text-sm leading-relaxed mb-5 font-inter">When you shop online with over 7,000 brands including Amazon, eBay, Tesco, and more, a donation is made to Cannock Phoenix at no extra cost to you. Sign up for free and start raising every time you shop.</p>
+          <a
+            href="https://www.easyfundraising.org.uk/causes/cannockphoenixsc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-[#1a3a5c] text-white text-sm font-inter font-semibold rounded-full transition-colors">
+            Join &amp; start raising
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true">
+              <path d="M15 3h6v6"/>
+              <path d="M10 14 21 3"/>
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            </svg>
+          </a>
+        </div>
+        {# YouTube embed #}
+        <div class="w-full lg:w-80 xl:w-96 shrink-0">
+          <p class="text-primary/50 text-xs uppercase tracking-widest mb-2 font-montserrat font-semibold">How it works</p>
+          <div class="relative w-full rounded-xl overflow-hidden bg-black" style="padding-top: 56.25%;">
+            <iframe
+              class="absolute inset-0 w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/GgFEVPnCBcE"
+              title="easyfundraising explained in 60 seconds"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# South Staffs Lottery #}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+      <div class="p-6 sm:p-8">
+        <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <svg
+                class="text-secondary"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="m17 2 4 4-4 4"/>
+                <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                <path d="m7 22-4-4 4-4"/>
+                <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+              </svg>
+              <span class="text-secondary text-xs uppercase tracking-widest font-semibold font-montserrat">Ongoing</span>
+            </div>
+            <h3 class="font-montserrat font-extrabold text-[1.1rem] text-primary">South Staffs Lottery</h3>
+            <p class="text-primary/55 text-sm mt-0.5 font-inter">Win big, support your local club</p>
+          </div>
+          <span class="inline-flex items-center px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold font-inter rounded-full border border-green-200">£1 per ticket</span>
+        </div>
+        <p class="text-primary/65 text-sm leading-relaxed mb-5 font-inter">Cannock Phoenix Swimming Club is a beneficiary of the South Staffordshire Community Lottery. Buy a ticket for a chance to win big prizes including a £25,000 jackpot — and help raise much-needed funds for the club at the same time.</p>
+        <a
+          href="https://www.southstaffordshirecommunitylottery.co.uk/support/cannock-phoenix-swimming-club"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-[#1a3a5c] text-white text-sm font-inter font-semibold rounded-full transition-colors">
+          Buy a lottery ticket
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M15 3h6v6"/>
+            <path d="M10 14 21 3"/>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+{# ── Grants & Community Schemes — white band ─────────────── #}
+<section class="bg-white py-12">
+
+  <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Grants &amp; Community Schemes</p>
+    <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2">Grants we apply for</h2>
+    <p class="text-primary/60 max-w-xl text-sm font-inter mt-2 mb-8">We actively apply for community grants and funding schemes when they open. Your support — through votes, memberships, and awareness — makes a real difference to our applications.</p>
+
+    <div class="grid sm:grid-cols-3 gap-5">
+
+      {# Tesco #}
+      <div class="bg-[#f5f8fc] rounded-2xl border border-gray-100 p-6 flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <svg
+            class="text-secondary"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M3 22V12a9 9 0 1 1 18 0v10"/>
+            <path d="M3 16h18"/>
+            <path d="M9 22V16"/>
+            <path d="M15 22V16"/>
+          </svg>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-primary/8 text-primary/60 font-medium font-inter">Apply when open</span>
+        </div>
+        <h3 class="font-montserrat font-extrabold text-[0.95rem] text-primary">Tesco Blue Token Scheme</h3>
+        <p class="mt-2 text-primary/60 text-sm leading-relaxed flex-1 font-inter">When Tesco runs its Blue Token Scheme, customers can vote for their chosen local cause. Your votes directly influence how Tesco distributes its community fundraising pot. Keep an eye out for tokens in-store and vote for Cannock Phoenix!</p>
+        <a
+          href="https://www.tescoplc.com/sustainability/communities/community-fundraising/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-1.5 text-secondary hover:text-[#a81818] text-sm font-semibold font-inter transition-colors">
+          Learn about the scheme
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M15 3h6v6"/>
+            <path d="M10 14 21 3"/>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          </svg>
+        </a>
+      </div>
+
+      {# Co-op #}
+      <div class="bg-[#f5f8fc] rounded-2xl border border-gray-100 p-6 flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <svg
+            class="text-secondary"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M3 22V12a9 9 0 1 1 18 0v10"/>
+            <path d="M3 16h18"/>
+            <path d="M9 22V16"/>
+            <path d="M15 22V16"/>
+          </svg>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-primary/8 text-primary/60 font-medium font-inter">Apply when open</span>
+        </div>
+        <h3 class="font-montserrat font-extrabold text-[0.95rem] text-primary">Co-op Local Community Fund</h3>
+        <p class="mt-2 text-primary/60 text-sm leading-relaxed flex-1 font-inter">Co-op members can choose a local cause to support through their membership. Every time a Co-op member buys own-brand products or services, a percentage is donated to their chosen community cause. We've benefitted from this scheme in the past.</p>
+        <a
+          href="https://www.coop.co.uk/causes"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-1.5 text-secondary hover:text-[#a81818] text-sm font-semibold font-inter transition-colors">
+          Visit Co-op causes
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M15 3h6v6"/>
+            <path d="M10 14 21 3"/>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          </svg>
+        </a>
+      </div>
+
+      {# Lions Club #}
+      <div class="bg-[#f5f8fc] rounded-2xl border border-gray-100 p-6 flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <svg
+            class="text-secondary"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M3 22V12a9 9 0 1 1 18 0v10"/>
+            <path d="M3 16h18"/>
+            <path d="M9 22V16"/>
+            <path d="M15 22V16"/>
+          </svg>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-primary/8 text-primary/60 font-medium font-inter">Ongoing relationship</span>
+        </div>
+        <h3 class="font-montserrat font-extrabold text-[0.95rem] text-primary">Lions Club</h3>
+        <p class="mt-2 text-primary/60 text-sm leading-relaxed flex-1 font-inter">The Lions Club has previously contributed to Cannock Phoenix, helping us acquire heart rate monitors for our coaching programme. We continue to maintain a positive relationship with our local Lions Club for future grant opportunities.</p>
+      </div>
+
+    </div>
+
+</section>
+
+{# ── One-off Fundraisers — grey band ─────────────────────── #}
+<section class="bg-[#f5f8fc] -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-ml-8 lg:pl-8 py-12">
+
+  <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">One-off Fundraisers</p>
+    <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2">Targeted campaigns</h2>
+    <p class="text-primary/60 max-w-xl text-sm font-inter mt-2 mb-8">From time to time we run specific campaigns to fund a particular piece of equipment or initiative.</p>
+
+    {# Operation GoPro #}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
+      <div class="flex items-center gap-2 mb-2">
+        <svg
+          class="text-secondary"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M20 12V22H4V12"/>
+          <path d="M22 7H2v5h20V7z"/>
+          <path d="M12 22V7"/>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+        </svg>
+        <span class="text-xs text-primary/50 font-inter">Crowdfunder UK</span>
+        <span class="text-xs px-2.5 py-0.5 rounded-full bg-green-50 text-green-700 border border-green-200 font-semibold font-inter">Completed</span>
+      </div>
+      <h3 class="font-montserrat font-extrabold text-[1.05rem] text-primary">Operation GoPro!</h3>
+      <p class="mt-2 text-primary/60 text-sm leading-relaxed font-inter">Cannock Phoenix wanted to take their swimmers to the next level. Operation GoPro aimed to equip the club with GoPro cameras to help improve swimmer technique through visual coaching — allowing coaches and swimmers to review and refine their strokes.</p>
+      <a
+        href="https://www.crowdfunder.co.uk/p/operation-gopro"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-[#1a3a5c] text-white text-sm font-inter font-semibold rounded-full transition-colors">
+        View the campaign
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M15 3h6v6"/>
+          <path d="M10 14 21 3"/>
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        </svg>
+      </a>
+    </div>
+
+</section>
+
+{# ── Success Stories — white band ────────────────────────── #}
+<section class="bg-white py-12">
+
+  <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Success Stories</p>
+    <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2">Fundraising that made a difference</h2>
+    <p class="text-primary/60 max-w-xl text-sm font-inter mt-2 mb-8">Here's what your support has helped us achieve.</p>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+
+      <div class="bg-[#f5f8fc] rounded-2xl border border-gray-100 p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg
+            class="text-secondary"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+          </svg>
+          <span class="text-xs text-primary/50 font-inter">Lions Club Contribution</span>
+        </div>
+        <h3 class="font-montserrat font-extrabold text-[0.95rem] text-primary">Heart Rate Monitors</h3>
+        <p class="mt-2 text-primary/60 text-sm leading-relaxed font-inter">Thanks to a generous contribution from our local Lions Club, we were able to purchase heart rate monitors for our coaching programme, giving coaches better insight into swimmer fitness and effort levels during training.</p>
+      </div>
+
+      <div class="bg-[#f5f8fc] rounded-2xl border border-gray-100 p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg
+            class="text-secondary"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+          </svg>
+          <span class="text-xs text-primary/50 font-inter">Crowdfunder Campaign</span>
+        </div>
+        <h3 class="font-montserrat font-extrabold text-[0.95rem] text-primary">Operation GoPro!</h3>
+        <p class="mt-2 text-primary/60 text-sm leading-relaxed font-inter">Our Crowdfunder campaign successfully raised funds to purchase GoPro cameras, enabling our coaches to film and review swimmer technique — a significant step forward in the quality of coaching we can offer.</p>
+      </div>
+
+    </div>
+
+</section>
+{% endcall %}
+
+{# ── Sponsorship CTA — full width ──────────────────────────── #}
+<section class="bg-primary py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="w-14 h-14 bg-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
+      <svg
+        class="text-secondary"
+        width="26"
+        height="26"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M11 12H3"/>
+        <path d="M16 6H3"/>
+        <path d="M16 18H3"/>
+        <path d="M20 9v6"/>
+        <path d="M23 12h-6"/>
+      </svg>
+    </div>
+    <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Sponsorship</p>
+    <h2 class="font-montserrat font-extrabold text-white mt-2" style="font-size: clamp(1.4rem, 3vw, 2rem);">Interested in sponsoring Cannock Phoenix?</h2>
+    <p class="mt-4 text-white/65 max-w-2xl mx-auto leading-relaxed font-inter">We're developing formal sponsorship opportunities for local businesses who want to invest in grassroots sport and align their brand with a welcoming, family-focused club. Whether it's kit, galas, or our annual awards evening — we'd love to explore what might work for you.</p>
+    <p class="mt-3 text-white/50 max-w-xl mx-auto text-sm font-inter">Sponsorship packages are coming soon. In the meantime, please get in touch with our Club Development lead to register your interest.</p>
+    <div class="mt-8">
+      <a
+        href="mailto:committee@cannockswimmingclub.org?subject=Sponsorship%20Enquiry"
+        class="inline-flex items-center gap-2 px-7 py-3.5 bg-secondary hover:bg-[#a81818] text-white font-inter font-semibold rounded-full transition-colors">
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <rect width="20" height="16" x="2" y="4" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        Register your interest
+      </a>
+    </div>
+  </div>
+</section>

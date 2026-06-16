@@ -1,0 +1,254 @@
+---
+title: FAQs
+layout: layouts/base.njk
+permalink: /faqs/index.html
+---
+
+{% from "components/section-nav.njk" import sectionNav %}
+
+{#
+  Variables:
+    heroSectionLabel  — section identity label
+    heroAccentColor   — cyan (#0891b2) — the Join section colour
+    heroSvgPaths      — UserPlus icon paths from icons-sprite.svg #icon-join
+    heroTitle         — page title
+    heroSubtitle      — intro text
+#}
+{% set heroSectionLabel = "Join Phoenix" %}
+{% set heroAccentColor = "#0891b2" %}
+{% set heroSvgPaths = [
+  "M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2",
+  "M4.5 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0",
+  "M20 8v6",
+  "M23 11h-6"
+] %}
+{% set heroTitle = "FAQs" %}
+{% set heroSubtitle = "Answers to the questions parents ask most." %}
+
+{% include "components/page-hero.njk" %}
+
+{% set sectionPages = [
+  { label: "Request a Trial", path: "/join/" },
+  { label: "FAQs", path: "/faqs/" },
+  { label: "Membership Fees", path: "/membership-fees/" }
+] %}
+
+{% call sectionNav(sectionPages, heroAccentColor, "Join Phoenix", page.url, heroTitle, heroSvgPaths) %}
+  <section class="py-12">
+
+    <div class="space-y-10">
+
+      {# ── Getting Started ─────────────────────────────────────── #}
+      <div>
+        <h2 class="text-primary font-montserrat font-extrabold text-lg mb-4">Getting Started</h2>
+        <div class="space-y-2">
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">How do I join Cannock Phoenix?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              The easiest way is to request a free trial via our Join Phoenix page. We'll arrange a taster session and if you're happy, our Membership Secretary will guide you through joining.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">Does my child need to be able to swim already?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              No — our Learn to Swim programme starts from complete beginners (Stage 1). Older children and complete non-swimmers are very welcome. For the Competitive Squad, swimmers need to be able to swim 25 metres confidently in at least two strokes.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">What age can children join?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Learn to Swim takes children from 3 years old. The Competitive Squad generally begins from age 8, subject to ability assessment. We are also launching a Masters section for adults aged 18 and over.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">Is there a waiting list?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Lesson spaces are limited and some stages do have waiting lists during busy periods. Contact our Membership Secretary to check current availability.
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      {# ── Fees & Payments ─────────────────────────────────────── #}
+      <div>
+        <h2 class="text-primary font-montserrat font-extrabold text-lg mb-4">Fees &amp; Payments</h2>
+        <div class="space-y-2">
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">How much does it cost?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Fees vary depending on programme and number of sessions. Full fee information is available on our Membership Fees page. We also offer a sibling discount.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">How do I pay?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Monthly fees are collected by Direct Debit via GoCardless, a secure FCA-regulated payment provider. You can set up your Direct Debit on our Payments page. One-off payments such as gala fees are handled separately.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">Are there any additional costs?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Gala entry fees apply to competitive swimmers (typically £3–8 per event per meet). Club kit is encouraged but not required initially. There is also an annual Swim England registration fee.
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      {# ── Sessions & Training ──────────────────────────────────── #}
+      <div>
+        <h2 class="text-primary font-montserrat font-extrabold text-lg mb-4">Sessions &amp; Training</h2>
+        <div class="space-y-2">
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">Where do you train?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              All sessions take place at Cannock Chase Leisure Centre, Auctioneers Way, Cannock, WS11 1AB.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">How many sessions per week?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Learn to Swim swimmers typically attend 1–2 sessions per week. Competitive Squad swimmers train 2–4 times per week depending on their squad level and goals.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">What should my child wear and bring?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              A well-fitting swimsuit or swim shorts (no long board shorts in competitive lanes), goggles, and a swim hat. A water bottle and a dry bag for kit are recommended.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">Do sessions run during school holidays?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Some sessions run during school holidays and some don't. The current holiday schedule is confirmed at the start of each term via Swim Manager and email.
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      {# ── Welfare & Safety ────────────────────────────────────── #}
+      <div>
+        <h2 class="text-primary font-montserrat font-extrabold text-lg mb-4">Welfare &amp; Safety</h2>
+        <div class="space-y-2">
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">Are your teachers and coaches DBS checked?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Yes — all CPSC teaching and coaching staff hold current enhanced DBS certificates. All coaches are also Swim England qualified.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">What is your safeguarding policy?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              The safety and welfare of every child is our absolute priority. Our full safeguarding policy is available on the Welfare &amp; Policies page. Our Welfare Officers are Kerry Purnell and Claire Bond.
+            </div>
+          </details>
+
+          <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+              <span class="font-inter font-semibold text-sm text-primary">Can parents watch sessions?</span>
+              <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0 transition-transform duration-200">
+                <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+              </div>
+            </summary>
+            <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+              Parents are welcome to watch sessions from designated spectator areas. Photography is subject to our photography and social media policy.
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+    </div>
+
+    {# ── Bottom CTA strip ────────────────────────────────────── #}
+    <div class="mt-12 bg-[#f5f8fc] rounded-2xl p-6 border border-primary/8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-primary/65 text-sm font-inter">Still have a question? We're happy to help.</p>
+      <div class="shrink-0">
+        <a href="/contact/" class="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-slate-700 text-white text-sm font-inter font-semibold rounded-full transition-colors">
+          Contact us →
+        </a>
+      </div>
+    </div>
+
+  </section>
+{% endcall %}

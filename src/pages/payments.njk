@@ -1,8 +1,565 @@
---- 
+---
+title: Club Fees & Payments
 layout: layouts/base.njk
 permalink: /payments/index.html
-
 ---
 
-<h1>Payments</h1>
-<div>content to add</div>
+{% from "components/section-nav.njk" import sectionNav %}
+{#
+  Variables:
+    heroSectionLabel  — "Members"
+    heroAccentColor   — amber (#ca8a04) — the Members section colour
+    heroSvgPaths      — Key icon paths from icons-sprite.svg #icon-members
+    heroTitle         — page title
+    heroSubtitle      — intro text
+#}
+{% set heroSectionLabel = "Members" %}
+{% set heroAccentColor = "#ca8a04" %}
+{% set heroSvgPaths = [
+  "m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4",
+  "m21 2-9.6 9.6",
+  "M 2 15.5 a 5.5 5.5 0 1 0 11 0 a 5.5 5.5 0 1 0 -11 0"
+] %}
+{% set heroTitle = "Club Fees & Payments" %}
+{% set heroSubtitle = "Monthly fees collected securely by Direct Debit — no card details stored, no hidden costs." %}
+{% set heroExtra %}<div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/15 border border-emerald-400/30 rounded-full">
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="text-emerald-400"
+    aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/> </svg>
+  <span class="text-emerald-300 text-xs uppercase tracking-widest font-inter font-semibold">Secure Payments · GoCardless</span>
+</div>
+{% endset %}
+{% include "components/page-hero.njk" %}
+{% set sectionPages = [
+  { label: "Pay Fees", path: "/payments/" },
+  { label: "Resources", path: "/resources/" },
+  { label: "Swim Manager", path: "/swim-manager/" }
+] %}
+{% set gcUrl = "https://pay.gocardless.com/billing/static/collect-customer-details?id=BRF01KPTPWFM20K2R9GBFWRRQ40RD0S5&initial=%2Fcollect-customer-details" %}
+{% call sectionNav(sectionPages, heroAccentColor, "Members", page.url, "Pay Fees", heroSvgPaths) %}
+{# ── DIRECT DEBIT SETUP ─────────────────────────────────────── #}
+<section class="py-16 border-b border-gray-100">
+  <div class="mb-12">
+    <span class="text-secondary text-sm uppercase tracking-widest font-montserrat font-semibold">Monthly Membership Fees</span>
+    <h2 class="mt-2 font-montserrat font-extrabold text-primary" style="font-size: clamp(1.5rem, 3vw, 2.1rem);">Set up your
+      Direct Debit</h2>
+    <p class="mt-3 text-primary/60 max-w-xl text-sm leading-relaxed font-inter">
+      Monthly fees are collected securely via GoCardless — the UK's leading Direct Debit provider, regulated by the Financial
+      Conduct Authority.
+    </p>
+  </div>
+  <div
+    class="grid lg:grid-cols-5 gap-10 items-start">
+    {# How it works #}
+    <div class="lg:col-span-3 space-y-6">
+      <h3 class="font-montserrat font-bold text-primary text-base mb-6">How it works</h3>
+      <div class="flex gap-5">
+        <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shrink-0 mt-0.5 font-montserrat
+          font-extrabold text-sm">
+        1</div>
+        <div>
+          <p class="font-inter font-semibold text-primary text-sm">Click the button below</p>
+          <p class="mt-1 text-primary/60 text-sm leading-relaxed font-inter">You'll be taken to GoCardless — a UK-regulated
+            payment provider. This is the same company used by thousands of schools, councils, and sports clubs.</p>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shrink-0 mt-0.5 font-montserrat
+          font-extrabold text-sm">
+        2</div>
+        <div>
+          <p class="font-inter font-semibold text-primary text-sm">Enter your bank details securely</p>
+          <p class="mt-1 text-primary/60 text-sm leading-relaxed font-inter">GoCardless collects your bank details via their
+            encrypted, FCA-authorised platform. Cannock Phoenix never sees or stores your banking information.</p>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shrink-0 mt-0.5 font-montserrat
+          font-extrabold text-sm">
+        3</div>
+        <div>
+          <p class="font-inter font-semibold text-primary text-sm">We handle the rest</p>
+          <p class="mt-1 text-primary/60 text-sm leading-relaxed font-inter">Monthly fees are collected automatically on the
+            scheduled date. You'll receive advance notice of any changes — and you can cancel at any time through your bank.</p>
+        </div>
+      </div>
+      {# GoCardless trust note #}
+      <div class="mt-6 flex items-start gap-3 bg-[#f5f8fc] rounded-xl p-4 border border-primary/8">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="text-emerald-600 shrink-0 mt-0.5"
+          aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <p class="text-primary/65 text-sm leading-relaxed font-inter">
+          <span class="text-primary font-semibold">GoCardless</span>
+          is authorised and regulated by the Financial Conduct Authority (FCA No. 597190). They process over £30 billion in
+          payments each year for 90,000+ organisations. Your bank details go directly to them — Cannock Phoenix never sees,
+          handles, or stores your banking information at any point.
+        </p>
+      </div>
+    </div>
+    {# CTA Card #}
+    <div class="lg:col-span-2">
+      <div
+        class="bg-primary rounded-3xl p-8 text-white shadow-2xl shadow-primary/20">
+        {# Secure badge #}
+        <div class="flex items-center gap-2 mb-6">
+          <div class="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-emerald-400"
+              aria-hidden="true">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <span class="text-emerald-300 text-xs uppercase tracking-wider font-inter font-semibold">Secure setup</span>
+        </div>
+        <h3 class="text-white font-montserrat font-extrabold text-xl">Monthly Direct Debit</h3>
+        <p class="mt-2 text-white/60 text-sm leading-relaxed font-inter">
+          Click below to set up your recurring monthly payment. You'll be taken directly to GoCardless's secure hosted page.
+        </p>
+        <ul class="mt-6 space-y-2.5">
+          <li class="flex items-center gap-2.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-emerald-400 shrink-0"
+              aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+            <span class="text-white/75 text-sm font-inter">Takes less than 2 minutes</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-emerald-400 shrink-0"
+              aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+            <span class="text-white/75 text-sm font-inter">No card details required</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-emerald-400 shrink-0"
+              aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+            <span class="text-white/75 text-sm font-inter">Fully protected by the Direct Debit Guarantee</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-emerald-400 shrink-0"
+              aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+            <span class="text-white/75 text-sm font-inter">Cancel at any time through your bank</span>
+          </li>
+        </ul>
+        <a href="{{ gcUrl }}" target="_blank" rel="noopener noreferrer" class="mt-8 w-full flex items-center justify-center gap-2.5 px-6 py-4 bg-emerald-500 hover:bg-emerald-400 text-white rounded-2xl transition-colors shadow-lg shadow-emerald-900/30 font-inter font-bold text-sm">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Set Up Direct Debit
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="opacity-70"
+            aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+        <div class="mt-3 flex items-center justify-center gap-1.5">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-white/30"
+            aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <p class="text-center text-white/35 leading-snug font-inter" style="font-size: 0.68rem;">
+            Secured by GoCardless · Protected by the Direct Debit Guarantee · FCA regulated
+          </p>
+        </div>
+      </div>
+      <p class="mt-5 text-center text-primary/50 text-xs font-inter">
+        Questions about fees?
+        <a
+          href="mailto:membership@cannockswimmingclub.org"
+          class="text-secondary hover:text-secondary/80 transition-colors underline underline-offset-2">Contact the Membership
+          Secretary</a>
+      </p>
+    </div>
+  </div>
+</section>
+{# ── DIRECT DEBIT GUARANTEE ─────────────────────────────────── #}
+<section class="py-16 border-b border-gray-100">
+  <div class="grid lg:grid-cols-5 gap-12 items-start">
+    <div class="lg:col-span-2">
+      <span class="text-secondary text-sm uppercase tracking-widest font-montserrat font-semibold">Your Protection</span>
+      <h2
+        class="mt-2 font-montserrat font-extrabold text-primary"
+        style="font-size: clamp(1.4rem, 2.5vw, 1.8rem); line-height: 1.2;">The Direct Debit Guarantee</h2>
+      <p class="mt-4 text-primary/60 text-sm leading-relaxed font-inter">
+        Direct Debit is one of the most secure payment methods available in the UK, backed by a formal guarantee scheme accepted
+        by all UK banks and building societies.
+      </p>
+      <div class="mt-6 inline-flex items-center gap-3 bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="text-emerald-600 shrink-0"
+          aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <div>
+          <p class="text-primary text-sm font-inter font-bold">Guaranteed by your bank</p>
+          <p class="text-primary/50 text-xs mt-0.5 font-inter">Full refunds if anything goes wrong</p>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-span-3 space-y-3">
+      <div class="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100">
+        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-emerald-600"
+            aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+        </div>
+        <p class="text-primary/70 text-sm leading-relaxed font-inter">Payments are protected by the UK Direct Debit Guarantee
+          scheme — one of the most secure payment methods available.</p>
+      </div>
+      <div class="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100">
+        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-emerald-600"
+            aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+        </div>
+        <p class="text-primary/70 text-sm leading-relaxed font-inter">If a payment is ever taken in error, your bank must refund
+          you immediately and in full — no questions asked.</p>
+      </div>
+      <div class="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100">
+        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-emerald-600"
+            aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+        </div>
+        <p class="text-primary/70 text-sm leading-relaxed font-inter">You will always receive at least 3 working days' advance
+          notice of any change to the amount or date.</p>
+      </div>
+      <div class="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100">
+        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-emerald-600"
+            aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+        </div>
+        <p class="text-primary/70 text-sm leading-relaxed font-inter">You can cancel your Direct Debit at any time by contacting
+          your bank or building society.</p>
+      </div>
+      <div class="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm border border-gray-100">
+        <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-emerald-600"
+            aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/> </svg>
+        </div>
+        <p class="text-primary/70 text-sm leading-relaxed font-inter">The Direct Debit Guarantee is offered by all banks and
+          building societies that accept Direct Debit instructions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{# ── PAYMENT FAQs ───────────────────────────────────────────── #}
+<section class="py-16">
+  <div class="mb-10">
+    <span class="text-secondary text-sm uppercase tracking-widest font-montserrat font-semibold">Common Questions</span>
+    <h2 class="mt-2 font-montserrat font-extrabold text-primary" style="font-size: clamp(1.4rem, 3vw, 2rem);">Payment FAQs</h2>
+  </div>
+  <div class="space-y-2">
+    <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+        <span class="font-inter font-semibold text-sm text-primary">Is it safe to set up a Direct Debit through this link?</span>
+        <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0
+            transition-transform duration-200">
+          <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/> </svg>
+        </div>
+      </summary>
+      <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+        Yes — completely. The link goes directly to GoCardless, an FCA-authorised payment provider trusted by 90,000+
+        organisations including NHS trusts, councils, and major charities. GoCardless uses bank-level 256-bit SSL encryption.
+        Cannock Phoenix never sees your bank account number or sort code.
+      </div>
+    </details>
+    <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+        <span class="font-inter font-semibold text-sm text-primary">How much will I be charged each month?</span>
+        <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0
+            transition-transform duration-200">
+          <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/> </svg>
+        </div>
+      </summary>
+      <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+        Monthly fees vary depending on which programme your child is enrolled in. Your fee will be confirmed by the club before
+        your Direct Debit is activated. If you're unsure, please contact the Membership Secretary before setting up.
+      </div>
+    </details>
+    <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+        <span class="font-inter font-semibold text-sm text-primary">When will payments be taken?</span>
+        <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0
+            transition-transform duration-200">
+          <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/> </svg>
+        </div>
+      </summary>
+      <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+        Payments are collected monthly on a scheduled date agreed with you. You'll receive at least 3 days' notice before any
+        payment is taken or changed.
+      </div>
+    </details>
+    <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+        <span class="font-inter font-semibold text-sm text-primary">Can I cancel my Direct Debit?</span>
+        <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0
+            transition-transform duration-200">
+          <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/> </svg>
+        </div>
+      </summary>
+      <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+        Yes. You can cancel at any time by contacting your bank or building society directly. Please also let the club know so
+        we can update our records — contact the Membership Secretary via the Committee page.
+      </div>
+    </details>
+    <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+        <span class="font-inter font-semibold text-sm text-primary">What if a payment is taken incorrectly?</span>
+        <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0
+            transition-transform duration-200">
+          <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/> </svg>
+        </div>
+      </summary>
+      <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+        Under the Direct Debit Guarantee, your bank must refund you immediately and in full if any payment is taken in error.
+        You can also contact the club and we will investigate promptly.
+      </div>
+    </details>
+    <details class="faq-item rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer bg-white list-none">
+        <span class="font-inter font-semibold text-sm text-primary">I need to update my bank details — what do I do?</span>
+        <div class="chevron w-7 h-7 rounded-full bg-primary/8 text-primary/50 flex items-center justify-center shrink-0
+            transition-transform duration-200">
+          <svg width="14" height="14" aria-hidden="true"><use href="#icon-chevron-down"/> </svg>
+        </div>
+      </summary>
+      <div class="bg-white border-t border-primary/8 px-5 py-4 text-primary/70 text-sm leading-relaxed font-inter">
+        Simply follow the GoCardless setup link again to create a new mandate. Your old one will be replaced. If you have any
+        difficulty, contact us at
+        <a href="mailto:treasurer@cannockswimmingclub.org" class="underline underline-offset-2 text-secondary">
+        treasurer@cannockswimmingclub.org</a>
+        and we'll help you through it.
+      </div>
+    </details>
+  </div>
+  <div class="mt-10 text-center">
+    <p class="text-primary/50 text-sm mb-4 font-inter">Still have a question about payments?</p>
+    <a
+      href="mailto:treasurer@cannockswimmingclub.org"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-full transition-colors
+        text-sm font-inter font-semibold">
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <rect width="20" height="16" x="2" y="4" rx="2"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+      Email the Treasurer
+    </a>
+  </div>
+</section>
+{% endcall %}
+{# ── BOTTOM CTA STRIP ──────────────────────────────────────────── #}
+<section class="bg-primary py-14">
+  <div class="max-w-2xl mx-auto px-4 text-center">
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="text-emerald-400 mx-auto mb-4"
+      aria-hidden="true">
+      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+    <h2 class="text-white font-montserrat font-extrabold" style="font-size: clamp(1.3rem, 3vw, 1.8rem);">Ready to set up
+      your Direct Debit?</h2>
+    <p class="mt-3 text-white/60 text-sm leading-relaxed font-inter">
+      It takes under 2 minutes. You'll be redirected to GoCardless's secure, FCA-regulated platform.
+    </p>
+    <a href="{{ gcUrl }}" target="_blank" rel="noopener noreferrer" class="mt-7 inline-flex items-center gap-2.5 px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-white rounded-full transition-colors shadow-lg shadow-emerald-900/30 font-inter font-bold">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      Set Up Direct Debit
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="opacity-70"
+        aria-hidden="true">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        <polyline points="15 3 21 3 21 9"/>
+        <line x1="10" y1="14" x2="21" y2="3"/>
+      </svg>
+    </a>
+    <p class="mt-4 text-white/30 text-xs font-inter">
+      Protected by the Direct Debit Guarantee · Powered by GoCardless · FCA regulated
+    </p>
+    <div class="mt-8 pt-8 border-t border-white/10">
+      <p class="text-white/40 text-xs font-inter">
+        Not yet a member?
+        <a href="/learn-to-swim/" class="text-white/60 hover:text-white transition-colors underline underline-offset-2">Request
+          a free trial</a>
+        · Questions?
+        <a href="/about/committee/" class="text-white/60 hover:text-white transition-colors underline underline-offset-2">
+        Contact the committee</a>
+      </p>
+    </div>
+  </div>
+</section>

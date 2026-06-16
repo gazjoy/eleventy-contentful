@@ -1,0 +1,308 @@
+---
+title: Volunteering
+layout: layouts/base.njk
+permalink: /volunteering/index.html
+---
+
+{% from "components/section-nav.njk" import sectionNav %}
+{% set heroSectionLabel = "Our Club" %}
+{% set heroAccentColor = "#db2777" %}
+{% set heroSvgPaths = [
+  "M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16",
+  "M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2",
+  "M10 12h4",
+  "M10 8h4",
+  "M14 21v-3a2 2 0 0 0-4 0v3"
+] %}
+{% set heroTitle = "Volunteering" %}
+{% set heroSubtitle = "Cannock Phoenix runs entirely on the goodwill of its volunteers. Whether you have an hour or a day, every bit of help makes a real difference." %}
+{% include "components/page-hero.njk" %}
+{% set sectionPages = [
+  { label: "About", path: "/about/" },
+  { label: "History", path: "/about/history/" },
+  { label: "Contact", path: "/contact/" },
+  { label: "Committee", path: "/about/committee/" },
+  { label: "Welfare & Concerns", path: "/welfare/" },
+  { label: "Club Policies", path: "/club-policies/" },
+  { label: "Fundraising & Sponsorship", path: "/fundraising/" },
+  { label: "Volunteering", path: "/volunteering/" }
+] %}
+{% call sectionNav(sectionPages, heroAccentColor, heroSectionLabel, page.url, heroTitle, heroSvgPaths) %}
+
+{# ── Why it matters — white ───────────────────────────────── #}
+<section class="bg-white py-12">
+  <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Why it matters</p>
+  <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2 leading-tight">The club can't run without you</h2>
+  <p class="mt-4 text-primary/70 leading-relaxed max-w-2xl font-inter">As a registered non-profit, Cannock Phoenix has no paid staff. Every gala that runs, every session that happens, every swimmer that progresses is made possible by the volunteers who give their time. Many of our most committed volunteers are parents who started by simply helping at their child's first gala — and never looked back!</p>
+
+  <div class="mt-10 grid sm:grid-cols-3 gap-5">
+
+    <div class="bg-[#f5f8fc] rounded-2xl p-6 border border-gray-100">
+      <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center mb-4">
+        <svg
+          class="text-secondary"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M11 12H3"/>
+          <path d="M16 6H3"/>
+          <path d="M16 18H3"/>
+          <path d="M20 9v6"/>
+          <path d="M23 12h-6"/>
+        </svg>
+      </div>
+      <p class="font-montserrat font-bold text-[0.9rem] text-primary">No paid staff</p>
+      <p class="mt-2 text-primary/60 text-sm leading-relaxed font-inter">Cannock Phoenix is a registered non-profit with no paid employees. Every gala, every session, every swimmer's progress is made possible entirely by volunteers.</p>
+    </div>
+
+    <div class="bg-[#f5f8fc] rounded-2xl p-6 border border-gray-100">
+      <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center mb-4">
+        <svg
+          class="text-secondary"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <p class="font-montserrat font-bold text-[0.9rem] text-primary">Rewarding &amp; social</p>
+      <p class="mt-2 text-primary/60 text-sm leading-relaxed font-inter">You'll be part of a passionate community, watch young people develop, and know that your time directly improves opportunities for every child in the club.</p>
+    </div>
+
+    <div class="bg-[#f5f8fc] rounded-2xl p-6 border border-gray-100">
+      <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center mb-4">
+        <svg
+          class="text-secondary"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M17 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <p class="font-montserrat font-bold text-[0.9rem] text-primary">Training &amp; support given</p>
+      <p class="mt-2 text-primary/60 text-sm leading-relaxed font-inter">You don't need to arrive with any specific skills. The club and Swim England provide all the training you need — whether that's timing systems, safeguarding, or committee governance.</p>
+    </div>
+
+  </div>
+</section>
+
+{# ── Volunteering roles — grey ─────────────────────────────── #}
+<section class="bg-[#f5f8fc] -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-ml-8 lg:pl-8 py-12">
+  <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Ways to help</p>
+  <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2">Volunteering roles</h2>
+  <p class="mt-3 text-primary/60 max-w-xl text-sm leading-relaxed font-inter">Whether you can commit to a regular role or just want to help out occasionally, there's a place for you at Cannock Phoenix. No experience is necessary for most roles — just enthusiasm and a willingness to help.</p>
+
+  <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+      <div class="w-11 h-11 bg-primary/5 rounded-xl flex items-center justify-center mb-4">
+        <svg
+          class="text-secondary"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+      </div>
+      <h3 class="font-montserrat font-bold text-[0.95rem] text-primary">Official</h3>
+      <p class="mt-1 text-secondary text-xs uppercase tracking-wider font-semibold font-inter">Gala days</p>
+      <p class="mt-3 text-primary/60 text-sm leading-relaxed font-inter">Operate the timing systems at galas — no experience needed, full training provided by Swim England. One of the most vital roles at any competition, and a great way to see the sport up close.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+      <div class="w-11 h-11 bg-primary/5 rounded-xl flex items-center justify-center mb-4">
+        <svg
+          class="text-secondary"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <h3 class="font-montserrat font-bold text-[0.95rem] text-primary">Committee Member</h3>
+      <p class="mt-1 text-secondary text-xs uppercase tracking-wider font-semibold font-inter">Monthly meetings</p>
+      <p class="mt-3 text-primary/60 text-sm leading-relaxed font-inter">Help steer the club as a trustee or committee member. Roles include Chair, Secretary, Treasurer and general members. A fantastic opportunity to shape the direction of the club.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+      <div class="w-11 h-11 bg-primary/5 rounded-xl flex items-center justify-center mb-4">
+        <svg
+          class="text-secondary"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+          <rect width="6" height="4" x="9" y="3" rx="1" ry="1"/>
+          <path d="M9 12h6"/>
+          <path d="M9 16h3"/>
+        </svg>
+      </div>
+      <h3 class="font-montserrat font-bold text-[0.95rem] text-primary">Team Manager</h3>
+      <p class="mt-1 text-secondary text-xs uppercase tracking-wider font-semibold font-inter">Gala days</p>
+      <p class="mt-3 text-primary/60 text-sm leading-relaxed font-inter">Co-ordinate entries, warm-ups and event running order at home and away galas. Great for organised people who enjoy a busy day and thrive on keeping things running smoothly.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+      <div class="w-11 h-11 bg-primary/5 rounded-xl flex items-center justify-center mb-4">
+        <svg
+          class="text-secondary"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </div>
+      <h3 class="font-montserrat font-bold text-[0.95rem] text-primary">General Helper</h3>
+      <p class="mt-1 text-secondary text-xs uppercase tracking-wider font-semibold font-inter">Ad hoc</p>
+      <p class="mt-3 text-primary/60 text-sm leading-relaxed font-inter">From setting up pool lanes to running the tuck shop — there's always something that needs doing. Any amount of time is hugely appreciated and no prior experience is needed.</p>
+    </div>
+
+  </div>
+
+  {# No experience note #}
+  <div class="mt-8 flex items-start gap-3 bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+    <svg
+      class="text-emerald-600 shrink-0 mt-0.5"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true">
+      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+      <path d="m9 12 2 2 4-4"/>
+    </svg>
+    <p class="text-primary/65 text-sm leading-relaxed font-inter"><span class="text-primary font-semibold">No experience necessary.</span> All officials receive free Swim England training and a licence. Committee members are supported through induction and mentoring. The club will cover any reasonable costs associated with volunteering.</p>
+  </div>
+</section>
+
+{# ── Officials pathway — white ─────────────────────────────── #}
+<section class="bg-white py-12">
+  <div class="grid lg:grid-cols-2 gap-10 items-start">
+    <div>
+      <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Officials programme</p>
+      <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2 leading-tight">Become a qualified official</h2>
+      <div class="mt-4 inline-flex items-center gap-3 bg-[#f5f8fc] rounded-xl px-4 py-3 border border-gray-100">
+        <img
+          src="https://d1s9j44aio5gjs.cloudfront.net/2017/02/Swim_England_500x159px.gif"
+          alt="Swim England"
+          class="h-7 w-auto"
+          loading="lazy">
+        <span class="text-primary/55 text-xs leading-tight font-inter">Training delivered in partnership<br>with Swim England</span>
+      </div>
+      <p class="mt-4 text-primary/70 text-sm leading-relaxed font-inter">Swim England runs a structured officials pathway that takes you from Club Helper all the way through to Judge, Referee and beyond. You can progress at your own pace, and every level adds real value to the club and to competitive swimming in the region.</p>
+      <p class="mt-3 text-primary/70 text-sm leading-relaxed font-inter">Training is free and typically delivered online followed by practical assessment at a gala. Many of our current officials started simply by volunteering as timekeepers at their first home meet.</p>
+    </div>
+    <div class="space-y-3">
+      <div class="flex items-start gap-4 bg-[#f5f8fc] rounded-xl px-5 py-4 border border-gray-100">
+        <div class="w-2 h-2 rounded-full bg-secondary shrink-0 mt-2"></div>
+        <div>
+          <p class="font-inter font-semibold text-[0.9rem] text-primary">Club Helper</p>
+          <p class="mt-0.5 text-primary/55 text-sm font-inter">Assist with poolside duties at club galas. Starting point for all new officials.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 bg-[#f5f8fc] rounded-xl px-5 py-4 border border-gray-100">
+        <div class="w-2 h-2 rounded-full bg-secondary shrink-0 mt-2"></div>
+        <div>
+          <p class="font-inter font-semibold text-[0.9rem] text-primary">Timekeeper</p>
+          <p class="mt-0.5 text-primary/55 text-sm font-inter">Operate lane timing equipment. Swim England certified training course required.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 bg-[#f5f8fc] rounded-xl px-5 py-4 border border-gray-100">
+        <div class="w-2 h-2 rounded-full bg-secondary shrink-0 mt-2"></div>
+        <div>
+          <p class="font-inter font-semibold text-[0.9rem] text-primary">Judge / Starter</p>
+          <p class="mt-0.5 text-primary/55 text-sm font-inter">Assess turns, finishes and starts under the rules of competition.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4 bg-[#f5f8fc] rounded-xl px-5 py-4 border border-gray-100">
+        <div class="w-2 h-2 rounded-full bg-secondary shrink-0 mt-2"></div>
+        <div>
+          <p class="font-inter font-semibold text-[0.9rem] text-primary">Referee</p>
+          <p class="mt-0.5 text-primary/55 text-sm font-inter">Oversee the entire competition. The most senior poolside official role.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endcall %}
+
+{# ── CTA — full width ──────────────────────────────────────── #}
+<section class="bg-primary py-16 text-center">
+  <div class="max-w-2xl mx-auto px-4">
+    <p class="text-white/50 text-xs uppercase tracking-widest font-montserrat font-semibold">Join us</p>
+    <h2 class="font-montserrat font-extrabold text-white mt-2" style="font-size: clamp(1.5rem, 3vw, 2rem);">Get involved today</h2>
+    <p class="mt-3 text-white/60 leading-relaxed font-inter">If you'd like to volunteer or find out more about any of the roles above, drop us an email and we'll get back to you.</p>
+    <div class="mt-7">
+      <a
+        href="mailto:volunteers@cannockphoenixsc.org"
+        class="inline-flex items-center gap-2 px-7 py-3.5 bg-secondary hover:bg-[#a81818] text-white font-inter font-semibold rounded-full transition-colors">
+        Email the volunteer co-ordinator
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

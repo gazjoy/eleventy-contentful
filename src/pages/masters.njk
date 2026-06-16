@@ -1,0 +1,152 @@
+---
+title: Masters Swimming
+layout: layouts/base.njk
+permalink: /masters/index.html
+---
+
+{% from "components/section-nav.njk" import sectionNav %}
+
+{#
+  Variables:
+    heroSectionLabel  — "Compete"
+    heroAccentColor   — orange (#ea580c) — the Compete section colour
+    heroSvgPaths      — icon-compete paths from icons-sprite.svg
+    heroTitle         — page title
+    heroSubtitle      — intro text
+    heroExtra         — "Coming Soon" pill badge
+#}
+{% set heroSectionLabel = "Compete" %}
+{% set heroAccentColor = "#ea580c" %}
+{% set heroSvgPaths = [
+  "M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z",
+  "M6 9H4.5a1 1 0 0 1 0-5H6",
+  "M18 9h1.5a1 1 0 0 0 0-5H18",
+  "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978",
+  "M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978",
+  "M4 22h16"
+] %}
+{% set heroTitle = "Masters Swimming" %}
+{% set heroSubtitle = "Competitive adult swimming for all abilities. Whether you're 18 or 80, there's a lane and a lane-mate for you at Cannock Phoenix." %}
+{% include "components/page-hero.njk" %}
+
+{% set sectionPages = [
+  { label: "Competitive Squads", path: "/competitive-squads/" },
+  { label: "Masters", path: "/masters/" },
+  { label: "Coaches", path: "/coaches/" },
+  { label: "Timetable & Locations", path: "/timetable/" }
+] %}
+
+{% call sectionNav(sectionPages, heroAccentColor, "Compete", page.url, heroTitle, heroSvgPaths) %}
+
+  {# ── Section 1: What is Masters swimming? ────────────────────── #}
+  <section class="py-12">
+    <h2 class="font-montserrat font-extrabold text-xl text-primary mb-4">What is Masters swimming?</h2>
+    <p class="text-primary/65 text-sm leading-relaxed max-w-2xl font-inter">
+      Masters swimming is competitive swimming for adults aged 18 and over, organised through Swim England and British
+      Masters Swimming. Races are split into five-year age bands, so you always compete against swimmers your own age.
+      It's a welcoming, social, and surprisingly competitive world.
+    </p>
+    <p class="mt-3 text-primary/65 text-sm leading-relaxed max-w-2xl font-inter">
+      Cannock Phoenix's Masters section is open now. We welcome adult swimmers of all abilities —
+      from complete returners to seasoned veterans — to join our group.
+    </p>
+  </section>
+
+  {# ── Section 2: Benefits ──────────────────────────────────────── #}
+  <section class="py-8 border-t border-gray-100">
+    <div class="grid sm:grid-cols-3 gap-5">
+
+      {# Benefit 1: Compete at any age #}
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center mb-3">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="text-secondary" aria-hidden="true">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.23 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.23 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+        </div>
+        <p class="font-montserrat font-bold text-sm text-primary">Compete at any age</p>
+        <p class="text-primary/55 text-sm leading-relaxed font-inter mt-1.5">
+          Masters events are held at regional, national, and international level with age-group categories from 18 to 80+.
+        </p>
+      </div>
+
+      {# Benefit 2: A welcoming community #}
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center mb-3">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="text-secondary" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <path d="M9 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <p class="font-montserrat font-bold text-sm text-primary">A welcoming community</p>
+        <p class="text-primary/55 text-sm leading-relaxed font-inter mt-1.5">
+          Whether you swam competitively as a junior or are returning to the pool after years away, you'll find a warm welcome.
+        </p>
+      </div>
+
+      {# Benefit 3: Flexible training #}
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center mb-3">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="text-secondary" aria-hidden="true">
+            <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <p class="font-montserrat font-bold text-sm text-primary">Flexible training</p>
+        <p class="text-primary/55 text-sm leading-relaxed font-inter mt-1.5">
+          Sessions are structured to fit around work and family commitments, with both morning and evening options.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  {# ── Section 3: Age groups ────────────────────────────────────── #}
+  <section class="py-10 border-t border-gray-100">
+    <h2 class="font-montserrat font-extrabold text-lg text-primary mb-5">Age groups</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">18–24</span>
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">25–29</span>
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">30–34</span>
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">35–39</span>
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">40–44</span>
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">45–49</span>
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">50–54</span>
+      <span class="px-4 py-2 bg-primary/5 rounded-xl text-sm font-inter font-semibold text-primary">55+</span>
+    </div>
+    <p class="text-primary/45 text-xs font-inter mt-4">
+      Ages based on the swimmer's age on 31 December of the current year, per Swim England Masters rules.
+    </p>
+  </section>
+
+  {# ── Section 4: CTA card ──────────────────────────────────────── #}
+  <section class="py-10 border-t border-gray-100">
+    <div class="bg-primary rounded-2xl p-7 text-white">
+      <h3 class="font-montserrat font-extrabold text-lg text-white">Interested in joining Masters?</h3>
+      <p class="text-white/60 text-sm font-inter mt-2">
+        Drop us a line and we'll get you started. We'd love to hear from you.
+      </p>
+      <a
+        href="mailto:info@cannockphoenixsc.org?subject=Masters%20Swimming%20Enquiry"
+        class="mt-5 inline-flex items-center gap-2 bg-secondary text-white font-inter font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-secondary/90 transition-colors"
+      >
+        Express your interest
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+{% endcall %}

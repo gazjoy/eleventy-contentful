@@ -1,0 +1,226 @@
+---
+title: Welfare & Concerns
+layout: layouts/base.njk
+permalink: /welfare/index.html
+---
+
+{% from "components/section-nav.njk" import sectionNav %}
+{#
+  Variables:
+    heroSectionLabel  — section identity label
+    heroAccentColor   — pink (#db2777) — the Our Club section colour
+    heroSvgPaths      — Building2 icon paths (icon-club)
+    heroTitle         — page title
+    heroSubtitle      — intro text
+#}
+{% set heroSectionLabel = "Our Club" %}
+{% set heroAccentColor = "#db2777" %}
+{% set heroSvgPaths = [
+  "M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16",
+  "M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2",
+  "M10 12h4",
+  "M10 8h4",
+  "M14 21v-3a2 2 0 0 0-4 0v3"
+] %}
+{% set heroTitle = "Welfare & Concerns" %}
+{% set heroSubtitle = "The safety and welfare of every swimmer is our first priority. Contact our Welfare Officers or raise a concern confidentially below." %}
+{% include "components/page-hero.njk" %}
+{% set sectionPages = [
+  { label: "About", path: "/about/" },
+  { label: "History", path: "/about/history/" },
+  { label: "Contact", path: "/contact/" },
+  { label: "Committee", path: "/about/committee/" },
+  { label: "Welfare & Concerns", path: "/welfare/" },
+  { label: "Club Policies", path: "/club-policies/" },
+  { label: "Fundraising & Sponsorship", path: "/fundraising/" },
+  { label: "Volunteering", path: "/volunteering/" }
+] %}
+{% call sectionNav(sectionPages, heroAccentColor, heroSectionLabel, page.url, heroTitle, heroSvgPaths) %}
+<section
+  class="py-12">
+  {# ── a) Emergency strip ────────────────────────────────────── #}
+  <div class="bg-secondary rounded-2xl p-4 mb-6 flex items-start gap-3">
+    <svg
+      class="text-white shrink-0 mt-0.5"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true">
+      <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      <path d="M12 9v4"/>
+      <path d="M12 17h.01"/>
+    </svg>
+    <p class="text-white text-sm leading-relaxed font-inter font-semibold">If a child is in
+      <span class="underline underline-offset-2">immediate danger</span>, call
+      <span class="text-yellow-200 text-base">999</span>
+      first. Do not wait to contact the club.</p>
+  </div>
+  {# ── b) Welfare Officers card ──────────────────────────────── #}
+  <div class="bg-primary rounded-2xl p-6 text-white mb-6">
+    <div class="flex items-start gap-3 mb-4">
+      <svg
+        class="text-emerald-400 shrink-0 mt-0.5"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0
+          1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+        <path d="m9 12 2 2 4-4"/>
+      </svg>
+      <div>
+        <h2 class="font-montserrat font-extrabold text-base text-white mb-1">Welfare Officers</h2>
+        <p class="text-white/60 text-sm font-inter">You can speak directly and confidentially with our Welfare Officers about
+          any concern. All conversations are treated with the utmost discretion.</p>
+      </div>
+    </div>
+    <a
+      href="mailto:welfare@cannockswimmingclub.org"
+      class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/[0.18] transition-colors rounded-xl px-4 py-2.5 mb-4">
+      <svg
+        class="text-emerald-400 shrink-0"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <rect width="20" height="16" x="2" y="4" rx="2"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+      <div>
+        <p class="font-inter font-semibold text-sm text-white">Kerry Purnell</p>
+        <p class="text-white/50 text-xs">Welfare Officer</p>
+      </div>
+    </a>
+    <div class="flex items-center gap-2">
+      <svg
+        class="text-emerald-400 shrink-0"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <rect width="20" height="16" x="2" y="4" rx="2"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+      <a
+        href="mailto:welfare@cannockswimmingclub.org"
+        class="text-emerald-300 text-sm font-inter hover:underline underline-offset-2">welfare@cannockswimmingclub.org</a>
+    </div>
+  </div>
+  {# ── c) External helplines ─────────────────────────────────── #}
+  <div class="grid sm:grid-cols-2 gap-3 mb-10">
+    <a
+      href="tel:01509618700"
+      class="flex items-center gap-3 bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm hover:shadow-md
+        transition-shadow">
+      <svg
+        class="text-primary/50 shrink-0"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 13 19.79 19.79 0 0 1 1.93 4.37 2 2 0 0 1
+        3.92 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1
+        2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">Swim England Safeguarding</p>
+        <p class="text-primary/50 text-xs font-inter">01509 618700</p>
+      </div>
+    </a>
+    <a
+      href="https://www.nspcc.org.uk/keeping-children-safe/reporting-abuse/report/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center gap-3 bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm hover:shadow-md
+        transition-shadow">
+      <svg
+        class="text-primary/50 shrink-0"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M15 3h6v6"/>
+        <path d="M10 14 21 3"/>
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">NSPCC — Report Abuse</p>
+        <p class="text-primary/50 text-xs font-inter">0808 800 5000 · nspcc.org.uk</p>
+      </div>
+    </a>
+  </div>
+  {# ── d) Raise a Concern ────────────────────────────────────── #}
+  <div class="border-t border-gray-100 pt-10">
+    <p class="text-secondary uppercase tracking-widest font-semibold font-montserrat text-sm">Raise a Concern</p>
+    <h2 class="font-montserrat font-extrabold text-2xl text-primary mt-2">Submit a welfare concern</h2>
+    <p class="text-primary/60 max-w-xl text-sm font-inter mt-2">
+      Use this form to report any welfare or safeguarding concern, including bullying, inappropriate behaviour, or anything
+      that doesn't feel right.</p>
+    {# Confidentiality notice #}
+    <div class="bg-[#f5f8fc] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 mb-8 mt-6">
+      <svg
+        class="text-primary/50 shrink-0 mt-0.5"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0
+          1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+        <path d="m9 12 2 2 4-4"/>
+      </svg>
+      <p class="text-primary/70 text-sm font-inter leading-relaxed">Strictly confidential. Your concern will only be shared
+        with the club's Welfare Officers and, where legally required, with statutory authorities. It will not be shared with
+        anyone else without your permission.</p>
+    </div>
+    {# Static form placeholder #}
+    <div class="bg-[#f5f8fc] rounded-2xl p-8 text-center border border-primary/10">
+      <p class="text-primary/50 text-sm font-inter">The welfare concern form will be available here shortly. In the meantime,
+        please contact the Welfare Officers directly at
+        <a href="mailto:welfare@cannockswimmingclub.org" class="text-secondary underline underline-offset-2">
+        welfare@cannockswimmingclub.org</a>
+        or speak to them at poolside.</p>
+    </div>
+    {# Club Policies crosslink #}
+    <div class="mt-12 border-t border-gray-100 pt-8">
+      <p class="text-primary/55 text-sm font-inter">Looking for our safeguarding policy, codes of conduct, or GDPR documentation?
+        <a href="/club-policies/" class="text-secondary hover:text-[#a81818] font-semibold transition-colors">View Club Policies →</a>
+      </p>
+    </div>
+  </div>
+</section>
+{% endcall %}

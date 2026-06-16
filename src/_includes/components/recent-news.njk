@@ -5,20 +5,78 @@
 	Uses the global "news" data.
 #}
 
-<section>
+<section class="bg-[#f5f8fc] py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  <h2>{{ component.title }}</h2>
-
-  {% for newsPost in news.slice(0, component.numberOfPosts) %}
-    <div>
-      <h3>
-        <a href="/news/{{newsPost.slug}}">{{ newsPost.title }}</a>
-      </h3>
-      <small>{{ newsPost.date | readableDate }}
-        by
-        {{ newsPost.authorName }}</small>
-      <div class="rich-text">{{ newsPost.bodyRichText | renderRichTextAsHtml | safe }}</div>
+    {# Header row #}
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <span class="text-secondary text-sm uppercase tracking-widest font-semibold font-montserrat">
+          Latest News
+        </span>
+        <h2 class="mt-1 text-primary font-montserrat font-extrabold">
+          {{ component.title }}
+        </h2>
+      </div>
+      <a
+        href="/news/"
+        class="hidden sm:inline-flex items-center gap-1.5 text-sm text-primary hover:text-secondary font-semibold font-inter transition-colors">
+        All news
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
     </div>
-  {% endfor %}
 
+    {# News card grid #}
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for newsPost in news.slice(0, component.numberOfPosts) %}
+        <article class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow group">
+          {# Image area — shows post image if available, otherwise a dark placeholder #}
+          <div class="relative h-44 overflow-hidden">
+            {% if newsPost.image and newsPost.image.url %}
+              <img
+                src="{{ newsPost.image.url }}"
+                alt="{{ newsPost.image.title or newsPost.title }}"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"/>
+            {% else %}
+              <div class="w-full h-full bg-primary flex items-center justify-center">
+                <svg width="40" height="40" class="text-white/20" aria-hidden="true">
+                  <use href="#icon-newspaper"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          {# Card body #}
+          <div class="p-5">
+            <p class="text-primary/40 text-xs font-inter mb-2">
+              <time datetime="{{ newsPost.date.toISO() }}">{{ newsPost.date | readableDate }}</time>
+              {% if newsPost.authorName %}
+                <span class="text-primary/25"> · </span>{{ newsPost.authorName }}
+              {% endif %}
+            </p>
+            <h3 class="text-primary font-montserrat font-bold leading-snug" style="font-size: 0.95rem;">
+              {{ newsPost.title }}
+            </h3>
+            <a
+              href="/news/{{ newsPost.slug }}/"
+              class="mt-4 inline-flex items-center gap-1 text-secondary text-sm font-semibold font-inter hover:gap-2 transition-all">
+              Read more
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    {# Mobile "All news" link #}
+    <div class="mt-8 text-center sm:hidden">
+      <a
+        href="/news/"
+        class="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full font-semibold text-sm font-inter">
+        All news
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+
+  </div>
 </section>

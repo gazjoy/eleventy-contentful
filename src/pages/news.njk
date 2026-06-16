@@ -1,21 +1,146 @@
---- 
-title: News
+---
+title: Club News
 layout: layouts/base.njk
 permalink: /news/index.html
-
 ---
 
-<h1>{{ title }}</h1>
+{% set heroSectionLabel = "Club News" %}
+{% set heroAccentColor = "#db2777" %}
+{% set heroSvgPaths = [
+  "M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2",
+  "M18 14h-8",
+  "M15 18h-5",
+  "M10 6h8v4h-8z"
+] %}
+{% set heroTitle = "Club News" %}
+{% set heroSubtitle = "Results, announcements, swimmer spotlights and everything happening at Phoenix." %}
+{% include "components/page-hero.njk" %}
 
-{% for post in news %}
-  <article>
-    <h3>
-      <a href="/news/{{ post.slug }}/">{{ post.title }}</a>
-    </h3>
-    <p>
-      {{ post.authorName }}
-      —
-      {{ post.date | readableDate }}
-    </p>
-  </article>
-{% endfor %}
+{# ── Body ───────────────────────────────────────────────────── #}
+<div class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    {# ── Mobile archive collapsible ───────────────────────────── #}
+    <div class="lg:hidden mb-8 border border-gray-100 rounded-2xl overflow-hidden">
+      <button
+        type="button"
+        class="w-full flex items-center justify-between px-4 py-3.5 text-left"
+        aria-expanded="false"
+        aria-controls="news-archive-mobile"
+        data-news-archive-toggle>
+        <div class="flex items-center gap-2">
+          <svg class="text-primary/40" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+          <span class="text-sm font-semibold font-inter text-primary">Browse by year</span>
+        </div>
+        <svg class="text-primary/35 transition-transform duration-200" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" data-news-archive-chevron><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div id="news-archive-mobile" class="overflow-hidden max-h-0 transition-[max-height] duration-300 ease-out" aria-hidden="true">
+        <div class="px-4 pb-4 pt-3 border-t border-gray-100">
+          {# Group by year #}
+          {% set currentYear = null %}
+          {% for post in news %}
+            {% if post.date.year != currentYear %}
+              {% set currentYear = post.date.year %}
+              <a href="#year-{{ currentYear }}" class="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-inter text-primary/60 hover:bg-primary/5 hover:text-primary transition-colors">
+                <span>{{ currentYear }}</span>
+                <span class="text-xs text-primary/30">
+                  {% set yearCount = 0 %}
+                  {% for p in news %}{% if p.date.year == currentYear %}{% set yearCount = yearCount + 1 %}{% endif %}{% endfor %}
+                  {{ yearCount }}
+                </span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    {# ── Two-column layout ──────────────────────────────────────── #}
+    <div class="flex gap-12 items-start">
+
+      {# Desktop archive sidebar #}
+      <aside class="hidden lg:block w-52 xl:w-60 shrink-0 sticky top-[72px] self-start" aria-label="News archive">
+        <div class="bg-[#f5f8fc] rounded-2xl p-4">
+          <p class="text-primary/40 text-xs uppercase tracking-wider font-montserrat font-bold px-1 mb-2">Archive</p>
+          <a href="/news/" class="flex items-center px-3 py-2 rounded-xl text-sm font-inter font-semibold text-primary bg-white shadow-sm mb-1">All posts</a>
+          {% set currentYear = null %}
+          {% for post in news %}
+            {% if post.date.year != currentYear %}
+              {% set currentYear = post.date.year %}
+              <a href="#year-{{ currentYear }}" class="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-inter text-primary/55 hover:bg-white hover:text-primary transition-colors">
+                <span>{{ currentYear }}</span>
+                <span class="text-xs text-primary/30">
+                  {% set yearCount = 0 %}
+                  {% for p in news %}{% if p.date.year == currentYear %}{% set yearCount = yearCount + 1 %}{% endif %}{% endfor %}
+                  {{ yearCount }}
+                </span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </aside>
+
+      {# Feed column #}
+      <div class="flex-1 min-w-0">
+
+        {# Post count #}
+        <div class="flex items-center justify-between mb-6 pb-5 border-b border-gray-100">
+          <p class="text-primary/45 text-sm font-inter">{{ news | length }} post{% if news | length != 1 %}s{% endif %}</p>
+        </div>
+
+        {% if not news | length %}
+          <div class="py-20 text-center text-primary/35 font-inter">No posts found.</div>
+        {% else %}
+          {% set lastYear = null %}
+          {% for post in news %}
+
+            {# Year divider #}
+            {% if post.date.year != lastYear %}
+              {% if not loop.first %}</div>{% endif %}
+              {% set lastYear = post.date.year %}
+              <div id="year-{{ lastYear }}">
+              <h2 class="font-montserrat font-extrabold text-xl text-primary mb-4{% if not loop.first %} mt-10 pt-10 border-t border-gray-100{% endif %}">{{ lastYear }}</h2>
+            {% endif %}
+
+            {# Article row #}
+            <article class="py-7{% if not loop.last %} border-b border-gray-100{% endif %}">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <time datetime="{{ post.date.toISO() }}" class="text-primary/40 text-sm font-inter">{{ post.date | readableDate }}</time>
+                <span class="text-primary/25 select-none">·</span>
+                <span class="text-primary/40 text-sm font-inter">{{ post.authorName }}</span>
+              </div>
+              <a href="/news/{{ post.slug }}/" class="group">
+                <h3 class="font-montserrat font-extrabold text-primary group-hover:text-secondary transition-colors leading-snug" style="font-size: clamp(1.05rem, 2vw, 1.25rem);">{{ post.title }}</h3>
+              </a>
+              <a
+                href="/news/{{ post.slug }}/"
+                class="mt-3 inline-flex items-center gap-1 text-secondary text-sm font-inter font-semibold hover:underline underline-offset-2">
+                Read more
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </article>
+
+            {% if loop.last %}</div>{% endif %}
+          {% endfor %}
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const btn = document.querySelector("[data-news-archive-toggle]");
+    const drawer = document.getElementById("news-archive-mobile");
+    const chevron = document.querySelector("[data-news-archive-chevron]");
+    if (!btn || !drawer) return;
+    btn.addEventListener("click", function () {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
+      drawer.setAttribute("aria-hidden", isOpen ? "true" : "false");
+      drawer.style.maxHeight = isOpen ? "0" : drawer.scrollHeight + "px";
+      if (chevron) chevron.style.transform = isOpen ? "" : "rotate(180deg)";
+    });
+  })();
+</script>

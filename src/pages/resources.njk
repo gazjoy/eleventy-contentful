@@ -1,0 +1,216 @@
+---
+title: Member Resources
+layout: layouts/base.njk
+permalink: /resources/index.html
+---
+
+{% from "components/section-nav.njk" import sectionNav %}
+{#
+  Variables:
+    heroSectionLabel  — "Members"
+    heroAccentColor   — amber (#ca8a04) — the Members section colour
+    heroSvgPaths      — Key icon paths from icons-sprite.svg #icon-members
+    heroTitle         — page title
+    heroSubtitle      — intro text
+#}
+{% set heroSectionLabel = "Members" %}
+{% set heroAccentColor = "#ca8a04" %}
+{% set heroSvgPaths = [
+  "m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4",
+  "m21 2-9.6 9.6",
+  "M 2 15.5 a 5.5 5.5 0 1 0 11 0 a 5.5 5.5 0 1 0 -11 0"
+] %}
+{% set heroTitle = "Member Resources" %}
+{% set heroSubtitle = "Downloads, documents, and useful links for Cannock Phoenix members and their families." %}
+{% include "components/page-hero.njk" %}
+{% set sectionPages = [
+  { label: "Pay Fees", path: "/payments/" },
+  { label: "Resources", path: "/resources/" },
+  { label: "Swim Manager", path: "/swim-manager/" }
+] %}
+{% call sectionNav(sectionPages, heroAccentColor, "Members", page.url, "Resources", heroSvgPaths) %}
+
+{# ── DOWNLOADS ──────────────────────────────────────────────── #}
+<section class="py-12">
+  <h2 class="font-montserrat font-extrabold text-lg text-primary mb-5">Downloads</h2>
+  <div class="space-y-3">
+
+    {# 1. Member Code of Conduct — coming soon #}
+    <div class="flex items-center gap-4 bg-white border border-gray-100 rounded-2xl shadow-sm px-5 py-4 opacity-60">
+      <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+          <path d="M10 9H8"/>
+          <path d="M16 13H8"/>
+          <path d="M16 17H8"/>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="font-inter font-semibold text-sm text-primary">Member Code of Conduct</p>
+        <p class="text-primary/50 text-xs mt-0.5 truncate font-inter">Expected standards of behaviour for all CPSC members.</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-primary/30 text-xs hidden sm:block font-inter">PDF · 245 KB</span>
+        <span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full border border-amber-200 font-inter font-semibold">Coming soon</span>
+      </div>
+    </div>
+
+    {# 2. Parent & Spectator Code of Conduct — coming soon #}
+    <div class="flex items-center gap-4 bg-white border border-gray-100 rounded-2xl shadow-sm px-5 py-4 opacity-60">
+      <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+          <path d="M10 9H8"/>
+          <path d="M16 13H8"/>
+          <path d="M16 17H8"/>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="font-inter font-semibold text-sm text-primary">Parent &amp; Spectator Code of Conduct</p>
+        <p class="text-primary/50 text-xs mt-0.5 truncate font-inter">Guidelines for parents and spectators at sessions and galas.</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-primary/30 text-xs hidden sm:block font-inter">PDF · 180 KB</span>
+        <span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full border border-amber-200 font-inter font-semibold">Coming soon</span>
+      </div>
+    </div>
+
+    {# 3. Swim England Learn to Swim Framework — available #}
+    <div class="flex items-center gap-4 bg-white border border-gray-100 rounded-2xl shadow-sm px-5 py-4">
+      <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+          <path d="M10 9H8"/>
+          <path d="M16 13H8"/>
+          <path d="M16 17H8"/>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="font-inter font-semibold text-sm text-primary">Swim England Learn to Swim Framework</p>
+        <p class="text-primary/50 text-xs mt-0.5 truncate font-inter">Swim England&#8217;s national framework explaining stages 1&#8211;7.</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-primary/30 text-xs hidden sm:block font-inter">PDF · 1.2 MB</span>
+        <a href="https://www.swimming.org/learntoswim/" target="_blank" rel="noopener noreferrer" class="p-2 bg-primary/5 hover:bg-primary/10 rounded-xl transition-colors" aria-label="Download Swim England Learn to Swim Framework">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <path d="m7 10 5 5 5-5"/>
+            <path d="M12 15V3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    {# 4. Competition Entry Guide — coming soon #}
+    <div class="flex items-center gap-4 bg-white border border-gray-100 rounded-2xl shadow-sm px-5 py-4 opacity-60">
+      <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+          <path d="M10 9H8"/>
+          <path d="M16 13H8"/>
+          <path d="M16 17H8"/>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="font-inter font-semibold text-sm text-primary">Competition Entry Guide</p>
+        <p class="text-primary/50 text-xs mt-0.5 truncate font-inter">How to read gala programmes, what to bring, and what to expect.</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-primary/30 text-xs hidden sm:block font-inter">PDF · 310 KB</span>
+        <span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full border border-amber-200 font-inter font-semibold">Coming soon</span>
+      </div>
+    </div>
+
+    {# 5. CPSC Training Log Template — coming soon #}
+    <div class="flex items-center gap-4 bg-white border border-gray-100 rounded-2xl shadow-sm px-5 py-4 opacity-60">
+      <div class="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+          <path d="M10 9H8"/>
+          <path d="M16 13H8"/>
+          <path d="M16 17H8"/>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="font-inter font-semibold text-sm text-primary">CPSC Training Log Template</p>
+        <p class="text-primary/50 text-xs mt-0.5 truncate font-inter">A simple weekly training log for competitive squad swimmers.</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-primary/30 text-xs hidden sm:block font-inter">XLSX · 55 KB</span>
+        <span class="px-2 py-1 bg-amber-50 text-amber-600 text-xs rounded-full border border-amber-200 font-inter font-semibold">Coming soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{# ── USEFUL LINKS ───────────────────────────────────────────── #}
+<section class="py-8 border-t border-gray-100">
+  <h2 class="font-montserrat font-extrabold text-lg text-primary mb-5">Useful links</h2>
+  <div class="grid sm:grid-cols-2 gap-3">
+
+    <a href="https://www.swimming.org" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 bg-white border border-gray-100 rounded-2xl shadow-sm p-4 hover:shadow-md transition-shadow group">
+      <div class="w-8 h-8 bg-primary/5 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40 group-hover:text-secondary transition-colors" aria-hidden="true">
+          <path d="M15 3h6v6"/>
+          <path d="M10 14 21 3"/>
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        </svg>
+      </div>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary group-hover:text-secondary transition-colors">Swim England</p>
+        <p class="text-primary/50 text-xs leading-snug mt-0.5 font-inter">The national governing body for swimming in England.</p>
+      </div>
+    </a>
+
+    <a href="https://www.swimmingresults.org/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 bg-white border border-gray-100 rounded-2xl shadow-sm p-4 hover:shadow-md transition-shadow group">
+      <div class="w-8 h-8 bg-primary/5 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40 group-hover:text-secondary transition-colors" aria-hidden="true">
+          <path d="M15 3h6v6"/>
+          <path d="M10 14 21 3"/>
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        </svg>
+      </div>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary group-hover:text-secondary transition-colors">Swim England Results System</p>
+        <p class="text-primary/50 text-xs leading-snug mt-0.5 font-inter">Look up official times, rankings, and meet results.</p>
+      </div>
+    </a>
+
+    <a href="https://www.britishswimming.org/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 bg-white border border-gray-100 rounded-2xl shadow-sm p-4 hover:shadow-md transition-shadow group">
+      <div class="w-8 h-8 bg-primary/5 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40 group-hover:text-secondary transition-colors" aria-hidden="true">
+          <path d="M15 3h6v6"/>
+          <path d="M10 14 21 3"/>
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        </svg>
+      </div>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary group-hover:text-secondary transition-colors">British Swimming</p>
+        <p class="text-primary/50 text-xs leading-snug mt-0.5 font-inter">Olympic, Paralympic, and high-performance swimming in Great Britain.</p>
+      </div>
+    </a>
+
+    <a href="https://staffordshireasa.co.uk/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 bg-white border border-gray-100 rounded-2xl shadow-sm p-4 hover:shadow-md transition-shadow group">
+      <div class="w-8 h-8 bg-primary/5 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40 group-hover:text-secondary transition-colors" aria-hidden="true">
+          <path d="M15 3h6v6"/>
+          <path d="M10 14 21 3"/>
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        </svg>
+      </div>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary group-hover:text-secondary transition-colors">Staffordshire ASA</p>
+        <p class="text-primary/50 text-xs leading-snug mt-0.5 font-inter">County swimming association for Staffordshire clubs.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+{% endcall %}

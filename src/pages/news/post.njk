@@ -6,19 +6,118 @@ pagination:
   alias: post
   addAllPagesToCollections: true
 permalink: /news/{{ post.slug }}/index.html
-
 ---
 
-<article>
-  <h1>{{ post.title }}</h1>
-  <p>
-    By
-    {{ post.authorName }}
-    on
-    {{ post.date | readableDate }}
-  </p>
-  <div class="rich-text">{{ post.bodyRichText | renderRichTextAsHtml | safe }}</div>
-  <p>
-    <a href="/news/">← Back to news</a>
-  </p>
-</article>
+{# ── Slim dark hero ───────────────────────────────────────────── #}
+<div class="relative pt-28 pb-14 bg-primary text-white overflow-hidden">
+  <div
+    class="absolute inset-0 opacity-[0.04]"
+    style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
+      background-size: 12px 12px;"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <a
+      href="/news/"
+      class="inline-flex items-center gap-1.5 text-white/50 hover:text-white text-sm mb-5 transition-colors font-inter">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Back to News
+    </a>
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <time datetime="{{ post.date.toISO() }}" class="text-white/45 text-sm font-inter">{{ post.date | readableDate }}</time>
+      <span class="text-white/25">·</span>
+      <span class="text-white/45 text-sm font-inter">{{ post.authorName }}</span>
+    </div>
+    <h1
+      class="text-white max-w-3xl font-montserrat font-black leading-tight"
+      style="font-size: clamp(1.6rem, 4vw, 2.6rem);">
+      {{ post.title }}
+    </h1>
+  </div>
+  {# Wave divider #}
+  <div class="wave">
+    {% include "svg/wave-small.svg" %}
+  </div>
+</div>
+
+{# ── Two-column body ──────────────────────────────────────────── #}
+<div class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex gap-12 items-start">
+
+      {# Desktop sidebar #}
+      <aside class="hidden lg:flex flex-col w-52 xl:w-60 shrink-0 sticky top-[72px] self-start gap-5" aria-label="News archive">
+        <a
+          href="/news/"
+          class="flex items-center gap-2 text-primary/45 hover:text-primary text-sm font-inter transition-colors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          All news
+        </a>
+        <div class="bg-[#f5f8fc] rounded-2xl p-4">
+          <p class="text-primary/40 text-xs uppercase tracking-wider font-montserrat font-bold px-1 mb-2">Archive</p>
+          {% set currentYear = null %}
+          {% for p in news %}
+            {% if p.date.year != currentYear %}
+              {% set currentYear = p.date.year %}
+              <a href="/news/#year-{{ currentYear }}" class="flex items-center justify-between px-3 py-2 rounded-xl text-sm font-inter text-primary/55 hover:bg-white hover:text-primary transition-colors">
+                <span>{{ currentYear }}</span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </aside>
+
+      {# Article #}
+      <article class="flex-1 min-w-0 max-w-2xl">
+        <div class="rich-text">{{ post.bodyRichText | renderRichTextAsHtml | safe }}</div>
+
+        {# Footer meta #}
+        <div class="mt-10 pt-6 border-t border-gray-100 flex flex-wrap items-center gap-3">
+          <span class="text-primary/35 text-sm font-inter">Published {{ post.date | readableDate }}</span>
+          <span class="text-primary/25">·</span>
+          <span class="text-primary/35 text-sm font-inter">{{ post.authorName }}</span>
+        </div>
+
+        {# ── Prev / Next ──────────────────────────────────────── #}
+        {% set prevPost = pagination.page.previous[0] if pagination.page.previous else null %}
+        {% set nextPost = pagination.page.next[0] if pagination.page.next else null %}
+
+        {% if prevPost or nextPost %}
+          <div class="mt-8 grid sm:grid-cols-2 gap-4">
+            {% if prevPost %}
+              <a
+                href="/news/{{ prevPost.slug }}/"
+                class="group flex items-start gap-3 p-4 rounded-2xl border border-gray-100 hover:border-primary/12 hover:bg-[#f5f8fc] transition-all">
+                <svg class="text-primary/22 group-hover:text-secondary mt-0.5 shrink-0 transition-colors" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                <div>
+                  <p class="text-primary/35 text-xs font-inter mb-1">Older post</p>
+                  <p class="text-primary text-sm font-inter font-semibold group-hover:text-secondary transition-colors line-clamp-2">{{ prevPost.title }}</p>
+                </div>
+              </a>
+            {% else %}
+              <div></div>
+            {% endif %}
+            {% if nextPost %}
+              <a
+                href="/news/{{ nextPost.slug }}/"
+                class="group flex items-start gap-3 p-4 rounded-2xl border border-gray-100 hover:border-primary/12 hover:bg-[#f5f8fc] transition-all sm:flex-row-reverse sm:text-right">
+                <svg class="text-primary/22 group-hover:text-secondary mt-0.5 shrink-0 transition-colors" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <div>
+                  <p class="text-primary/35 text-xs font-inter mb-1">Newer post</p>
+                  <p class="text-primary text-sm font-inter font-semibold group-hover:text-secondary transition-colors line-clamp-2">{{ nextPost.title }}</p>
+                </div>
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {# Mobile back link #}
+        <div class="mt-8 lg:hidden">
+          <a href="/news/" class="inline-flex items-center gap-2 text-primary/50 hover:text-primary text-sm font-inter transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            Back to all news
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</div>

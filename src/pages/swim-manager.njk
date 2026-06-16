@@ -1,0 +1,143 @@
+---
+title: Swim Manager
+layout: layouts/base.njk
+permalink: /swim-manager/index.html
+---
+
+{% from "components/section-nav.njk" import sectionNav %}
+{#
+  Variables:
+    heroSectionLabel  — "Members"
+    heroAccentColor   — amber (#ca8a04) — the Members section colour
+    heroSvgPaths      — Key icon paths from icons-sprite.svg #icon-members
+    heroTitle         — page title
+    heroSubtitle      — intro text
+#}
+{% set heroSectionLabel = "Members" %}
+{% set heroAccentColor = "#ca8a04" %}
+{% set heroSvgPaths = [
+  "m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4",
+  "m21 2-9.6 9.6",
+  "M 2 15.5 a 5.5 5.5 0 1 0 11 0 a 5.5 5.5 0 1 0 -11 0"
+] %}
+{% set heroTitle = "Swim Manager" %}
+{% set heroSubtitle = "Cannock Phoenix uses Swim Manager for squad management, attendance, and training programme access." %}
+{% include "components/page-hero.njk" %}
+{% set sectionPages = [
+  { label: "Pay Fees", path: "/payments/" },
+  { label: "Resources", path: "/resources/" },
+  { label: "Swim Manager", path: "/swim-manager/" }
+] %}
+{% call sectionNav(sectionPages, heroAccentColor, "Members", page.url, "Swim Manager", heroSvgPaths) %}
+
+<section class="py-12">
+
+  {# ── LOGIN CTA ──────────────────────────────────────────────── #}
+  <div class="bg-primary rounded-2xl p-8 text-white mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+    <div class="bg-white rounded-xl px-4 py-3 shrink-0 shadow-sm">
+      <img
+        src="https://swimmanager.co.uk/wp-content/uploads/2025/10/Swim-Manager-Logo-with-Text78h-1.png"
+        alt="Swim Manager"
+        class="h-10 w-auto object-contain"
+        loading="lazy"
+      />
+    </div>
+    <div class="flex-1">
+      <h2 class="font-montserrat font-extrabold text-lg text-white">Log in to your account</h2>
+      <p class="mt-1 text-white/60 text-sm leading-relaxed font-inter">
+        Access your squad schedule, training plans, attendance history, and gala entries.
+        Your login details will have been sent by email from the club.
+      </p>
+    </div>
+    <a
+      href="https://www.swimmanager.co.uk/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 px-5 py-3 bg-white text-primary rounded-full text-sm hover:bg-gray-100 transition-colors shrink-0 font-inter font-bold"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/>
+        <path d="m21 2-9.6 9.6"/>
+        <path d="M 2 15.5 a 5.5 5.5 0 1 0 11 0 a 5.5 5.5 0 1 0 -11 0"/>
+      </svg>
+      Go to Swim Manager
+    </a>
+  </div>
+
+  {# ── FEATURES GRID ──────────────────────────────────────────── #}
+  <h2 class="font-montserrat font-extrabold text-lg text-primary mb-5">What you can do in Swim Manager</h2>
+  <div class="grid sm:grid-cols-2 gap-3 mb-10">
+
+    <div class="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary/30 shrink-0 mt-2"></span>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">View training schedules</p>
+        <p class="text-primary/50 text-xs mt-0.5 font-inter">See your squad's upcoming sessions and any changes.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary/30 shrink-0 mt-2"></span>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">Mark attendance</p>
+        <p class="text-primary/50 text-xs mt-0.5 font-inter">Notify the club if your swimmer cannot attend a session.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary/30 shrink-0 mt-2"></span>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">Access training plans</p>
+        <p class="text-primary/50 text-xs mt-0.5 font-inter">Coaches can share drill sheets and weekly training focus.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary/30 shrink-0 mt-2"></span>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">Gala entries</p>
+        <p class="text-primary/50 text-xs mt-0.5 font-inter">Review and confirm entries submitted on your behalf.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary/30 shrink-0 mt-2"></span>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">Personal bests</p>
+        <p class="text-primary/50 text-xs mt-0.5 font-inter">View your swimmer's current personal best times.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary/30 shrink-0 mt-2"></span>
+      <div>
+        <p class="font-inter font-semibold text-sm text-primary">Club communications</p>
+        <p class="text-primary/50 text-xs mt-0.5 font-inter">Receive important notices from the coaching team.</p>
+      </div>
+    </div>
+
+  </div>
+
+  {# ── HELP NOTE ──────────────────────────────────────────────── #}
+  <div class="flex items-start gap-3 bg-[#f5f8fc] rounded-2xl p-5 border border-primary/8">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/40 shrink-0 mt-0.5" aria-hidden="true">
+      <path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/>
+      <path d="m21 2-9.6 9.6"/>
+      <path d="M 2 15.5 a 5.5 5.5 0 1 0 11 0 a 5.5 5.5 0 1 0 -11 0"/>
+    </svg>
+    <div>
+      <p class="font-inter font-semibold text-sm text-primary">Need help logging in?</p>
+      <p class="mt-1 text-primary/55 text-sm leading-relaxed font-inter">
+        If you haven't received your login details, or if you're having trouble
+        accessing the system, please contact the Membership Secretary.
+      </p>
+      <a
+        href="mailto:membership@cannockswimmingclub.org"
+        class="mt-2 inline-block text-secondary hover:text-[#a81818] text-sm transition-colors font-inter"
+      >membership@cannockswimmingclub.org</a>
+    </div>
+  </div>
+
+</section>
+
+{% endcall %}

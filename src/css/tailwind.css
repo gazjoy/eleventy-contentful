@@ -190,14 +190,6 @@ body,
   @apply p-1 text-white/85 hover:text-white hover:bg-white/10 rounded transition-colors duration-150;
 }
 
-.nav-submenu {
-  @apply md:flex md:flex-col;
-}
-
-.nav-submenu.hidden {
-  @apply hidden;
-}
-
 /* Footer */
 
 .site-footer h3 {
@@ -352,6 +344,18 @@ body,
       margin-bottom: 0;
     }
   }
+}
+
+/* FAQ accordion */
+
+.faq-item[open] {
+  @apply border-primary/15 shadow-md;
+}
+.faq-item[open] > summary {
+  @apply bg-primary/[0.03];
+}
+.faq-item[open] summary .chevron {
+  transform: rotate(180deg);
 }
 
 /* Shimmer animation for hero */

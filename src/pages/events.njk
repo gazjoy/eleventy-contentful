@@ -1,102 +1,171 @@
 ---
-title: Events
+title: Galas & Events
 layout: layouts/base.njk
 permalink: /events/index.html
-
 ---
 
-<h1>{{ title }}</h1>
-<h2>Upcoming Events</h2>
-{% for event in events.upcoming %}
-  <div class="flex">
-    {% include "components/event-date-badge.njk" %}
-    <div>
-      {% if loop.first %}
-        <p>
-          <em>Next Event!</em>
-        </p>
-      {% endif %}
-      <h3>{{ event.title }}</h3>
-      <p>
-        <strong>{{ event.startDate | readableDate(event.endDate) }}</strong>
-        {{ event.startTime | readableTime }}
-      </p>
-      <p>{{ event.venue.name }}</p>
-      {% if event.websiteUrl %}
-        <p>
-          <a href="{{ event.websiteUrl }}" target="_blank" rel="noopener noreferrer">Event details (opens in a new tab)</a>
-        </p>
-      {% endif %}
-      <div class="rich-text">{{ event.descriptionRichText | renderRichTextAsHtml | safe }}</div>
-    </div>
-  </div>
-{% endfor %}
-<h2>Past Events</h2>
-<div id="past-events-by-year">
-  <div class="flex gap-2">
-    {% for year, pastEvents in events.past %}
-      <button type="button" data-year-tab="{{ year }}" class="px-4 py-2 border border-[#222] rounded-full bg-white min-w-20">
-        {{ year }}
-      </button>
-    {% endfor %}
-  </div>
-  {% for year, pastEvents in events.past %}
-    <div data-year-panel="{{ year }}" class="hidden">
-      {% for event in pastEvents %}
-        <div class="flex gap-6 items-start mb-10">
-          {% include "components/event-date-badge.njk" %}
-          <div>
-            <h3>{{ event.title }}</h3>
-            <p>
-              <strong>{{ event.startDate | readableDate(event.endDate) }}</strong>
-              {{ event.startTime | readableTime }}
-            </p>
-            {% if event.venue %}
-              <p>{{ event.venue.name }}</p>
-            {% endif %}
+{% from "components/section-nav.njk" import sectionNav %}
+{% set heroSectionLabel = "Club Events" %}
+{% set heroAccentColor = "#16a34a" %}
+{% set heroSvgPaths = [
+  "M5 4H19a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+  "M16 2v4",
+  "M8 2v4",
+  "M3 10h18"
+] %}
+{% set heroTitle = "Galas & Events" %}
+{% set heroSubtitle = "Our competitive calendar for the season. Gala entries are managed by coaches — speak to your squad coach about qualifying times and selection." %}
+{% include "components/page-hero.njk" %}
+{% set sectionPages = [
+  { label: "Events & Galas", path: "/events/" },
+  { label: "Results", path: "/results/" }
+] %}
+{% call sectionNav(sectionPages, heroAccentColor, heroSectionLabel, page.url, heroTitle, heroSvgPaths) %}
+<section class="py-12">
+
+  {# ── Upcoming events ─────────────────────────────────────── #}
+  {% if events.upcoming | length %}
+    <div class="space-y-6">
+      {% for event in events.upcoming %}
+        <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-lg transition-shadow{% if loop.first %} ring-2 ring-secondary{% endif %}">
+
+          {# Next Up banner #}
+          {% if loop.first %}
+            <div class="bg-secondary text-white text-xs text-center py-1.5 uppercase tracking-widest font-semibold font-montserrat">
+              &#9889; Next Up
+            </div>
+          {% endif %}
+
+          <div class="p-6 md:p-8 flex flex-col md:flex-row gap-6">
+            {# Date block #}
+            <div class="shrink-0 flex flex-col items-center justify-center bg-primary rounded-2xl px-5 py-4 min-w-[70px] text-center">
+              <span class="text-white/60 text-xs uppercase tracking-wider font-inter">{{ event.startDate.toFormat("LLL") }}</span>
+              <span class="text-white font-black font-montserrat leading-tight" style="font-size: 2rem;">{{ event.startDate.day }}</span>
+              <span class="text-white/60 text-xs font-inter">{{ event.startDate.year }}</span>
+            </div>
+
+            {# Details #}
+            <div class="flex-1">
+              <h2 class="font-montserrat font-extrabold text-[1.3rem] text-primary">{{ event.title }}</h2>
+              <div class="mt-2 flex flex-wrap gap-4 text-sm text-primary/50 font-inter">
+                {% if event.venue %}
+                  <span class="flex items-center gap-1.5">
+                    <svg class="text-secondary shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    {{ event.venue.name }}
+                  </span>
+                {% endif %}
+                {% if event.startTime %}
+                  <span class="flex items-center gap-1.5">
+                    <svg class="text-secondary shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    {{ event.startTime | readableTime }}
+                  </span>
+                {% endif %}
+                <span class="flex items-center gap-1.5">
+                  <svg class="text-secondary shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                  {{ event.startDate | readableDate(event.endDate) }}
+                </span>
+              </div>
+              {% if event.descriptionRichText %}
+                <div class="mt-3 text-primary/65 text-sm leading-relaxed font-inter">{{ event.descriptionRichText | renderRichTextAsHtml | safe }}</div>
+              {% endif %}
+              {% if event.websiteUrl %}
+                <a
+                  href="{{ event.websiteUrl }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-[#a81818] text-white text-sm font-inter font-semibold rounded-full transition-colors">
+                  Event Details
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                </a>
+              {% endif %}
+            </div>
           </div>
         </div>
       {% endfor %}
     </div>
-  {% endfor %}
-</div>
+
+    {# Squad members note #}
+    <div class="mt-10 bg-primary/5 border border-primary/10 rounded-2xl p-6 text-center">
+      <p class="text-primary/60 text-sm leading-relaxed font-inter"><strong class="text-primary">Squad members:</strong> Gala entries are submitted by coaches. Please ensure your membership is up to date and speak to your coach about your target events for this season. Qualification times and entry deadlines are shared via the club communication channels.</p>
+    </div>
+
+  {% else %}
+    <div class="bg-primary/5 border border-primary/10 rounded-2xl p-8 text-center">
+      <p class="text-primary/60 text-sm font-inter">No upcoming events at the moment — check back soon.</p>
+    </div>
+  {% endif %}
+
+  {# ── Past events ─────────────────────────────────────────── #}
+  {% if events.past | length %}
+    <div class="mt-14 border-t border-gray-100 pt-10">
+      <h2 class="font-montserrat font-extrabold text-xl text-primary mb-6">Past Events</h2>
+      <div id="past-events-by-year">
+        <div class="flex flex-wrap gap-2 mb-6" role="tablist" aria-label="Past events by year">
+          {% for year, pastEvents in events.past %}
+            <button
+              type="button"
+              data-year-tab="{{ year }}"
+              role="tab"
+              aria-selected="false"
+              aria-controls="year-panel-{{ year }}"
+              class="px-4 py-2 border border-gray-200 rounded-full text-sm font-inter font-medium bg-white text-primary/60 hover:text-primary hover:border-primary/30 transition-colors min-w-20">
+              {{ year }}
+            </button>
+          {% endfor %}
+        </div>
+        {% for year, pastEvents in events.past %}
+          <div id="year-panel-{{ year }}" data-year-panel="{{ year }}" class="hidden" role="tabpanel">
+            <div class="space-y-4">
+              {% for event in pastEvents %}
+                <div class="flex gap-5 items-start bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+                  <div class="shrink-0 flex flex-col items-center justify-center bg-primary/10 rounded-xl px-4 py-3 min-w-[58px] text-center">
+                    <span class="text-primary/50 text-xs uppercase tracking-wider font-inter">{{ event.startDate.toFormat("LLL") }}</span>
+                    <span class="text-primary font-extrabold font-montserrat leading-tight text-xl">{{ event.startDate.day }}</span>
+                  </div>
+                  <div>
+                    <h3 class="font-montserrat font-bold text-[0.95rem] text-primary">{{ event.title }}</h3>
+                    <p class="text-primary/50 text-xs font-inter mt-0.5">{{ event.startDate | readableDate(event.endDate) }}{% if event.startTime %} · {{ event.startTime | readableTime }}{% endif %}</p>
+                    {% if event.venue %}
+                      <p class="text-primary/40 text-xs font-inter mt-0.5">{{ event.venue.name }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+</section>
+{% endcall %}
+
 <script>
   (function () {
     const container = document.getElementById("past-events-by-year");
+    if (!container) return;
     const yearButtons = Array.from(container.querySelectorAll("[data-year-tab]"));
-    const yearPanels = Array.from(container.querySelectorAll("[data-year-panel]"),);
-    if (! yearButtons.length || ! yearPanels.length) {
-      return;
-    }
+    const yearPanels = Array.from(container.querySelectorAll("[data-year-panel]"));
+    if (!yearButtons.length || !yearPanels.length) return;
     let activeIndex = 0;
     const render = () => {
       yearButtons.forEach((button, index) => {
         const isActive = index === activeIndex;
-        button.style.background = isActive
-          ? "#666"
-          : "#fff";
-        button.style.color = isActive
-          ? "#fff"
-          : "#111";
-        button.setAttribute(
-          "aria-pressed",
-          isActive
-            ? "true"
-            : "false",
-        );
-        button.style.cursor = "pointer";
+        button.setAttribute("aria-selected", isActive ? "true" : "false");
+        button.classList.toggle("bg-primary", isActive);
+        button.classList.toggle("text-white", isActive);
+        button.classList.toggle("border-primary", isActive);
+        button.classList.toggle("bg-white", !isActive);
+        button.classList.toggle("text-primary/60", !isActive);
+        button.classList.toggle("border-gray-200", !isActive);
       });
       yearPanels.forEach((panel, index) => {
-        panel.style.display = index === activeIndex
-          ? "block"
-          : "none";
+        panel.classList.toggle("hidden", index !== activeIndex);
       });
     };
     yearButtons.forEach((button, index) => {
-      button.addEventListener("click", () => {
-        activeIndex = index;
-        render();
-      });
+      button.addEventListener("click", () => { activeIndex = index; render(); });
     });
     render();
   })();

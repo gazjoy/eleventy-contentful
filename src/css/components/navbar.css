@@ -1,6 +1,14 @@
-/* Navbar Mobile - Colored dot indicators */
-/* These dots are tied to data-section attribute and cannot be easily done with Tailwind */
+/* ─────────────────────────────────────────────────────────────
+   Navbar — state management and responsive overrides.
+   All mobile styles live in @media (max-width: 1023px).
+   ───────────────────────────────────────────────────────────── */
 
+/* Submenus hidden by default */
+.nav-submenu {
+  display: none;
+}
+
+/* ── Expanded state (all sizes) ────────────────────────────── */
 .nav-section__button[aria-expanded="true"] {
   background: var(--color-navbar-overlay-expanded);
   font-weight: 600;
@@ -14,11 +22,52 @@
   display: block;
 }
 
+/* ── Page link: desktop ────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    transition: background 0.15s;
+  }
+
+  .nav-link:hover {
+    background: color-mix(in oklab, var(--color-primary) 5%, transparent);
+  }
+
+  .nav-link__label {
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .nav-link__description {
+    display: block;
+    color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+    font-size: 0.75rem;
+    line-height: 1.375;
+  }
+}
+
+/* ── Mobile (<1024px) ──────────────────────────────────────── */
 @media (max-width: 1023px) {
-  .nav-submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
+  /* Section button */
+  .nav-section__button {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 0.75rem;
+    background: transparent;
+    padding-inline: 1rem;
+    padding-block: 0.75rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .nav-section__button:hover {
+    background: var(--color-navbar-overlay-hover);
+    color: white;
   }
 
   .nav-section__button[aria-expanded="true"] {
@@ -26,65 +75,69 @@
     color: var(--color-navbar-on-dark);
   }
 
+  /* Accordion: grid-template-rows (GPU-accelerated, no layout thrash) */
+  .nav-submenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease-out;
+    contain: layout style;
+  }
+
+  .nav-submenu__inner {
+    overflow: hidden;
+  }
+
   .nav-section__button[aria-expanded="true"] ~ .nav-submenu {
-    max-height: 24rem;
-    overflow-y: auto;
+    display: grid;
+    grid-template-rows: 1fr;
   }
 
-  .nav-submenu .group {
-    margin-top: 0.5rem;
-    padding: 0.875rem 1rem;
-    background: none;
-    gap: 1rem;
-    border-radius: 0.75rem;
+  /* Page links list */
+  .nav-submenu ul {
+    display: flex;
+    flex-direction: column;
   }
 
-  .nav-submenu .group:hover {
+  /* Page link */
+  .nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .nav-link:hover {
     background: var(--color-navbar-overlay-hover);
   }
 
-  .nav-submenu .group > div:last-child {
-    flex: 1;
-  }
-
-  .nav-submenu .group > div:last-child > p {
-    color: var(--color-navbar-on-dark);
-    font-weight: 600;
-  }
-
-  .nav-submenu .group > div:last-child > p:last-of-type {
-    color: var(--color-navbar-on-dark-strong);
+  .nav-link__label {
+    font-size: var(--text-sm, 0.875rem);
     font-weight: 400;
-  }
-}
-
-@media (max-width: 1023px) {
-  [data-section="learn"] {
-    --nav-section-accent: var(--color-section-learn);
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
   }
 
-  [data-section="compete"] {
-    --nav-section-accent: var(--color-section-compete);
+  .nav-link:hover .nav-link__label {
+    color: white;
   }
 
-  [data-section="club"] {
-    --nav-section-accent: var(--color-section-club);
+  /* Description: hidden on mobile */
+  .nav-link__description {
+    display: none;
   }
 
-  [data-section="events"] {
-    --nav-section-accent: var(--color-section-events);
-  }
+  /* Section accent colours for dot indicators */
+  [data-section="learn"]   { --nav-section-accent: var(--color-section-learn); }
+  [data-section="compete"] { --nav-section-accent: var(--color-section-compete); }
+  [data-section="club"]    { --nav-section-accent: var(--color-section-club); }
+  [data-section="events"]  { --nav-section-accent: var(--color-section-events); }
+  [data-section="members"] { --nav-section-accent: var(--color-section-members); }
+  [data-section="join"]    { --nav-section-accent: var(--color-section-join); }
 
-  [data-section="members"] {
-    --nav-section-accent: var(--color-section-members);
-  }
-
-  [data-section="join"] {
-    --nav-section-accent: var(--color-section-join);
-  }
-
-  /* Base dot styling */
-  .nav-submenu a::before {
+  /* Dot indicators (exclude Club News which has its own icon) */
+  .nav-submenu a:not(.group)::before {
     content: "";
     display: inline-block;
     width: 0.375rem;
@@ -95,7 +148,32 @@
     margin-right: 0.25rem;
   }
 
-  [data-section] ~ .nav-submenu a::before {
+  [data-section] ~ .nav-submenu a:not(.group)::before {
     background-color: var(--nav-section-accent, var(--color-navbar-on-dark-soft));
   }
+
+  /* Club News special link */
+  .nav-submenu .group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    background: none;
+    border-radius: 0.75rem;
+    transition: background 0.15s;
+  }
+
+  .nav-submenu .group:hover {
+    background: var(--color-navbar-overlay-hover);
+  }
+
+  .nav-submenu .group p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .nav-submenu .group p + p {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+  }
 }
+

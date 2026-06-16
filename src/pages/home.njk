@@ -69,6 +69,27 @@ bodyClass: page-home
     {% include "svg/wave.svg" %}
   </div>
 </section>
+{# ── Stats Bar ──────────────────────────────────────────────────────────── #}
+<section class="bg-white py-10 border-b border-gray-100">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div class="flex flex-col items-center gap-1">
+      <span class="text-secondary font-montserrat font-black" style="font-size: clamp(1.8rem, 4vw, 2.5rem);">1980</span>
+      <span class="text-primary/55 text-xs uppercase tracking-widest font-inter">Founded</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <span class="text-secondary font-montserrat font-black" style="font-size: clamp(1.8rem, 4vw, 2.5rem);">50+</span>
+      <span class="text-primary/55 text-xs uppercase tracking-widest font-inter">Members</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <span class="text-secondary font-montserrat font-black" style="font-size: clamp(1.8rem, 4vw, 2.5rem);">45</span>
+      <span class="text-primary/55 text-xs uppercase tracking-widest font-inter">Years of Swimming</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <span class="text-secondary font-montserrat font-black" style="font-size: clamp(1.8rem, 4vw, 2.5rem);">Non-Profit</span>
+      <span class="text-primary/55 text-xs uppercase tracking-widest font-inter">Community Club</span>
+    </div>
+  </div>
+</section>
 {# ── About Teaser ──────────────────────────────────────────────────────── #}
 <section class="bg-[#f5f8fc] py-20">
   <div
@@ -375,3 +396,28 @@ bodyClass: page-home
   {% endif %}
   {% set components = homepage.components %}
   {% include "components/dynamic-components.njk" %}
+{# ── CTA Banner ─────────────────────────────────────────────────────────── #}
+<section class="relative py-24 overflow-hidden bg-primary">
+  {# Wave — transitions from the news section (bg-[#f5f8fc]) into the dark strip #}
+  <div class="absolute top-0 left-0 right-0 overflow-hidden leading-none rotate-180" aria-hidden="true">
+    <svg viewBox="0 0 1440 48" fill="none" class="w-full">
+      <path d="M0 24 Q180 0 360 24 Q540 48 720 24 Q900 0 1080 24 Q1260 48 1440 24 L1440 48 L0 48 Z" fill="#f5f8fc"/>
+    </svg>
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+    <h2 class="text-white font-montserrat font-black leading-tight mb-4" style="font-size: clamp(1.8rem, 4vw, 3rem);">
+      Ready to <span class="text-secondary">dive in?</span>
+    </h2>
+    <p class="text-white/70 mb-8 leading-relaxed font-inter text-[1.05rem]">
+      Whether your child is taking their first dip or looking to join our competitive squad,
+      we'd love to welcome you to the Phoenix family. Request a trial session today — it's free
+      and no-obligation.
+    </p>
+    <a
+      href="/join/"
+      class="inline-flex items-center gap-2 px-8 py-4 bg-secondary hover:bg-[#a81818] text-white rounded-full shadow-xl hover:shadow-secondary/40 transition-all duration-200 hover:-translate-y-0.5 font-inter font-bold">
+      Request a Free Trial
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
